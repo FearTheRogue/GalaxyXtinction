@@ -1,6 +1,6 @@
 # GalaxyXtinction
 
-##### Current Unity3D Version: _2020.3.9f1_
+##### Current Unity3D Version: _2021.1.17.f1_
 
 ---
 
