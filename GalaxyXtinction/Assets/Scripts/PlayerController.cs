@@ -14,12 +14,18 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 mouseLookInput, screenCenter, mouseDistance;
 
+    public Camera cam;
+    public GameObject bullet;
+    public Transform pointOfOrigin;
+
     // Start is called before the first frame update
     void Start()
     {
         // Finding the screen center
         screenCenter.x = Screen.width * .5f;
         screenCenter.y = Screen.height * .5f;
+
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     // Update is called once per frame
@@ -39,5 +45,23 @@ public class PlayerController : MonoBehaviour
         currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, Input.GetAxisRaw("Vertical") * forwardSpeed, forwardAcceleration * Time.deltaTime);
 
         transform.position += transform.forward * currentForwardSpeed * Time.deltaTime;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
+    }
+
+    void Shoot()
+    {
+        Debug.Log("Shooting");
+        
+        RaycastHit hit;
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
+        {
+            Debug.Log(hit.transform.name);
+        }
+        Instantiate(bullet, pointOfOrigin.position, Quaternion.identity);
+
     }
 }

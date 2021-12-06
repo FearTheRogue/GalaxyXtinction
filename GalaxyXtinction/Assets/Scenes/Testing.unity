@@ -216,6 +216,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &230405680
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2078198710779525692, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_Name
+      value: Warp Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525693, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: warpToPlanetTrigger
+      value: 
+      objectReference: {fileID: 348760998}
+    - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
 --- !u!1 &329203619
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,7 +513,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &348760995
 MeshRenderer:
@@ -530,6 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0be2e4413cdc3241bae4e3dde9175e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warpPos: {x: 0, y: 0, z: 0}
 --- !u!1 &351990400
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,51 +1251,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727609740}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &872179036
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 872179038}
-  - component: {fileID: 872179037}
-  m_Layer: 0
-  m_Name: Planet Warp Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &872179037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 872179036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fc8a8b8d694851458af93976c29e356, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  warpToPlanetTrigger: {fileID: 348760998}
-  planetName: Planet-1
---- !u!4 &872179038
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 872179036}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &884791625
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,6 +1456,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884791625}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &970754231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 970754232}
+  m_Layer: 0
+  m_Name: Gun Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &970754232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970754231}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5378}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2041164509}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1019348534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,11 +1739,14 @@ MonoBehaviour:
   currentForwardSpeed: 0
   forwardAcceleration: 5
   roll: 0
-  rollSpeed: 0
-  rollAcceleration: 0
+  rollSpeed: 90
+  rollAcceleration: 5
   mouseLookInput: {x: 0, y: 0}
   screenCenter: {x: 0, y: 0}
   mouseDistance: {x: 0, y: 0}
+  cam: {fileID: 441624607}
+  bullet: {fileID: 4990944800662779066, guid: b0b9648bbf016bf42830cdd651955570, type: 3}
+  pointOfOrigin: {fileID: 970754232}
 --- !u!4 &1038850922
 Transform:
   m_ObjectHideFlags: 0
@@ -1730,7 +1780,7 @@ Transform:
   - {fileID: 727609741}
   - {fileID: 441624605}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1038850923
 Rigidbody:
@@ -2941,7 +2991,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.244, y: 0.08, z: -0.872}
   m_LocalScale: {x: 0.22215378, y: 0.19656979, z: 3.4846}
-  m_Children: []
+  m_Children:
+  - {fileID: 970754232}
   m_Father: {fileID: 1038850922}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

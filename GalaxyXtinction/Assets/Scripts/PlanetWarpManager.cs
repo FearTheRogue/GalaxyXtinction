@@ -5,13 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class PlanetWarpManager : MonoBehaviour
 {
-    [SerializeField] private WarpHandler warpToPlanetTrigger;
+    public static PlanetWarpManager instance;
+
+    [SerializeField] private WarpHandler warpToPlanetTrigger; //warpToSpaceTrigger;
     [SerializeField] public string planetName;
+
+    private Vector3 returningWarpPos;
+    private bool isOnPlanet = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame
@@ -22,16 +27,33 @@ public class PlanetWarpManager : MonoBehaviour
 
     private void OnEnable()
     {
-        warpToPlanetTrigger.OnPlayerEnter += TravelToPlanet;
+        if (!isOnPlanet)
+        {
+            warpToPlanetTrigger.OnPlayerEnter += TravelToPlanet;
+            
+            isOnPlanet = true;
+        }
+        else
+        {
+            // warpToSpaceTrigger.OnPlayerEnter += TravelToSpace;
+            this.enabled = false;
+            isOnPlanet = false;
+        }
     }
 
     private void OnDisable()
     {
         warpToPlanetTrigger.OnPlayerEnter -= TravelToPlanet;
+        //warpToSpaceTrigger.OnPlayerEnter -= TravelToSpace;
     }
 
     private void TravelToPlanet()
     {
         SceneManager.LoadScene(planetName);
+    }
+
+    private void TravelToSpace()
+    {
+        //returningWarpPos = new Vector3(warpToSpaceTrigger.warpPos.x, warpToSpaceTrigger.warpPos.y, warpToSpaceTrigger.warpPos.z);
     }
 }
