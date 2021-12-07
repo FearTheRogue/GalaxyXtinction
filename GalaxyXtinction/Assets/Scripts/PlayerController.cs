@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float forwardSpeed;
-    public float currentForwardSpeed;
-    public float forwardAcceleration;
+    [SerializeField] private float forwardSpeed;
+    [SerializeField] private float currentForwardSpeed;
+    [SerializeField] private float forwardAcceleration;
 
-    public float roll;
-    public float rollSpeed = 90f;
-    public float rollAcceleration = 5f;
+    private float roll;
+    private float rollSpeed = 90f;
+    private float rollAcceleration = 5f;
 
-    public Vector2 mouseLookInput, screenCenter, mouseDistance;
+    private Vector2 mouseLookInput, screenCenter, mouseDistance;
 
     public Camera cam;
-    public GameObject bullet;
-    public Transform pointOfOrigin;
+    public Rigidbody projectile;
+    public Transform[] pointOfOrigin;
+
+    public float projectileSpeed = 100f;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +63,12 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
         }
-        Instantiate(bullet, pointOfOrigin.position, Quaternion.identity);
 
+        Rigidbody clone;
+        foreach (Transform origin in pointOfOrigin)
+        {
+            clone = Instantiate(projectile, origin.position, origin.rotation);
+            clone.velocity = origin.transform.TransformDirection(Vector3.forward * projectileSpeed);
+        }
     }
 }

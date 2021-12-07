@@ -316,6 +316,7 @@
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/PlanetWarpManager.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/Projectile.cs"
 "Assets/Scripts/SpaceWarpManager.cs"
 "Assets/Scripts/WarpHandler.cs"
 -langversion:8.0

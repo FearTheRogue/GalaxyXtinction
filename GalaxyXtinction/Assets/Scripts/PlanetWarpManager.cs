@@ -7,11 +7,11 @@ public class PlanetWarpManager : MonoBehaviour
 {
     public static PlanetWarpManager instance;
 
-    [SerializeField] private WarpHandler warpToPlanetTrigger; //warpToSpaceTrigger;
+    [SerializeField] private WarpHandler warpToPlanetTrigger;//, warpToSpaceTrigger;
     [SerializeField] public string planetName;
 
     private Vector3 returningWarpPos;
-    private bool isOnPlanet = false;
+    public bool isOnPlanet = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,10 @@ public class PlanetWarpManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isOnPlanet)
+        {
+            this.enabled = false;
+        }
     }
 
     private void OnEnable()
@@ -30,13 +33,10 @@ public class PlanetWarpManager : MonoBehaviour
         if (!isOnPlanet)
         {
             warpToPlanetTrigger.OnPlayerEnter += TravelToPlanet;
-            
-            isOnPlanet = true;
         }
         else
         {
             // warpToSpaceTrigger.OnPlayerEnter += TravelToSpace;
-            this.enabled = false;
             isOnPlanet = false;
         }
     }
@@ -49,6 +49,7 @@ public class PlanetWarpManager : MonoBehaviour
 
     private void TravelToPlanet()
     {
+        isOnPlanet = true;
         SceneManager.LoadScene(planetName);
     }
 

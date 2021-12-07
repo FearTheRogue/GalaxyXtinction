@@ -216,6 +216,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &215230952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 215230953}
+  m_Layer: 0
+  m_Name: Gun Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &215230953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215230952}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.666}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1593773879}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &230405680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -273,6 +303,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174988162393934898, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1480,7 +1514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 970754231}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5378}
+  m_LocalPosition: {x: 0, y: 0, z: 0.666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2041164509}
@@ -1705,7 +1739,7 @@ GameObject:
   - component: {fileID: 1038850923}
   m_Layer: 0
   m_Name: Player Ship
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1737,16 +1771,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardSpeed: 50
   currentForwardSpeed: 0
-  forwardAcceleration: 5
-  roll: 0
-  rollSpeed: 90
-  rollAcceleration: 5
-  mouseLookInput: {x: 0, y: 0}
-  screenCenter: {x: 0, y: 0}
-  mouseDistance: {x: 0, y: 0}
+  forwardAcceleration: 25
   cam: {fileID: 441624607}
-  bullet: {fileID: 4990944800662779066, guid: b0b9648bbf016bf42830cdd651955570, type: 3}
-  pointOfOrigin: {fileID: 970754232}
+  projectile: {fileID: 9202658585707986356, guid: b0b9648bbf016bf42830cdd651955570, type: 3}
+  pointOfOrigin:
+  - {fileID: 970754232}
+  - {fileID: 215230953}
+  projectileSpeed: 500
 --- !u!4 &1038850922
 Transform:
   m_ObjectHideFlags: 0
@@ -2210,7 +2241,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.248, y: 0.08, z: -0.872}
   m_LocalScale: {x: 0.22215378, y: 0.19656979, z: 3.4846}
-  m_Children: []
+  m_Children:
+  - {fileID: 215230953}
   m_Father: {fileID: 1038850922}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
