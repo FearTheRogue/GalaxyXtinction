@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class WarpHandler : MonoBehaviour
 {
+    private string warpTo;
     public UnityAction OnPlayerEnter;
     public Vector3 warpPos;
 

@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 12047536}
   m_Layer: 0
   m_Name: Player Ship
-  m_TagString: Untagged
+  m_TagString: Warp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1367,7 +1367,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2078198710779525693, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078198710779525693, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: planetName
+      value: Testing
       objectReference: {fileID: 0}
     - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
       propertyPath: m_RootOrder
@@ -1411,6 +1415,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2078198710779525694, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174988162393934898, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5174988162393934898, guid: 2540d10edbfe85c4bb3bc5914c3d9b7a, type: 3}
