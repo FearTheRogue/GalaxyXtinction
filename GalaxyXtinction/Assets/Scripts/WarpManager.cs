@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class WarpManager : MonoBehaviour
 {
-    public static WarpManager instance;
+    //public static WarpManager instance;
 
     [SerializeField] private WarpHandler warpToPlanetTrigger;//, warpToSpaceTrigger;
     [SerializeField] public string planetName;
@@ -24,7 +24,7 @@ public class WarpManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
+        //instance = this;
     }
 
     // Update is called once per frame
@@ -58,7 +58,7 @@ public class WarpManager : MonoBehaviour
     private void TravelToPlanet()
     {
         isOnPlanet = true;
-        SceneManager.LoadScene(planetName);
+        //SceneManager.LoadScene(planetName);
     }
 
     private void TravelToSpace()

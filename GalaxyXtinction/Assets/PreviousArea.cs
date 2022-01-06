@@ -8,7 +8,14 @@ public class PreviousArea : MonoBehaviour
 
     public string areaTransitionName;
 
+    public Vector3 playersPreviousPosition;
+    PlayerController controller;
     public bool IsOnPlanet = false;
+
+    private void Awake()
+    {
+        controller = GetComponent<PlayerController>();
+    }
 
     // Start is called before the first frame update
     void Start()

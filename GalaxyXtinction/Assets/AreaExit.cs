@@ -24,10 +24,11 @@ public class AreaExit : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            SceneManager.LoadScene(areaToLoad);
+            //SceneManager.LoadScene(areaToLoad);
 
             PreviousArea.instance.IsOnPlanet = true;
             PreviousArea.instance.areaTransitionName = areaTransitionName;
+            
         }
     }
 }

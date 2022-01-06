@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SpaceWarpManager : MonoBehaviour
 {
     [SerializeField] private WarpHandler warpToSpaceTrigger;
-    [SerializeField] private string backToSpace;
+    //[SerializeField] private string backToSpace;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +32,6 @@ public class SpaceWarpManager : MonoBehaviour
 
     private void TravelToSpace()
     {
-        SceneManager.LoadScene(backToSpace);
+        //SceneManager.LoadScene(backToSpace);
     }
 }
