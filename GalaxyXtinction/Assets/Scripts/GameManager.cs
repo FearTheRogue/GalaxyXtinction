@@ -9,7 +9,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     public GameObject[] warpPortals;
-    //public string sceneName;
+
+    public GameObject playerModel, fpsModel;
+
+    public WarpPortal portal;
 
     public int currentWarpNumber;
 
@@ -33,6 +36,19 @@ public class GameManager : MonoBehaviour
         if (warpPortals.Length == 0)
         {
             warpPortals = GameObject.FindGameObjectsWithTag("Warp");
+        }
+
+        if(portal == null)
+        {
+            return;
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            player.transform.rotation = Quaternion.Inverse(player.transform.localRotation); 
         }
     }
 
@@ -71,9 +87,30 @@ public class GameManager : MonoBehaviour
         {
             if (warpPortals[i].GetComponent<WarpPortal>().warpPortalNumber == currentWarpNumber)
             {
-                player.transform.position = warpPortals[i].transform.position;
+                portal = warpPortals[i].GetComponent<WarpPortal>();
 
-                Debug.Log("Player position: " + player.transform.position);
+                if (portal.isInSpace)
+                {
+                    
+                    //player.transform.position = new Vector3(warpPortals[i].transform.position.x, warpPortals[i].transform.position.y, (warpPortals[i].transform.position.z - 24.0f));
+                    //player.transform.rotation = Quaternion.LookRotation(player.transform.position - warpPortals[i].transform.position);
+                    
+                    Vector3 newPos = new Vector3((warpPortals[i].transform.position.x + 12.0f), warpPortals[i].transform.position.y, (warpPortals[i].transform.position.z - 24.0f));
+                    Quaternion newRot = Quaternion.LookRotation(player.transform.position - warpPortals[i].transform.position);
+
+                    Instantiate(playerModel, newPos, newRot);
+                    
+                    Debug.Log("Player returning to Space");
+                }
+                else if (!portal.isInSpace)
+                {
+                    //player.transform.position = warpPortals[i].transform.position;
+                    Vector3 newPos = warpPortals[i].transform.position;
+
+                    Instantiate(fpsModel, newPos, Quaternion.identity);
+
+                    Debug.Log("Player entering planet");
+                }
             }
         }
     }
@@ -84,9 +121,9 @@ public class GameManager : MonoBehaviour
         
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(sceneNumberToLoad);
         }
-        else if (SceneManager.GetActiveScene().buildIndex == 1)
+        else if (SceneManager.GetActiveScene().buildIndex == sceneNumberToLoad)
         {
             SceneManager.LoadScene(0);
         }

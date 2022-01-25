@@ -315,6 +315,8 @@
 "Assets/MouseLook.cs"
 "Assets/PreviousArea.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/LookAt.cs"
+"Assets/Scripts/MenuManager.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/PlayerMovement.cs"
 "Assets/Scripts/Projectile.cs"
@@ -322,6 +324,7 @@
 "Assets/Scripts/SpaceWarpManager.cs"
 "Assets/Scripts/WarpHandler.cs"
 "Assets/Scripts/WarpManager.cs"
+"Assets/WarpPortal.cs"
 -langversion:8.0
 
 /deterministic

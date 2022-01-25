@@ -315,6 +315,8 @@
 "Assets/MouseLook.cs"
 "Assets/PreviousArea.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/LookAt.cs"
+"Assets/Scripts/MenuManager.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/PlayerMovement.cs"
 "Assets/Scripts/Projectile.cs"
