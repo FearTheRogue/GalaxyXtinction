@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class LookAt : MonoBehaviour
 {
-    [SerializeField] public Transform player;
+    [SerializeField] public GameObject player;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private void FixedUpdate()
     {
-        transform.LookAt(player);
+        transform.LookAt(player.transform);
     }
 }
