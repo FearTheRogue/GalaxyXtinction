@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject[] warpPortals;
-    private WarpPortal portal;
+    private WarpHandler portal;
     [SerializeField] private int currentWarpNumber;
 
     private void Awake()
@@ -53,9 +53,9 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < warpPortals.Length; i++)
         {
-            if (warpPortals[i].GetComponent<WarpPortal>().warpPortalNumber == currentWarpNumber)
+            if (warpPortals[i].GetComponent<WarpHandler>().warpPortalNumber == currentWarpNumber)
             {
-                portal = warpPortals[i].GetComponent<WarpPortal>();
+                portal = warpPortals[i].GetComponent<WarpHandler>();
 
                 player = GameObject.FindGameObjectWithTag("Player");
 
