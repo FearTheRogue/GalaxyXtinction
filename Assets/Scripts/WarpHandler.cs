@@ -21,7 +21,41 @@ public class WarpHandler : MonoBehaviour
         
     }
 
+<<<<<<< Updated upstream
     private void OnTriggerEnter(Collider other)
+=======
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Player has exited the box");
+
+        if (other.tag != "Player")
+            return;
+
+        travel.RemoveListener(ReturnToSpace);
+        //helpText.Invoke
+        isInBox = false;
+    }
+
+    private void ReturnToSpace()
+    {
+        if (isInSpace)
+        {
+            //GameManager.instance.SceneToLoad(warpPortalNumber);
+            GameManager.instance.StartToLoadLevel(warpPortalNumber);
+        }
+        else if (!isInSpace)
+        {
+            GameManager.instance.SceneToLoad(warpPortalNumber);
+        }
+    }
+
+    public Transform GetSpawnPoint()
+    {
+        return spawnPoint;
+    }
+
+    private void Update()
+>>>>>>> Stashed changes
     {
         if(other.tag == "Player")
         OnPlayerEnter.Invoke();

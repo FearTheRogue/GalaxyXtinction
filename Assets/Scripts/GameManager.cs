@@ -65,17 +65,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SceneToLoad(int sceneNumberToLoad)
+    public void StartToLoadLevel(int levelToLoad)
+    {
+        SceneToLoad(levelToLoad);
+        //SceneManager.LoadScene(levelToLoad);
+        StartCoroutine(LoadSceneAsync(levelToLoad));
+    }
+
+    private IEnumerator LoadSceneAsync(int levelToLoad)
+    {
+        AsyncOperation loadAsync = SceneManager.LoadSceneAsync(levelToLoad);
+
+        while (!loadAsync.isDone)
+        {
+            yield return null;
+        }
+
+        SceneManager.LoadScene(levelToLoad);
+    }
+
+    public int SceneToLoad(int sceneNumberToLoad)
     {
         currentWarpNumber = sceneNumberToLoad;
         
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            SceneManager.LoadScene(sceneNumberToLoad);
+            //SceneManager.LoadScene(sceneNumberToLoad);
+            return sceneNumberToLoad;
         }
         else if (SceneManager.GetActiveScene().buildIndex == sceneNumberToLoad)
         {
-            SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(0);
+            return 0;
         }
+        return sceneNumberToLoad;
     }
 }
