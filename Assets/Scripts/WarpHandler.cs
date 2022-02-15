@@ -5,31 +5,22 @@ using UnityEngine.Events;
 
 public class WarpHandler : MonoBehaviour
 {
-    public int warpPortalNumber;
+    public int sceneToLoadIndex;
     public bool isInSpace, isInBox;
     [SerializeField] Transform spawnPoint;
-    [SerializeField] DisplayText text;
-
-    UnityEvent travel = new UnityEvent();
-    UnityEvent helpText = new UnityEvent();
 
     private void Start()
     {
-        travel.AddListener(ReturnToSpace);
-        //helpText.AddListener(text.IsTestVisible);
-
         isInBox = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Player has entered the box");
+        Debug.Log(other.gameObject.name + " has entered the box");
 
         if (other.tag != "Player")
             return;
 
-        travel.AddListener(ReturnToSpace);
-        //helpText.Invoke();
         isInBox = true;
     }
 
@@ -40,21 +31,12 @@ public class WarpHandler : MonoBehaviour
         if (other.tag != "Player")
             return;
 
-        travel.RemoveListener(ReturnToSpace);
-        //helpText.Invoke
         isInBox = false;
     }
 
-    private void ReturnToSpace()
+    private void BeginTravel()
     {
-        if (isInSpace)
-        {
-            GameManager.instance.SceneToLoad(warpPortalNumber);
-        }
-        else if (!isInSpace)
-        {
-            GameManager.instance.SceneToLoad(warpPortalNumber);
-        }
+        GameManager.instance.StartToLoadLevel(sceneToLoadIndex);
     }
 
     public Transform GetSpawnPoint()
@@ -64,13 +46,13 @@ public class WarpHandler : MonoBehaviour
 
     private void Update()
     {
-        if (isInBox && !isInSpace && Input.GetKeyDown(KeyCode.C) && travel != null)
+        if (isInBox && !isInSpace && Input.GetKeyDown(KeyCode.R))
         {
-            travel.Invoke();
+            BeginTravel();
         }
-        else if(isInBox && isInSpace && travel != null)
+        else if(isInBox && isInSpace)
         {
-            travel.Invoke();
+            BeginTravel();
         }
     }
 }

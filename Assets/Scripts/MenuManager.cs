@@ -1,38 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
+    [SerializeField] Button playBtn, closeTestingBtn, okayBtn, quitBtn;
+    [SerializeField] GameObject closeTestingPopup, aboutGamePopup;
+    [SerializeField] string levelToLoad;
 
-    public GameObject pauseMenuUI;
-
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameIsPaused)
-            {
-                Resume();
-            } else
-            {
-                Pause();
-            }
-        }
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
 
-        void Resume()
-        {
-            pauseMenuUI.SetActive(false);
-            Time.timeScale = 1f;
-            GameIsPaused = false;
-        }
+    public void PlayGame()
+    {
+        GameManager.instance.SceneToLoad(levelToLoad);
+    }
 
-        void Pause()
-        {
-            pauseMenuUI.SetActive(true);
-            Time.timeScale = 0f;
-            GameIsPaused = true;
-        }
+    public void AboutGame()
+    {
+        aboutGamePopup.gameObject.SetActive(true);
+    }
+
+    public void CloseAboutGame()
+    {
+        aboutGamePopup.gameObject.SetActive(false);
+    }
+
+    public void CloseTestingPopUp()
+    {
+        closeTestingPopup.gameObject.SetActive(false);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

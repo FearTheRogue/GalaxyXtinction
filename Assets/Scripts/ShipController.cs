@@ -48,7 +48,7 @@ public class ShipController : MonoBehaviour
 
         transform.position += transform.forward * currentForwardSpeed * Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused)
         {
             Shoot();
         }
@@ -65,6 +65,7 @@ public class ShipController : MonoBehaviour
         }
 
         Rigidbody clone;
+
         foreach (Transform origin in pointOfOrigin)
         {
             clone = Instantiate(projectile, origin.position, origin.rotation);
