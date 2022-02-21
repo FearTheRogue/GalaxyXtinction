@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestingV2.unity
     guid: 3d73e44377be06147abf9c3bff0f0f1b
   - enabled: 1
+    path: Assets/Scenes/Space.unity
+    guid: 722282b732a7c9f4d8b6064cd58af110
+  - enabled: 1
     path: Assets/Scenes/Planet-1 1.unity
     guid: 6aa152b4da12b8543b32cb507a223dd8
   - enabled: 1
