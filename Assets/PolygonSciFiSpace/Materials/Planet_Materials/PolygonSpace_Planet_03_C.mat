@@ -4,13 +4,15 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: PolygonSpace_Planet_03_C
   m_Shader: {fileID: 4800000, guid: eaaf78c712eddcb47a6a599d04aea29b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -105,6 +107,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _ASEOutlineWidth: 0.01
     - _BumpScale: 1
@@ -142,7 +145,7 @@ Material:
     - _PlanetSurfaceTiling: 1
     - _Planet_Falloff: -1.16
     - _Planet_Tiling: 18.2
-    - _RimPower: 3.73
+    - _RimPower: 7.02
     - _Scale: -0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -154,7 +157,7 @@ Material:
     - __dirty: 0
     - _frez: 16.33
     m_Colors:
-    - _ASEOutlineColor: {r: 0.5181034, g: 0.4426903, b: 0.6764706, a: 0}
+    - _ASEOutlineColor: {r: 0.38501248, g: 0.7924528, b: 0.7184557, a: 0}
     - _BaseColor: {r: 0.77205884, g: 0.5565714, b: 0.28384516, a: 0}
     - _CloudColor: {r: 0.75735295, g: 0.15035684, b: 0.15035684, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -164,7 +167,8 @@ Material:
     - _PlanetBaseColor: {r: 0.9558824, g: 0, b: 0, a: 0}
     - _PlanetRimColor: {r: 0, g: 0, b: 0, a: 0}
     - _PlanetSecondColor: {r: 0.50735295, g: 0.10818557, b: 0.10818557, a: 0}
-    - _RimColor: {r: 0.5176471, g: 0.4431373, b: 0.6784314, a: 0}
+    - _RimColor: {r: 0.36356357, g: 0.8113208, b: 0.7536958, a: 0}
     - _SecondColor: {r: 0.7794118, g: 0.4859862, b: 0.04584775, a: 0}
     - _Second_Color: {r: 0.5441177, g: 0.18254983, b: 0.07601645, a: 0}
     - _Size: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
