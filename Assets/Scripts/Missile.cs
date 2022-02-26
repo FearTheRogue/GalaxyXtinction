@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    public float speed;
-    public float fireRate;
+    [SerializeField] private float speed;
+    [SerializeField] public float fireRate;
 
     private void Update()
     {

@@ -13,8 +13,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float forwardSpeed;
     [SerializeField] private float currentForwardSpeed;
     [SerializeField] private float forwardAcceleration;
-
     [SerializeField] private float wanderRange = 5f;
+    [SerializeField] private float rotationSpeed;
+
+    [SerializeField] private float minIdleTime, maxIdleTime, currentIdleTime, targetIdleTime;
+
+    [Range(-1, 1)]
+    [SerializeField] private float interpolatingValue;
+
     private Vector3 wanderLocation;
     private Vector3 target;
     private Transform playerTransform;
@@ -23,11 +29,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Transform[] missileSpawnPoint;
     [SerializeField] private float attackRange = 100f;
     [SerializeField] private GameObject missilePrefab;
+    
     private float timeToFire = 0;
-
-    [Range(-1, 1)]
-    public float interpalatingValue;
-
     private bool isAtDestination, hasWanderPos;
 
     private void Awake()
@@ -43,12 +46,17 @@ public class EnemyMovement : MonoBehaviour
         {
             case Behaviour.Idle:
 
+                UpdateIdleBehaviour();
+
                 if(playerTransform != null)
                 {
                     currentBehaviour = Behaviour.Pursue;
                 } else
                 {
-                    currentBehaviour = Behaviour.Wandering;
+                    if(currentIdleTime >= targetIdleTime)
+                    {
+                        currentBehaviour = Behaviour.Wandering;
+                    }
                 }
                 break;
 
@@ -57,12 +65,18 @@ public class EnemyMovement : MonoBehaviour
                 if(playerTransform != null)
                 {
                     currentBehaviour = Behaviour.Pursue;
-                } else
+                }
+                else
                 {
                     if (!hasWanderPos || !isAtDestination)
+                    {
                         StartWandering();
+                        currentIdleTime = 0f;
+                    }
                     else
+                    {
                         UpdateWanderingPos();
+                    }
                 }
                 break;
 
@@ -70,7 +84,7 @@ public class EnemyMovement : MonoBehaviour
 
                 if(playerTransform == null)
                 {
-                    currentBehaviour = Behaviour.Idle;
+                    StartIdleBehaviour();
                 }
                 else
                 {
@@ -102,15 +116,15 @@ public class EnemyMovement : MonoBehaviour
         //    }
         //}
 
-        if (interpalatingValue <= 1f)
+        if (interpolatingValue <= 1f)
         {
-            interpalatingValue += 0.01f;
+            interpolatingValue += 0.01f;
         }
     }
 
     private void MoveToLocation()
     {
-        currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, interpalatingValue * forwardSpeed, forwardAcceleration * Time.deltaTime);
+        currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, interpolatingValue * forwardSpeed, forwardAcceleration * Time.deltaTime);
         transform.position += transform.forward * currentForwardSpeed * Time.deltaTime;
     }
 
@@ -128,6 +142,18 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    private void StartIdleBehaviour()
+    {
+        currentBehaviour = Behaviour.Idle;
+
+        targetIdleTime = Random.Range(minIdleTime, maxIdleTime);
+    }
+
+    private void UpdateIdleBehaviour()
+    {
+        currentIdleTime += Time.deltaTime;
+    }
+
     private void StartWandering()
     {
         if (!isAtDestination && !hasWanderPos)
@@ -142,6 +168,8 @@ public class EnemyMovement : MonoBehaviour
         if (hasWanderPos)
         {
             transform.LookAt(target);
+            //StartLooking();
+            //transform.rotation = Quaternion.RotateTowards(target) * rotationSpeed;
 
             Debug.DrawRay(transform.position, Vector3.forward, Color.black);
 
@@ -152,6 +180,7 @@ public class EnemyMovement : MonoBehaviour
             else
             { 
                 isAtDestination = true;
+                StartIdleBehaviour();
             }
         }
     }
@@ -160,6 +189,8 @@ public class EnemyMovement : MonoBehaviour
     {
         isAtDestination = false;
         hasWanderPos = false;
+
+        StartIdleBehaviour();
     }
 
     private void OnDrawGizmos()
@@ -172,7 +203,12 @@ public class EnemyMovement : MonoBehaviour
     {
         target = playerTransform.position;
 
-        transform.LookAt(target);
+        //transform.LookAt(target);
+        Quaternion rotation;
+        Vector3 direction;
+        direction = (playerTransform.position - transform.position).normalized;
+        rotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed);
 
         if (DistanceFromTarget() >= 30.0f)
         {
