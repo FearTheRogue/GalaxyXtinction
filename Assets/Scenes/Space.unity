@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e39b117069b369f46924ed2f6f82050b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 10
+  rotationSpeed: -6
 --- !u!1001 &616157000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1949,6 +1949,10 @@ PrefabInstance:
     - target: {fileID: 1379459666093482, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_Name
       value: SM_Env_Asteroid_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379459666093482, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4404864704542510, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_RootOrder

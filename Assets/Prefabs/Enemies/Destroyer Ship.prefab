@@ -196,7 +196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7352432255676287422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.798, y: -0.0000014007092, z: 2.6109993}
+  m_LocalPosition: {x: -0.798, y: -0.0000010877847, z: 2.0299995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7351566085677370567}
@@ -226,7 +226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7352432256323601329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.79, y: -0, z: 2.611}
+  m_LocalPosition: {x: 0.79, y: 0, z: 2.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7351566085677370567}
@@ -287,8 +287,9 @@ GameObject:
   - component: {fileID: 7352432257339605674}
   - component: {fileID: 7352432257339605672}
   - component: {fileID: 7352432257339605717}
+  - component: {fileID: 64695963}
   m_Layer: 0
-  m_Name: Destroyer
+  m_Name: Destroyer Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,7 +302,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7352432257339605673}
-  m_LocalRotation: {x: 0.02520268, y: -0, z: -0, w: 0.99968237}
+  m_LocalRotation: {x: 0.025199875, y: 0, z: 0, w: 0.9996825}
   m_LocalPosition: {x: 0, y: 169.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -343,12 +344,36 @@ MonoBehaviour:
   currentForwardSpeed: 0
   forwardAcceleration: 25
   wanderRange: 150
+  rotationSpeed: 0.06
+  attackRange: 100
+  minIdleTime: 0
+  maxIdleTime: 10
+  currentIdleTime: 0
+  targetIdleTime: 0
   interpolatingValue: 0
+--- !u!114 &64695963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352432257339605673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1978990f4cf464187d602d3082cf5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireMode: 2
   missileSpawnPoint:
   - {fileID: 7352432256323601328}
   - {fileID: 7352432255676287417}
-  attackRange: 100
   missilePrefab: {fileID: 6728574877116025351, guid: 9c0ff0677bbc8db45aff9a84306afc69, type: 3}
+  burstAmount: 0
+  maxBurstAmount: 5
+  rechargeTime: 5
+  fireTimer: 0
+  fireRate: 0.45
+  burstFire: 0
 --- !u!1 &7353593027632414199
 GameObject:
   m_ObjectHideFlags: 0

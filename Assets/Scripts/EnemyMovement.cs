@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+public enum Behaviour { Idle, Wandering, Pursue, Attack };
 
 public class EnemyMovement : MonoBehaviour
 {
-    enum Behaviour { Idle, Wandering, Pursue, Attack };
+    [Header("Current Behaviour")]
     [SerializeField] private Behaviour currentBehaviour = Behaviour.Idle;
 
     private Vector3 startingLocation;
@@ -13,31 +13,40 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float forwardSpeed;
     [SerializeField] private float currentForwardSpeed;
     [SerializeField] private float forwardAcceleration;
-    [SerializeField] private float wanderRange = 5f;
+
+    [Range(0f,1f)]
     [SerializeField] private float rotationSpeed;
-
-    [SerializeField] private float minIdleTime, maxIdleTime, currentIdleTime, targetIdleTime;
-
+    
     [Range(-1, 1)]
     [SerializeField] private float interpolatingValue;
+
+    [Header("Idle Behaviour")]
+    [SerializeField] private float minIdleTime;
+    [SerializeField] private float maxIdleTime;
+    [SerializeField] private float currentIdleTime;
+    [SerializeField] private float targetIdleTime;
+
+    [Header("Wander Behaviour")]
+    [SerializeField] private float wanderRange = 5f;
+    [SerializeField] private float distanceFromTarget;
+    private bool isAtDestination, hasWanderPos;
+    
+    [Header("Attack Behaviour")]
+    [SerializeField] private float attackRange = 100f;
 
     private Vector3 wanderLocation;
     private Vector3 target;
     private Transform playerTransform;
 
-    [Header("Weapon Properties")]
-    [SerializeField] private Transform[] missileSpawnPoint;
-    [SerializeField] private float attackRange = 100f;
-    [SerializeField] private GameObject missilePrefab;
-    
-    private float timeToFire = 0;
-    private bool isAtDestination, hasWanderPos;
+    private Weapon weapon;
 
     private void Awake()
     {
         startingLocation = transform.position;
 
         isAtDestination = false;
+
+        weapon = GetComponent<Weapon>();
     }
 
     private void Update()
@@ -128,20 +137,6 @@ public class EnemyMovement : MonoBehaviour
         transform.position += transform.forward * currentForwardSpeed * Time.deltaTime;
     }
 
-    private void ShootPlayer()
-    {
-        if(Time.time >= timeToFire)
-        {
-            timeToFire = Time.time + 1 / missilePrefab.GetComponent<Missile>().fireRate;
-            
-            foreach (Transform origin in missileSpawnPoint)
-            {
-                Instantiate(missilePrefab, origin.transform.position, origin.transform.rotation);
-            }
-            
-        }
-    }
-
     private void StartIdleBehaviour()
     {
         currentBehaviour = Behaviour.Idle;
@@ -150,7 +145,10 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void UpdateIdleBehaviour()
-    {
+    {  
+        Quaternion levellingOut = new Quaternion(0, transform.rotation.y, transform.rotation.z,1.0f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, levellingOut, (rotationSpeed / 2.0f));
+
         currentIdleTime += Time.deltaTime;
     }
 
@@ -167,22 +165,30 @@ public class EnemyMovement : MonoBehaviour
 
         if (hasWanderPos)
         {
-            transform.LookAt(target);
-            //StartLooking();
-            //transform.rotation = Quaternion.RotateTowards(target) * rotationSpeed;
+            UpdateRotation(target);
 
             Debug.DrawRay(transform.position, Vector3.forward, Color.black);
 
-            if (DistanceFromTarget() >= 1f && !isAtDestination)
+            if (DistanceFromTarget() >= distanceFromTarget && !isAtDestination)
             {
                 MoveToLocation();
             } 
             else
             { 
                 isAtDestination = true;
+                currentForwardSpeed = 0f;
                 StartIdleBehaviour();
             }
         }
+    }
+
+    private void UpdateRotation(Vector3 posToRotate)
+    {
+        Quaternion rotation;
+        Vector3 direction;
+        direction = (posToRotate - transform.position).normalized;
+        rotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed);
     }
 
     void UpdateWanderingPos()
@@ -203,12 +209,7 @@ public class EnemyMovement : MonoBehaviour
     {
         target = playerTransform.position;
 
-        //transform.LookAt(target);
-        Quaternion rotation;
-        Vector3 direction;
-        direction = (playerTransform.position - transform.position).normalized;
-        rotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed);
+        UpdateRotation(target);
 
         if (DistanceFromTarget() >= 30.0f)
         {
@@ -229,7 +230,8 @@ public class EnemyMovement : MonoBehaviour
         {
             Debug.DrawRay(gameObject.transform.position, hit.point);
 
-            ShootPlayer();
+            weapon.Shoot();
+            //weapon.BurstShoot();
 
             return true;
         }

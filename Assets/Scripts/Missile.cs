@@ -19,7 +19,7 @@ public class Missile : MonoBehaviour
     {
         speed = 0;
 
-        Debug.Log("Hit: " + collision.gameObject.name);
+        //Debug.Log("Hit: " + collision.gameObject.name);
 
         Destroy(gameObject);
     }
