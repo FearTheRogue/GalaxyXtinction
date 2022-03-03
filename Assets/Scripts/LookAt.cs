@@ -11,8 +11,8 @@ public class LookAt : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        transform.LookAt(player.transform);
+        transform.LookAt(transform.position + player.transform.forward);
     }
 }

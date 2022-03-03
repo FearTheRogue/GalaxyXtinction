@@ -9,8 +9,12 @@ public class Weapon : MonoBehaviour
     [Header("Weapon Properties")]
     [SerializeField] private FireMode fireMode = FireMode.Semi;
     [SerializeField] private Transform[] missileSpawnPoint;
+    [SerializeField] private Transform[] homingMissileSpawnPoint;
 
-    [SerializeField] private GameObject missilePrefab;
+    public bool canHomingMissile = true;
+
+    [SerializeField] private GameObject primaryWeapon;
+    [SerializeField] private GameObject secondaryWeapon;
     [SerializeField] private int burstAmount, maxBurstAmount;
     [SerializeField] private float rechargeTime;
 
@@ -21,7 +25,8 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        //burstAmount = maxBurstAmount;
+        if (!secondaryWeapon)
+            return;
     }
 
     private void Update()
@@ -38,6 +43,9 @@ public class Weapon : MonoBehaviour
                 fireMode = FireMode.Auto;
                 break;
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+            canHomingMissile = true;
     }
 
     public float GetAttackRange()
@@ -46,10 +54,8 @@ public class Weapon : MonoBehaviour
         return 0;
     }
 
-    public void Shoot()
+    public void ShootMissile()
     {
-        Debug.Log("Shoot was called");
-
         if(fireTimer < fireRate + 1.0f)
         {
             fireTimer += Time.deltaTime;
@@ -61,7 +67,7 @@ public class Weapon : MonoBehaviour
             {
                 foreach (Transform origin in missileSpawnPoint)
                 {
-                    GameObject projectile = Instantiate(missilePrefab, origin.transform.position, origin.transform.rotation);
+                    GameObject projectile = Instantiate(primaryWeapon, origin.transform.position, origin.transform.rotation);
 
                     Physics.IgnoreCollision(projectile.GetComponent<Collider>(), origin.parent.GetComponent<Collider>());
                 }
@@ -78,14 +84,30 @@ public class Weapon : MonoBehaviour
                 {
                     foreach (Transform origin in missileSpawnPoint)
                     {
-                        Instantiate(missilePrefab, origin.transform.position, origin.transform.rotation);
+                        Instantiate(primaryWeapon, origin.transform.position, origin.transform.rotation);
                     }
 
                     burstAmount++;
                 }
-                fireTimer = 0f;
 
+                fireTimer = 0f;
             }
+        }
+    }
+
+    public void ShootHomingMissile()
+    {
+        if (canHomingMissile)
+            StartCoroutine(FiringHomingMissiles());
+    }
+
+    private IEnumerator FiringHomingMissiles()
+    {
+        foreach (Transform origin in homingMissileSpawnPoint)
+        {
+            GameObject projectile = Instantiate(secondaryWeapon, origin.transform.position, origin.transform.rotation);
+            Physics.IgnoreCollision(projectile.GetComponent<Collider>(), origin.parent.GetComponent<Collider>());
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
@@ -96,7 +118,7 @@ public class Weapon : MonoBehaviour
 
         for (int i = 0; i <= maxBurstAmount; i++)
         {
-            Shoot();
+            ShootMissile();
             burstAmount--;
         }
     }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6728574877116025345}
   - component: {fileID: 9185903059272217824}
   - component: {fileID: 2473889509384655601}
-  - component: {fileID: 5814617008696549811}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -47,8 +46,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd58b22c72947144cae3419e100768ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 150
   fireRate: 4
+  damage: 10
+  isHoming: 0
+  rb: {fileID: 0}
+  player: {fileID: 0}
+  explosionPrefab: {fileID: 0}
+  timeToDestroy: 5
+  rotateSpeed: 15
+  maxDistancePredict: 100
+  minDistancePredict: 5
+  maxTimePrediction: 5
+  deviationAmount: 50
+  deviationSpeed: 2
 --- !u!65 &9185903059272217824
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78,19 +89,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5814617008696549811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6728574877116025351}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cde065c1025f19f46b2729770972f7f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDestroy: 20.78
 --- !u!1 &6728574878635432629
 GameObject:
   m_ObjectHideFlags: 0

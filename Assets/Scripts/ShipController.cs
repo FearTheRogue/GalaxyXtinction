@@ -15,12 +15,16 @@ public class ShipController : MonoBehaviour
     private Vector2 mouseLookInput, screenCenter, mouseDistance;
 
     public Camera cam;
-    public Rigidbody projectile;
+    //public Rigidbody projectile;
     public Transform[] pointOfOrigin;
 
-    public float projectileSpeed = 100f;
+    //public float projectileSpeed = 100f;
 
-    // Start is called before the first frame update
+    [SerializeField] private Rigidbody rb;
+    public Rigidbody Rb => rb;
+
+    [SerializeField] private Weapon weapon;
+
     void Start()
     {
         // Finding the screen center
@@ -28,9 +32,10 @@ public class ShipController : MonoBehaviour
         screenCenter.y = Screen.height * .5f;
 
         Cursor.lockState = CursorLockMode.Confined;
+
+        weapon = GetComponent<Weapon>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         mouseLookInput.x = Input.mousePosition.x;
@@ -50,26 +55,26 @@ public class ShipController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused)
         {
-            Shoot();
+            weapon.ShootMissile();
         }
     }
 
-    void Shoot()
-    {
-        Debug.Log("Shooting");
+    //void Shoot()
+    //{
+    //    Debug.Log("Shooting");
         
-        RaycastHit hit;
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
-        {
-            Debug.Log(hit.transform.name);
-        }
+    //    RaycastHit hit;
+    //    if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
+    //    {
+    //        Debug.Log(hit.transform.name);
+    //    }
 
-        Rigidbody clone;
+    //    Rigidbody clone;
 
-        foreach (Transform origin in pointOfOrigin)
-        {
-            clone = Instantiate(projectile, origin.position, origin.rotation);
-            clone.velocity = origin.transform.TransformDirection(Vector3.forward * projectileSpeed);
-        }
-    }
+    //    foreach (Transform origin in pointOfOrigin)
+    //    {
+    //        clone = Instantiate(projectile, origin.position, origin.rotation);
+    //        clone.velocity = origin.transform.TransformDirection(Vector3.forward * projectileSpeed);
+    //    }
+    //}
 }

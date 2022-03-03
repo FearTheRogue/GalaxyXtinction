@@ -4,6 +4,10 @@ public enum Behaviour { Idle, Wandering, Pursue, Attack };
 
 public class EnemyMovement : MonoBehaviour
 {
+    [Header("Ship Health")]
+    [SerializeField] private int health;
+    [SerializeField] private int maxHealth;
+
     [Header("Current Behaviour")]
     [SerializeField] private Behaviour currentBehaviour = Behaviour.Idle;
 
@@ -13,6 +17,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float forwardSpeed;
     [SerializeField] private float currentForwardSpeed;
     [SerializeField] private float forwardAcceleration;
+    [SerializeField] private SphereCollider detector;
 
     [Range(0f,1f)]
     [SerializeField] private float rotationSpeed;
@@ -30,9 +35,13 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float wanderRange = 5f;
     [SerializeField] private float distanceFromTarget;
     private bool isAtDestination, hasWanderPos;
-    
+
+    [Header("Pursue Behaviour")]
+    [SerializeField] private float distanceFromPlayer;
+
     [Header("Attack Behaviour")]
-    [SerializeField] private float attackRange = 100f;
+    [SerializeField] private float missileAttackRange = 100f;
+    [SerializeField] private float homingMissileAttackRange = 150f;
 
     private Vector3 wanderLocation;
     private Vector3 target;
@@ -47,6 +56,12 @@ public class EnemyMovement : MonoBehaviour
         isAtDestination = false;
 
         weapon = GetComponent<Weapon>();
+    }
+
+
+    private void Start()
+    {
+
     }
 
     private void Update()
@@ -167,8 +182,6 @@ public class EnemyMovement : MonoBehaviour
         {
             UpdateRotation(target);
 
-            Debug.DrawRay(transform.position, Vector3.forward, Color.black);
-
             if (DistanceFromTarget() >= distanceFromTarget && !isAtDestination)
             {
                 MoveToLocation();
@@ -207,11 +220,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void UpdatePursue()
     {
+        if (playerTransform == null)
+            return;
+
         target = playerTransform.position;
 
         UpdateRotation(target);
 
-        if (DistanceFromTarget() >= 30.0f)
+        if (DistanceFromTarget() >= distanceFromPlayer)
         {
             isAtDestination = false;
             MoveToLocation();
@@ -225,16 +241,38 @@ public class EnemyMovement : MonoBehaviour
     private bool IsPlayerInRange()
     {
         RaycastHit hit;
-        
-        if(Physics.Raycast(gameObject.transform.position, transform.forward, out hit, attackRange))
-        {
-            Debug.DrawRay(gameObject.transform.position, hit.point);
 
-            weapon.Shoot();
+        if (Physics.Raycast(gameObject.transform.position, transform.forward, out hit, detector.radius))
+        {
+            Debug.DrawLine(transform.position, hit.point, Color.blue);
+
+            if(hit.distance <= homingMissileAttackRange && hit.distance >= missileAttackRange)
+            {
+                Debug.DrawLine(transform.position, hit.point, Color.white);
+
+                weapon.ShootHomingMissile();
+                weapon.canHomingMissile = false;
+            }
+            else if (hit.distance <= missileAttackRange)
+            {
+                Debug.DrawLine(transform.position, hit.point, Color.green);
+
+                weapon.ShootMissile();
+            }
+
             //weapon.BurstShoot();
 
             return true;
         }
+        //else if (Physics.Raycast(gameObject.transform.position, transform.forward, out hit, homingMissileAttackRange))
+        //{
+        //    Debug.DrawLine(gameObject.transform.position, hit.point, Color.gray);
+
+        //    weapon.ShootHomingMissile();
+        //    weapon.canHomingMissile = false;
+
+        //    return true;
+        //}
 
         return false;
     }
