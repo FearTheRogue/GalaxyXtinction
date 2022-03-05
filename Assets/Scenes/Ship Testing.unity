@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1721860369327728, guid: bbad770c80b2db742986dcae1946ab2a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4243327588238360, guid: bbad770c80b2db742986dcae1946ab2a, type: 3}
       propertyPath: m_RootOrder
@@ -206,15 +206,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036bdf55ed0c4c940bac3c4f87e0eaef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 50
-  currentForwardSpeed: 0
-  forwardAcceleration: 25
   cam: {fileID: 252517935}
-  projectile: {fileID: 9202658585707986356, guid: b0b9648bbf016bf42830cdd651955570, type: 3}
+  camCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  startFOV: 0
+  normalSpeedFOV: 0
+  boostSpeedFOV: 0
+  fovT: 0
   pointOfOrigin:
   - {fileID: 1982697077}
   - {fileID: 248719945}
-  projectileSpeed: 500
+  rb: {fileID: 0}
+  weapon: {fileID: 0}
+  forwardSpeed: 50
+  currentForwardSpeed: 0
+  forwardAcceleration: 25
+  thrusters: {fileID: 0}
+  thrusterSpeed: 0
+  thrusterStock: 0
+  maxThrusterStock: 0
+  decreaseThrusterAmount: 0
+  IncreaseThrusterAmount: 0
+  rechargeDelay: 0
+  isThrusting: 0
 --- !u!54 &33615684
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4621,6 +4639,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1328393897608994872, guid: 6d93550eb1c1ea045b35d2b0d17de523, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340320607090877251, guid: 6d93550eb1c1ea045b35d2b0d17de523, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340320607090877251, guid: 6d93550eb1c1ea045b35d2b0d17de523, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824816091024140434, guid: 6d93550eb1c1ea045b35d2b0d17de523, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824816091024140434, guid: 6d93550eb1c1ea045b35d2b0d17de523, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

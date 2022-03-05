@@ -578,15 +578,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036bdf55ed0c4c940bac3c4f87e0eaef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 100
-  currentForwardSpeed: 0
-  forwardAcceleration: 25
   cam: {fileID: 1324186377354086988}
+  camCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  startFOV: 60
+  normalSpeedFOV: 70
+  boostSpeedFOV: 100
+  fovT: 35
   pointOfOrigin:
   - {fileID: 1324186378448407334}
   - {fileID: 1324186377327130382}
   rb: {fileID: 1324186379111175765}
   weapon: {fileID: 1890104345}
+  forwardSpeed: 100
+  currentForwardSpeed: 0
+  forwardAcceleration: 25
+  thrusters: {fileID: 1298636468}
+  thrusterSpeed: 200
+  thrusterStock: 0
+  maxThrusterStock: 5
+  decreaseThrusterAmount: 1
+  IncreaseThrusterAmount: 0.8
+  rechargeDelay: 1
+  isThrusting: 0
 --- !u!114 &1890104345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1100,6 +1136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4424755887117265662}
   - component: {fileID: 5926584739805655689}
+  - component: {fileID: 1298636468}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1180,6 +1217,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1298636468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3200203410026972859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3432c28b46dfe1a408e23e2571e9f5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 5926584739805655689}
 --- !u!1 &3319032621393891426
 GameObject:
   m_ObjectHideFlags: 0
