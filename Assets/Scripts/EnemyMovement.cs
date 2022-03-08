@@ -4,10 +4,6 @@ public enum Behaviour { Idle, Wandering, Pursue, Attack };
 
 public class EnemyMovement : MonoBehaviour
 {
-    [Header("Ship Health")]
-    [SerializeField] private int health;
-    [SerializeField] private int maxHealth;
-
     [Header("Current Behaviour")]
     [SerializeField] private Behaviour currentBehaviour = Behaviour.Idle;
 
@@ -56,12 +52,6 @@ public class EnemyMovement : MonoBehaviour
         isAtDestination = false;
 
         weapon = GetComponent<Weapon>();
-    }
-
-
-    private void Start()
-    {
-
     }
 
     private void Update()
@@ -251,7 +241,6 @@ public class EnemyMovement : MonoBehaviour
                 Debug.DrawLine(transform.position, hit.point, Color.white);
 
                 weapon.ShootHomingMissile();
-                weapon.canHomingMissile = false;
             }
             else if (hit.distance <= missileAttackRange)
             {

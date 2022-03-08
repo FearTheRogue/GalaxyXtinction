@@ -78,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 40
   fireRate: 0
+  damage: 20
   isHoming: 1
   rb: {fileID: 2633950650922247760}
   player: {fileID: 0}

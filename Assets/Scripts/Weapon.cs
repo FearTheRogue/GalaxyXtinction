@@ -10,11 +10,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] private FireMode fireMode = FireMode.Semi;
     [SerializeField] private Transform[] missileSpawnPoint;
     [SerializeField] private Transform[] homingMissileSpawnPoint;
-
-    public bool canHomingMissile = true;
-
+    
     [SerializeField] private GameObject primaryWeapon;
     [SerializeField] private GameObject secondaryWeapon;
+
+
+
+    [Header("Missile Settings")]
     [SerializeField] private int burstAmount, maxBurstAmount;
     [SerializeField] private float rechargeTime;
 
@@ -22,6 +24,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float fireRate;
 
     [SerializeField] private bool burstFire;
+
+    [Header("Homing Missile Settings")]
+    [SerializeField] private bool canHomingMissile = true;
+    [SerializeField] private float homingCooldown;
+    [SerializeField] private float maxHomingCooldown;
 
     private void Awake()
     {
@@ -44,8 +51,13 @@ public class Weapon : MonoBehaviour
                 break;
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-            canHomingMissile = true;
+        if (!canHomingMissile)
+        {
+            homingCooldown = Mathf.MoveTowards(homingCooldown, maxHomingCooldown, (1 * Time.deltaTime));
+
+            if (homingCooldown == maxHomingCooldown)
+                canHomingMissile = true;
+        }
     }
 
     public float GetAttackRange()
@@ -98,7 +110,11 @@ public class Weapon : MonoBehaviour
     public void ShootHomingMissile()
     {
         if (canHomingMissile)
+        {
+            canHomingMissile = false;
+            homingCooldown = 0f;
             StartCoroutine(FiringHomingMissiles());
+        }
     }
 
     private IEnumerator FiringHomingMissiles()
