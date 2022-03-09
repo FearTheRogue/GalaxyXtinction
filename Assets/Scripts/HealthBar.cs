@@ -7,15 +7,22 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
+    [SerializeField] private Text text;
 
     public void SetHealth(int health)
     {
         slider.value = health;
+
+        if(text != null)
+        text.text = slider.value.ToString() + "/" + slider.maxValue.ToString();
     }
 
     public void SetMaxHealth(int health)
     {
         slider.maxValue = health;
         slider.value = health;
+
+        if(text != null)
+        text.text = health.ToString() + "/" + slider.maxValue.ToString();
     }
 }

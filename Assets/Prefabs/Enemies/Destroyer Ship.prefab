@@ -289,6 +289,7 @@ GameObject:
   - component: {fileID: 1905893391852048311}
   - component: {fileID: 7352432257339605717}
   - component: {fileID: 64695963}
+  - component: {fileID: 616457744}
   m_Layer: 0
   m_Name: Destroyer Ship
   m_TagString: Untagged
@@ -356,8 +357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c33c7e80b584a541afaeb1895746e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 100
   currentBehaviour: 0
   forwardSpeed: 40
   currentForwardSpeed: 0
@@ -391,7 +390,6 @@ MonoBehaviour:
   - {fileID: 7352432256323601328}
   - {fileID: 7352432255676287417}
   homingMissileSpawnPoint: []
-  canHomingMissile: 1
   primaryWeapon: {fileID: 6728574877116025351, guid: 9c0ff0677bbc8db45aff9a84306afc69, type: 3}
   secondaryWeapon: {fileID: 0}
   burstAmount: 0
@@ -400,6 +398,26 @@ MonoBehaviour:
   fireTimer: 0
   fireRate: 0.45
   burstFire: 0
+  canHomingMissile: 1
+  homingCooldown: 0
+  maxHomingCooldown: 0
+--- !u!114 &616457744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352432257339605673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411060de4483b5e4c9847cd3cbc18554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColor: {r: 1, g: 0, b: 0, a: 1}
+  needBoxIndicator: 1
+  needArrowIndicator: 1
+  needDistanceText: 1
+  indicator: {fileID: 0}
 --- !u!1 &7353593027632414199
 GameObject:
   m_ObjectHideFlags: 0

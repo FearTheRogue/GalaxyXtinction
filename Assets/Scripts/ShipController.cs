@@ -89,7 +89,7 @@ public class ShipController : MonoBehaviour
             AdjustCamera(startFOV);
         }
 
-        if (Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused)
+        if (Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused && !IsThrusting())
         {
             weapon.ShootMissile();
         }

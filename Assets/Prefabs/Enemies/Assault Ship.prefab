@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 2773099621025560800}
   - component: {fileID: 7333407760982181796}
   - component: {fileID: 7333407760982181797}
+  - component: {fileID: 1326759166}
   m_Layer: 0
   m_Name: Assault Ship
   m_TagString: Untagged
@@ -371,7 +372,6 @@ MonoBehaviour:
   homingMissileSpawnPoint:
   - {fileID: 2053515358}
   - {fileID: 106266885}
-  canHomingMissile: 1
   primaryWeapon: {fileID: 6728574877116025351, guid: 9c0ff0677bbc8db45aff9a84306afc69, type: 3}
   secondaryWeapon: {fileID: 2633950650922247774, guid: 7d1fe6f0fc81c5f4fbbd99cff9b70c43, type: 3}
   burstAmount: 0
@@ -380,8 +380,26 @@ MonoBehaviour:
   fireTimer: 0
   fireRate: 0.45
   burstFire: 0
+  canHomingMissile: 1
   homingCooldown: 0
   maxHomingCooldown: 5
+--- !u!114 &1326759166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7333407760982181798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411060de4483b5e4c9847cd3cbc18554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColor: {r: 1, g: 0, b: 0, a: 1}
+  needBoxIndicator: 1
+  needArrowIndicator: 1
+  needDistanceText: 1
+  indicator: {fileID: 0}
 --- !u!1 &7333407761021077670
 GameObject:
   m_ObjectHideFlags: 0

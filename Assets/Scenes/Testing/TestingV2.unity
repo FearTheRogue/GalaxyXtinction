@@ -248,6 +248,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &550279970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 409644985916341241, guid: 56078aa2379aeef47a482d03f5765d87, type: 3}
+  m_PrefabInstance: {fileID: 2022126250}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &550279971 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 409644985916341237, guid: 56078aa2379aeef47a482d03f5765d87, type: 3}
+  m_PrefabInstance: {fileID: 2022126250}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &550279975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550279970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1978990f4cf464187d602d3082cf5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireMode: 0
+  missileSpawnPoint: []
+  homingMissileSpawnPoint: []
+  primaryWeapon: {fileID: 0}
+  secondaryWeapon: {fileID: 0}
+  burstAmount: 0
+  maxBurstAmount: 0
+  rechargeTime: 0
+  fireTimer: 0
+  fireRate: 0
+  burstFire: 0
+  canHomingMissile: 1
+  homingCooldown: 0
+  maxHomingCooldown: 0
 --- !u!1001 &616157000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -671,6 +707,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 409644985916341239, guid: 56078aa2379aeef47a482d03f5765d87, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 550279971}
+    - target: {fileID: 409644985916341239, guid: 56078aa2379aeef47a482d03f5765d87, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 550279975}
     - target: {fileID: 409644985916341241, guid: 56078aa2379aeef47a482d03f5765d87, type: 3}
       propertyPath: m_Name
       value: Player Ship

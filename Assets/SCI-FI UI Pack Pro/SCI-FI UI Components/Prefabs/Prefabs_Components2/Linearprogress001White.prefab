@@ -477,12 +477,12 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.67
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3986141047904689736}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: SliderValuePass, Assembly-CSharp
         m_MethodName: UpdateProgress
         m_Mode: 0
         m_Arguments:

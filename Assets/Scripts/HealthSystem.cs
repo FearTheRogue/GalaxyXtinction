@@ -3,7 +3,7 @@ using UnityEngine;
 public class HealthSystem : MonoBehaviour
 {
     [SerializeField] private int maxHealth;
-    [SerializeField] private int currentHealth;
+    [SerializeField] public int currentHealth;
 
     [SerializeField] private HealthBar healthBar;
 
@@ -13,17 +13,6 @@ public class HealthSystem : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(20);
-        }
-
-        if (currentHealth <= 0)
-            Dead();
-    }
-
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -31,7 +20,7 @@ public class HealthSystem : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-    private void Dead()
+    public void Dead()
     {
         Debug.Log("Entity is dead");
         Destroy(gameObject);

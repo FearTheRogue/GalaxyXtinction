@@ -41,9 +41,10 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector3 wanderLocation;
     private Vector3 target;
-    private Transform playerTransform;
+    public Transform playerTransform;
 
     private Weapon weapon;
+    private HealthSystem health;
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class EnemyMovement : MonoBehaviour
         isAtDestination = false;
 
         weapon = GetComponent<Weapon>();
+        health = GetComponent<HealthSystem>();
     }
 
     private void Update()
@@ -133,6 +135,16 @@ public class EnemyMovement : MonoBehaviour
         if (interpolatingValue <= 1f)
         {
             interpolatingValue += 0.01f;
+        }
+
+        if(health.currentHealth <= 0)
+        {
+            health.Dead();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            health.TakeDamage(100);
         }
     }
 
