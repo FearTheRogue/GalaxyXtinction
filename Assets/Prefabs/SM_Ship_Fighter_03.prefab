@@ -568,6 +568,9 @@ GameObject:
   - component: {fileID: 1324186379111175765}
   - component: {fileID: 2109165904167705110}
   - component: {fileID: 1324186379111175762}
+  - component: {fileID: 499247349981196375}
+  - component: {fileID: 1894220819338390842}
+  - component: {fileID: 423376629334618000}
   - component: {fileID: 1890104345}
   m_Layer: 0
   m_Name: SM_Ship_Fighter_03
@@ -702,6 +705,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036bdf55ed0c4c940bac3c4f87e0eaef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointOfOrigin:
+  - {fileID: 1324186378448407334}
+  - {fileID: 1324186377327130382}
+  rb: {fileID: 1324186379111175765}
+  weapon: {fileID: 1890104345}
+  forwardSpeed: 100
+  currentForwardSpeed: 0
+  forwardAcceleration: 25
+--- !u!114 &499247349981196375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325864218414367312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a355b50ad9825864ea607c3a9ae92813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   cam: {fileID: 1324186377354086988}
   camCurve:
     serializedVersion: 2
@@ -731,22 +754,41 @@ MonoBehaviour:
   normalSpeedFOV: 70
   boostSpeedFOV: 100
   fovT: 35
-  pointOfOrigin:
-  - {fileID: 1324186378448407334}
-  - {fileID: 1324186377327130382}
-  rb: {fileID: 1324186379111175765}
-  weapon: {fileID: 1890104345}
-  forwardSpeed: 100
-  currentForwardSpeed: 0
-  forwardAcceleration: 25
+--- !u!114 &1894220819338390842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325864218414367312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5379dea21c58b4aaed0aa1af2a4e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   thrusters: {fileID: 1599601916}
   thrusterSpeed: 200
   thrusterStock: 0
   maxThrusterStock: 25
   decreaseThrusterAmount: 5
-  IncreaseThrusterAmount: 0.8
+  IncreaseThrusterAmount: 5
   rechargeDelay: 1
   isThrusting: 0
+  canThrust: 0
+--- !u!114 &423376629334618000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325864218414367312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 487d043e1533d85408f6a061c376f9e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons: []
+  selectedWeapon: 0
 --- !u!114 &1890104345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -759,6 +801,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1978990f4cf464187d602d3082cf5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapons: []
+  selectedWeapon: 0
+  weaponName: 
   fireMode: 2
   missileSpawnPoint:
   - {fileID: 1324186378448407334}
@@ -2478,7 +2523,7 @@ GameObject:
   - component: {fileID: 7594021197481579577}
   - component: {fileID: 1193330975}
   m_Layer: 5
-  m_Name: HP
+  m_Name: Power Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2584,7 +2629,7 @@ GameObject:
   - component: {fileID: 7594021197554925723}
   - component: {fileID: 1599601916}
   m_Layer: 5
-  m_Name: EP
+  m_Name: Thruster Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

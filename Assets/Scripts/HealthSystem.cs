@@ -3,7 +3,9 @@ using UnityEngine;
 public class HealthSystem : MonoBehaviour
 {
     [SerializeField] private int maxHealth;
-    [SerializeField] public int currentHealth;
+    [SerializeField] private int currentHealth;
+
+    public int GetCurrentHealth() { return currentHealth; }
 
     [SerializeField] private HealthBar healthBar;
 

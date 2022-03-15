@@ -20,7 +20,7 @@ public class DropLookSystem : MonoBehaviour
 
     private void Update()
     {
-        if(health.currentHealth <= 0)
+        if(health.GetCurrentHealth() <= 0)
         {
             SpawnLoot();
         }

@@ -7,7 +7,10 @@ public class EnemyMovement : MonoBehaviour
     [Header("Current Behaviour")]
     [SerializeField] private Behaviour currentBehaviour = Behaviour.Idle;
 
+    [SerializeField] private bool canMove = true;
+
     private Vector3 startingLocation;
+    public bool hasBeenSpawned;
 
     [Header("Ship Properties")]
     [SerializeField] private float forwardSpeed;
@@ -43,21 +46,43 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 target;
     public Transform playerTransform;
 
-    private Weapon weapon;
+    [SerializeField] private Weapon weapon;
     private HealthSystem health;
 
     private void Awake()
     {
-        startingLocation = transform.position;
-
         isAtDestination = false;
 
-        weapon = GetComponent<Weapon>();
+        //weapon = GameObject.Find("Weapon").GetComponent<Weapon>();
         health = GetComponent<HealthSystem>();
     }
 
-    private void Update()
+    private void Start()
     {
+        if (hasBeenSpawned)
+        {
+            SetSpawnedEnemyLocation();
+            return;
+        }
+
+        startingLocation = transform.position;
+    }
+
+    public void SetSpawnedEnemyLocation()
+    {
+        startingLocation = transform.position + new Vector3(Random.Range(50, 200), Random.Range(100,250), 0);
+    }
+
+    private void Update()
+    {     
+        if(health.GetCurrentHealth() < 0)
+        {
+            health.Dead();
+        }
+
+        if (!canMove)
+            return;
+
         switch (currentBehaviour)
         {
             case Behaviour.Idle:
@@ -124,22 +149,9 @@ public class EnemyMovement : MonoBehaviour
                 break;
         }
 
-        //if (target == null)
-        //{
-        //    if (interpalatingValue >= 0)
-        //    {
-        //        interpalatingValue -= 0.1f;
-        //    }
-        //}
-
         if (interpolatingValue <= 1f)
         {
             interpolatingValue += 0.01f;
-        }
-
-        if(health.currentHealth <= 0)
-        {
-            health.Dead();
         }
 
         if (Input.GetKeyDown(KeyCode.F))

@@ -294,6 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 2076202117347291321}
+  text: {fileID: 0}
 --- !u!1 &2076202117389731562
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +378,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2076202117389731563
 MonoBehaviour:
   m_ObjectHideFlags: 0

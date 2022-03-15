@@ -4,8 +4,10 @@ using UnityEngine;
 
 public enum FireMode { Semi, Burst, Auto };
 
-public class Weapon : MonoBehaviour
+public class Weapon : WeaponManager
 {
+    [SerializeField] private string weaponName;
+
     [Header("Weapon Properties")]
     [SerializeField] private FireMode fireMode = FireMode.Semi;
     [SerializeField] private Transform[] missileSpawnPoint;
@@ -13,8 +15,6 @@ public class Weapon : MonoBehaviour
     
     [SerializeField] private GameObject primaryWeapon;
     [SerializeField] private GameObject secondaryWeapon;
-
-
 
     [Header("Missile Settings")]
     [SerializeField] private int burstAmount, maxBurstAmount;
@@ -81,7 +81,7 @@ public class Weapon : MonoBehaviour
                 {
                     GameObject projectile = Instantiate(primaryWeapon, origin.transform.position, origin.transform.rotation);
 
-                    Physics.IgnoreCollision(projectile.GetComponent<Collider>(), origin.parent.GetComponent<Collider>());
+                    Physics.IgnoreCollision(projectile.GetComponent<Collider>(), this.transform.parent.GetComponent<Collider>());
                 }
 
                 fireTimer = 0f;
@@ -122,7 +122,7 @@ public class Weapon : MonoBehaviour
         foreach (Transform origin in homingMissileSpawnPoint)
         {
             GameObject projectile = Instantiate(secondaryWeapon, origin.transform.position, origin.transform.rotation);
-            Physics.IgnoreCollision(projectile.GetComponent<Collider>(), origin.parent.GetComponent<Collider>());
+            Physics.IgnoreCollision(projectile.GetComponent<Collider>(), this.transform.parent.GetComponent<Collider>());
             yield return new WaitForSeconds(0.5f);
         }
     }

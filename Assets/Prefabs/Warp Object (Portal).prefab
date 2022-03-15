@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &9142875904951754302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8642167052816107859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b1ad1babc3d6ba4c889f6e7826529c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!1 &8068144170009382685
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8068144170009382685}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_Children:
   - {fileID: 1551611632569780724}
   - {fileID: 8239325897900127326}
@@ -98,6 +85,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9142875904951754302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8642167052816107859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1ad1babc3d6ba4c889f6e7826529c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1001 &1556318060525996432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,11 +243,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1930287293564321099, guid: 6baf2ecc8f9a0f54592b79ec0c33fba0, type: 3}
       propertyPath: m_Size.x
-      value: 15
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 1930287293564321099, guid: 6baf2ecc8f9a0f54592b79ec0c33fba0, type: 3}
       propertyPath: m_Size.y
-      value: 15
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 1930287293564321099, guid: 6baf2ecc8f9a0f54592b79ec0c33fba0, type: 3}
       propertyPath: m_Size.z
@@ -255,7 +255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930287293564321099, guid: 6baf2ecc8f9a0f54592b79ec0c33fba0, type: 3}
       propertyPath: m_Center.z
-      value: 1.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1930287293564321099, guid: 6baf2ecc8f9a0f54592b79ec0c33fba0, type: 3}
       propertyPath: m_IsTrigger

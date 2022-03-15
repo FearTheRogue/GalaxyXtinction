@@ -4,42 +4,34 @@ using UnityEngine;
 
 public class ShipController : MonoBehaviour
 {
-    [Header("Camera Settings")]
-    [SerializeField] private Camera cam;
-    [SerializeField] private AnimationCurve camCurve;
-    [SerializeField] private float startFOV;
-    [SerializeField] private float normalSpeedFOV;
-    [SerializeField] private float boostSpeedFOV;
-    [SerializeField] private float fovT;
+    private CameraMovement shipCamera;
+    private ThrusterSystem thrusterSystem;
 
     [Header("Ship Settings")]
     [SerializeField] private Transform[] pointOfOrigin;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Weapon weapon;
-    
+
     [Header("Normal Speed Settings")]
     [SerializeField] private float forwardSpeed;
     [SerializeField] private float currentForwardSpeed;
     [SerializeField] private float forwardAcceleration;
-
-    [Header("Thruster Speed Settings")]
-    [SerializeField] private ThrusterBar thrusters;
-    [SerializeField] private float thrusterSpeed;
-    [SerializeField] private float thrusterStock;
-    [SerializeField] private float maxThrusterStock;
-    [SerializeField] private float decreaseThrusterAmount;
-    [SerializeField] private float IncreaseThrusterAmount;
-    [SerializeField] private float rechargeDelay;
-    [SerializeField] private bool isThrusting;
 
     private float roll;
     private float rollSpeed = 90f;
     private float rollAcceleration = 5f;
 
     private Vector2 mouseLookInput, screenCenter, mouseDistance;
-
     public Rigidbody Rb => rb;
-    
+
+    private void Awake()
+    {
+        shipCamera = GetComponent<CameraMovement>();
+        thrusterSystem = GetComponent<ThrusterSystem>();
+
+        rb = GetComponent<Rigidbody>();
+    }
+
     void Start()
     {
         // Finding the screen center
@@ -47,11 +39,6 @@ public class ShipController : MonoBehaviour
         screenCenter.y = Screen.height * .5f;
 
         Cursor.lockState = CursorLockMode.Confined;
-
-        weapon = GetComponent<Weapon>();
-
-        thrusterStock = maxThrusterStock;
-        thrusters.SetMaxThrusterValue(thrusterStock);
     }
 
     void Update()
@@ -66,77 +53,40 @@ public class ShipController : MonoBehaviour
 
         RollShip();
 
-        //if (Input.GetAxisRaw("Vertical") >= 0.5f && Input.GetAxisRaw("Vertical") <= 1f)
-        //    cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, normalSpeedFOV, camCurve.Evaluate(fovT));
-        //else
-        //    cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, startFOV, camCurve.Evaluate(fovT));
-
-        isThrusting = IsThrusting();
-
-        if (IsThrusting())
-        {
-            ThrusterBoost();
-        }
-        else
-        {
-            AdjustCamera(normalSpeedFOV);
-            currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, Input.GetAxisRaw("Vertical") * forwardSpeed, forwardAcceleration * Time.deltaTime);
-            transform.position += transform.forward * currentForwardSpeed * Time.deltaTime;
-        }
-
-        if(Input.GetAxisRaw("Vertical") <= 0.5f)
-        {
-            AdjustCamera(startFOV);
-        }
-
-        if (Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused && !IsThrusting())
+        if (CheckShoot())
         {
             weapon.ShootMissile();
         }
 
-        if (!IsThrusting())
+        if (thrusterSystem.CheckCanThrust())
         {
-            StartCoroutine(RechargeThrusters());
-        } else
+            currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, Input.GetAxisRaw("Vertical") * thrusterSystem.GetThrusterSpeed(), forwardAcceleration * Time.deltaTime);
+        }
+        else
         {
-            StopCoroutine(RechargeThrusters());
+            currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, Input.GetAxisRaw("Vertical") * forwardSpeed, forwardAcceleration * Time.deltaTime);
+
+            if (currentForwardSpeed <= 50)
+            {
+                shipCamera.AdjustCamera(shipCamera.startFOV);
+            }
+            else
+            { 
+                shipCamera.AdjustCamera(shipCamera.normalSpeedFOV);
+            }
         }
 
-        thrusters.SetThruster(thrusterStock);
+        transform.position += transform.forward * currentForwardSpeed * Time.deltaTime;
     }
 
-    private void AdjustCamera(float target)
+    private bool CheckShoot()
     {
-        cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, camCurve.Evaluate(fovT * Time.deltaTime));
-    }
-
-    private IEnumerator RechargeThrusters()
-    {
-        yield return new WaitForSeconds(rechargeDelay);
-
-        thrusterStock = Mathf.MoveTowards(thrusterStock, maxThrusterStock, (IncreaseThrusterAmount * Time.deltaTime));
-    }
-
-    private bool IsThrusting()
-    {
-        if (Input.GetKey(KeyCode.LeftShift) && thrusterStock > 0f && currentForwardSpeed >= (forwardSpeed -5))
-        { 
+        if(Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused && currentForwardSpeed <= 150)
+        {
             return true;
         }
-        else 
-        {
-            return false;
-        }
-    }
 
-    private void ThrusterBoost()
-    {
-        AdjustCamera(boostSpeedFOV);
-
-        thrusterStock = Mathf.MoveTowards(thrusterStock, 0, (decreaseThrusterAmount * Time.deltaTime));
-
-        currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, Input.GetAxisRaw("Vertical") * thrusterSpeed, forwardAcceleration * Time.deltaTime);
-        transform.position += transform.forward * currentForwardSpeed * Time.deltaTime;
+        return false;
     }
 
     private void RollShip()
@@ -145,10 +95,15 @@ public class ShipController : MonoBehaviour
         transform.Rotate(-mouseDistance.y * 100f * Time.deltaTime, mouseDistance.x * 100f * Time.deltaTime, roll * rollSpeed * Time.deltaTime, Space.Self);
     }
 
+    public float GetCurrentSpeed()
+    {
+        return currentForwardSpeed;
+    }
+
     //void Shoot()
     //{
     //    Debug.Log("Shooting");
-        
+
     //    RaycastHit hit;
     //    if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
     //    {
