@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5743578613124288212}
   - component: {fileID: 5633757908239883056}
   - component: {fileID: 5582523349641705494}
-  - component: {fileID: 5633040526357027394}
   - component: {fileID: 5582929122013222578}
   - component: {fileID: 5716107731461246878}
   - component: {fileID: 5726506754821498508}
@@ -33,6 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.65, y: 2, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5743352044958413660}
   - {fileID: 5740939524654408060}
@@ -62,7 +62,7 @@ MonoBehaviour:
   hitPrefab: {fileID: 1801918589960200, guid: 6953498a5ce2ecb4eaa9390c957cbe80, type: 3}
   trails:
   - {fileID: 5745661679434865208}
-  damage: 15
+  damage: 20
 --- !u!199 &5582523349641705494
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -106,6 +106,7 @@ ParticleSystemRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_RenderMode: 4
+  m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 3
@@ -129,34 +130,11 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+  m_MeshWeighting: 1
+  m_MeshWeighting1: 1
+  m_MeshWeighting2: 1
+  m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &5633040526357027394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745601091419127658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9e272d634f40434b85fbf756732714d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 0.7
-  speed: 1
-  duration: 1
-  loop: 1
-  prewarm: 0
-  lights: 1
-  trails: 1
-  changeColor: 1
-  newMaxColor: {r: 0.09558821, g: 1, b: 0.13924955, a: 1}
-  newMinColor: {r: 0.613286, g: 1, b: 0.09558821, a: 1}
-  ParticleSystems:
-  - {fileID: 5745601091419127658}
-  - {fileID: 5746132335799149768}
-  - {fileID: 5745661679434865208}
-  ActiveParticleSystems: 010101
 --- !u!198 &5582929122013222578
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4967,6 +4945,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.146}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5743578613124288212}
   m_RootOrder: 1
@@ -5107,6 +5086,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5743578613124288212}
   m_RootOrder: 0
@@ -9895,6 +9875,7 @@ ParticleSystemRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_RenderMode: 0
+  m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 3
@@ -9918,4 +9899,8 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+  m_MeshWeighting: 1
+  m_MeshWeighting1: 1
+  m_MeshWeighting2: 1
+  m_MeshWeighting3: 1
   m_MaskInteraction: 0

@@ -31,6 +31,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 	public GameObject muzzlePrefab;
 	public GameObject hitPrefab;
 	public List<GameObject> trails;
+
     public float damage;
 
     private Vector3 startPos;
@@ -89,29 +90,18 @@ public class ProjectileMoveScript : MonoBehaviour {
     }
 
 	void OnCollisionEnter (Collision co) {
-
-        //if (hitPrefab != null)
-        //{
-        //    GameObject hitVFX = Instantiate(hitPrefab, co.collider.transform.position, co.collider.transform.rotation, co.transform);
-
-        //    var ps = hitVFX.GetComponent<ParticleSystem>();
-        //    if (ps == null)
-        //    {
-        //        var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-        //        Destroy(hitVFX, psChild.main.duration);
-        //    }
-        //    else
-        //        Destroy(hitVFX, ps.main.duration);
-        //}
-
-        //StartCoroutine(DestroyParticle(0f));
-
-
         if (!bounce)
         {
             if (co.gameObject.tag != "Bullet" && !collided)
             {
                 collided = true;
+
+                HealthSystem health = co.gameObject.GetComponent<HealthSystem>();
+
+                if(health != null)
+                {
+                    health.TakeDamage((int)damage);
+                }
 
                 if (trails.Count > 0)
                 {
@@ -136,14 +126,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 
                 if (hitPrefab != null)
                 {
-                    HealthSystem health = co.gameObject.GetComponent<HealthSystem>();
-
-                    if(health != null)
-                    {
-                        health.TakeDamage((int)damage);
-                    }
-
-                    var hitVFX = Instantiate(hitPrefab, pos, rot, co.transform) as GameObject;
+                    var hitVFX = Instantiate(hitPrefab, pos, rot) as GameObject;
 
                     var ps = hitVFX.GetComponent<ParticleSystem>();
                     if (ps == null)
@@ -163,10 +146,10 @@ public class ProjectileMoveScript : MonoBehaviour {
             rb.useGravity = true;
             rb.drag = 0.5f;
             ContactPoint contact = co.contacts[0];
-            rb.AddForce(Vector3.Reflect((contact.point - startPos).normalized, contact.normal) * bounceForce, ForceMode.Impulse);
-            Destroy(this);
+            rb.AddForce (Vector3.Reflect((contact.point - startPos).normalized, contact.normal) * bounceForce, ForceMode.Impulse);
+            Destroy ( this );
         }
-    }
+	}
 
 	public IEnumerator DestroyParticle (float waitTime) {
 
