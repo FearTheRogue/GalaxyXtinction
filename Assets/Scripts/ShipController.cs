@@ -7,6 +7,8 @@ public class ShipController : MonoBehaviour
     private CameraMovement shipCamera;
     private ThrusterSystem thrusterSystem;
 
+    [SerializeField] private bool canRotate = true;
+
     [Header("Ship Settings")]
     [SerializeField] private Transform[] pointOfOrigin;
     [SerializeField] private Rigidbody rb;
@@ -43,13 +45,16 @@ public class ShipController : MonoBehaviour
 
     void Update()
     {
-        mouseLookInput.x = Input.mousePosition.x;
-        mouseLookInput.y = Input.mousePosition.y;
+        if (!canRotate)
+        {
+            mouseLookInput.x = Input.mousePosition.x;
+            mouseLookInput.y = Input.mousePosition.y;
 
-        mouseDistance.x = (mouseLookInput.x - screenCenter.x) / screenCenter.y;
-        mouseDistance.y = (mouseLookInput.y - screenCenter.y) / screenCenter.y;
+            mouseDistance.x = (mouseLookInput.x - screenCenter.x) / screenCenter.y;
+            mouseDistance.y = (mouseLookInput.y - screenCenter.y) / screenCenter.y;
 
-        mouseDistance = Vector2.ClampMagnitude(mouseDistance, 1f);
+            mouseDistance = Vector2.ClampMagnitude(mouseDistance, 1f);
+        }
 
         RollShip();
 

@@ -53,7 +53,8 @@ MonoBehaviour:
   - {fileID: 2989888814112641107}
   - {fileID: 2989888815137795195}
   homingMissileSpawnPoint: []
-  primaryWeapon: {fileID: 6728574877116025351, guid: 9c0ff0677bbc8db45aff9a84306afc69, type: 3}
+  primaryWeapon: {fileID: 5745601091419127658, guid: 7adfd70401d3f194a8c1b3a7b3fb061d, type: 3}
+  muzzleFlash: {fileID: 900159797146572587, guid: 09a1e9833a262014e866632184b5976a, type: 3}
   secondaryWeapon: {fileID: 0}
   burstAmount: 0
   maxBurstAmount: 0
@@ -81,7 +82,7 @@ GameObject:
   - component: {fileID: 1360476382555285709}
   m_Layer: 0
   m_Name: Player Ship
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,11 +147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036bdf55ed0c4c940bac3c4f87e0eaef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canRotate: 0
   pointOfOrigin:
   - {fileID: 2989888814112641107}
   - {fileID: 2989888815137795195}
   rb: {fileID: 0}
-  weapon: {fileID: 0}
+  weapon: {fileID: 286578901}
   forwardSpeed: 100
   currentForwardSpeed: 0
   forwardAcceleration: 25
@@ -244,7 +246,7 @@ GameObject:
   - component: {fileID: 2997769723430262319}
   m_Layer: 0
   m_Name: Ship GFX
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,7 +328,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b9cd94a24f904184e81989744300be87, type: 3}
 --- !u!1 &2988339555345983207

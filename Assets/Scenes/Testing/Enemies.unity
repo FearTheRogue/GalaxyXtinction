@@ -349,17 +349,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &286578901 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 286578901, guid: 75933370dcb9fc14cb005fd4a1c3b968, type: 3}
-  m_PrefabInstance: {fileID: 1673359571}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f1978990f4cf464187d602d3082cf5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &708089265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -623,15 +612,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 548816306, guid: 4a77ea676942d84468b1c7b3ea733d27, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 548816306, guid: 4a77ea676942d84468b1c7b3ea733d27, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7352432257339605673, guid: 4a77ea676942d84468b1c7b3ea733d27, type: 3}
       propertyPath: m_Name
       value: Destroyer Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352432257339605673, guid: 4a77ea676942d84468b1c7b3ea733d27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7352432257339605674, guid: 4a77ea676942d84468b1c7b3ea733d27, type: 3}
       propertyPath: m_RootOrder
@@ -1351,7 +1344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1360476382555285699, guid: 75933370dcb9fc14cb005fd4a1c3b968, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -272.8
+      value: -410.8
       objectReference: {fileID: 0}
     - target: {fileID: 1360476382555285699, guid: 75933370dcb9fc14cb005fd4a1c3b968, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1389,10 +1382,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1360476382555285710, guid: 75933370dcb9fc14cb005fd4a1c3b968, type: 3}
-      propertyPath: weapon
-      value: 
-      objectReference: {fileID: 286578901}
     - target: {fileID: 5943958196068954406, guid: 75933370dcb9fc14cb005fd4a1c3b968, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1545,26 +1534,6 @@ RectTransform:
   m_AnchoredPosition: {x: 49, y: -48}
   m_SizeDelta: {x: 351.1444, y: 69.32434}
   m_Pivot: {x: 0, y: 1}
---- !u!1 &1881701745 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7333407760982181798, guid: 03e4a65efa4380f4aa1f490eefc6796c, type: 3}
-  m_PrefabInstance: {fileID: 7333407761994297759}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1881701747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881701745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f45067f051950645b07f090dca0ad46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToDrop: {fileID: 7233758894649881590, guid: 3d9d4fb16bc1df743b990ab1e87099b7, type: 3}
-  minRate: 5
-  maxRate: 15
 --- !u!1 &2059709329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,6 +1607,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 516032119375687278, guid: 03e4a65efa4380f4aa1f490eefc6796c, type: 3}
+      propertyPath: canHomingMissile
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5574153581805755515, guid: 03e4a65efa4380f4aa1f490eefc6796c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1688,10 +1661,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7333407760982181794, guid: 03e4a65efa4380f4aa1f490eefc6796c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7333407760982181796, guid: 03e4a65efa4380f4aa1f490eefc6796c, type: 3}
-      propertyPath: canMove
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7333407760982181798, guid: 03e4a65efa4380f4aa1f490eefc6796c, type: 3}

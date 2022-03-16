@@ -260,6 +260,8 @@ public class EnemyMovement : MonoBehaviour
         {
             Debug.DrawLine(transform.position, hit.point, Color.blue);
 
+            Debug.Log("Hit Distance is " + hit.distance * 100);
+
             if(hit.distance <= homingMissileAttackRange && hit.distance >= missileAttackRange)
             {
                 Debug.DrawLine(transform.position, hit.point, Color.white);
@@ -295,6 +297,9 @@ public class EnemyMovement : MonoBehaviour
         Vector3 targetPos = target;
         float dist = Vector3.Distance(transform.position, targetPos);
 
+        if(playerTransform != null)
+        Debug.Log(gameObject.name + " is " + dist + "away from player");
+
         return dist;
     }
 
@@ -306,6 +311,8 @@ public class EnemyMovement : MonoBehaviour
         }
 
         playerTransform = other.transform;
+
+        Debug.Log("fjsifsjd");
     }
 
     private void OnTriggerExit(Collider other)

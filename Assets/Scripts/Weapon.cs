@@ -14,6 +14,7 @@ public class Weapon : WeaponManager
     [SerializeField] private Transform[] homingMissileSpawnPoint;
     
     [SerializeField] private GameObject primaryWeapon;
+    [SerializeField] private GameObject muzzleFlash;
     [SerializeField] private GameObject secondaryWeapon;
 
     [Header("Missile Settings")]
@@ -80,6 +81,11 @@ public class Weapon : WeaponManager
                 foreach (Transform origin in missileSpawnPoint)
                 {
                     GameObject projectile = Instantiate(primaryWeapon, origin.transform.position, origin.transform.rotation);
+
+                    if (muzzleFlash != null)
+                    {
+                        GameObject muzzle = Instantiate(muzzleFlash, origin.transform.position, transform.rotation, origin.transform);
+                    }
 
                     Physics.IgnoreCollision(projectile.GetComponent<Collider>(), this.transform.parent.GetComponent<Collider>());
                 }

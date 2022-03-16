@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1399482361108304374}
+  - component: {fileID: 209776303}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -32,6 +33,38 @@ Transform:
   m_Father: {fileID: 7351566085677370567}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &209776303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2150668164445902166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1978990f4cf464187d602d3082cf5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons: []
+  selectedWeapon: 0
+  weaponName: 
+  fireMode: 2
+  missileSpawnPoint:
+  - {fileID: 7352432256323601328}
+  - {fileID: 7352432255676287417}
+  homingMissileSpawnPoint: []
+  primaryWeapon: {fileID: 3002110568612396956, guid: 51d95304709da7b40a4519df7e1ef9cb, type: 3}
+  muzzleFlash: {fileID: 3583984613307745663, guid: ab35ec01ff121d44a8fac1e7e28d7610, type: 3}
+  secondaryWeapon: {fileID: 0}
+  burstAmount: 0
+  maxBurstAmount: 5
+  rechargeTime: 5
+  fireTimer: 0
+  fireRate: 0.45
+  burstFire: 0
+  canHomingMissile: 1
+  homingCooldown: 0
+  maxHomingCooldown: 0
 --- !u!1 &2632880528634188441
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +353,6 @@ GameObject:
   - component: {fileID: 7352432257339605672}
   - component: {fileID: 1905893391852048311}
   - component: {fileID: 7352432257339605717}
-  - component: {fileID: 64695963}
   - component: {fileID: 616457744}
   - component: {fileID: 1966360269}
   m_Layer: 0
@@ -391,7 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentBehaviour: 0
-  canMove: 0
+  canMove: 1
   hasBeenSpawned: 0
   forwardSpeed: 40
   currentForwardSpeed: 0
@@ -409,38 +441,7 @@ MonoBehaviour:
   missileAttackRange: 100
   homingMissileAttackRange: 150
   playerTransform: {fileID: 0}
-  weapon: {fileID: 0}
---- !u!114 &64695963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7352432257339605673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f1978990f4cf464187d602d3082cf5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons: []
-  selectedWeapon: 0
-  weaponName: 
-  fireMode: 2
-  missileSpawnPoint:
-  - {fileID: 7352432256323601328}
-  - {fileID: 7352432255676287417}
-  homingMissileSpawnPoint: []
-  primaryWeapon: {fileID: 6728574877116025351, guid: 9c0ff0677bbc8db45aff9a84306afc69, type: 3}
-  secondaryWeapon: {fileID: 0}
-  burstAmount: 0
-  maxBurstAmount: 5
-  rechargeTime: 5
-  fireTimer: 0
-  fireRate: 0.45
-  burstFire: 0
-  canHomingMissile: 1
-  homingCooldown: 0
-  maxHomingCooldown: 0
+  weapon: {fileID: 209776303}
 --- !u!114 &616457744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,9 +570,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 43239783779963154, guid: aa3addb7572f59049b8b3c722567fab9, type: 2}
+  m_Mesh: {fileID: 4300000, guid: a2b596f04de3c734699bded605c10a5f, type: 3}
 --- !u!1 &8293612060358749627
 GameObject:
   m_ObjectHideFlags: 0
