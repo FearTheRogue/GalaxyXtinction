@@ -17,6 +17,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float currentForwardSpeed;
     [SerializeField] private float forwardAcceleration;
     [SerializeField] private SphereCollider detector;
+    [SerializeField] private LayerMask mask;
 
     [Range(0f,1f)]
     [SerializeField] private float rotationSpeed;
@@ -44,10 +45,12 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector3 wanderLocation;
     private Vector3 target;
-    public Transform playerTransform;
+    [SerializeField] private Transform playerTransform;
 
     [SerializeField] private Weapon weapon;
     private HealthSystem health;
+
+    [SerializeField] private RaycastHit hit;
 
     private void Awake()
     {
@@ -74,7 +77,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void Update()
-    {     
+    {
         if(health.GetCurrentHealth() < 0)
         {
             health.Dead();
@@ -131,8 +134,9 @@ public class EnemyMovement : MonoBehaviour
                 {
                     if (IsPlayerInRange())
                     {
-                        currentBehaviour = Behaviour.Attack;
+                        AttackPlayer();
                     }
+
                     UpdatePursue();
                 }
                 break;
@@ -141,10 +145,10 @@ public class EnemyMovement : MonoBehaviour
 
                 UpdatePursue();
 
-                if(!IsPlayerInRange())
-                {
-                    currentBehaviour = Behaviour.Pursue;
-                }
+                //if(!IsPlayerInRange())
+                //{
+                //    currentBehaviour = Behaviour.Pursue;
+                //} 
 
                 break;
         }
@@ -249,47 +253,92 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             isAtDestination = true;
+
+            //currentBehaviour = Behaviour.Attack;
         }
     }
 
     private bool IsPlayerInRange()
     {
-        RaycastHit hit;
+        //RaycastHit hit;
 
-        if (Physics.Raycast(gameObject.transform.position, transform.forward, out hit, detector.radius))
-        {
-            Debug.DrawLine(transform.position, hit.point, Color.blue);
-
-            Debug.Log("Hit Distance is " + hit.distance * 100);
-
-            if(hit.distance <= homingMissileAttackRange && hit.distance >= missileAttackRange)
-            {
-                Debug.DrawLine(transform.position, hit.point, Color.white);
-
-                weapon.ShootHomingMissile();
-            }
-            else if (hit.distance <= missileAttackRange)
-            {
-                Debug.DrawLine(transform.position, hit.point, Color.green);
-
-                weapon.ShootMissile();
-            }
-
-            //weapon.BurstShoot();
-
-            return true;
-        }
-        //else if (Physics.Raycast(gameObject.transform.position, transform.forward, out hit, homingMissileAttackRange))
+        //if (Physics.Raycast(gameObject.transform.position, transform.forward, out hit, layerMask))
         //{
-        //    Debug.DrawLine(gameObject.transform.position, hit.point, Color.gray);
+        //    Debug.DrawLine(transform.position, hit.point, Color.blue);
 
-        //    weapon.ShootHomingMissile();
-        //    weapon.canHomingMissile = false;
+        //    Physics.IgnoreCollision(gameObject.transform.Find("Ship Model").GetComponent<MeshCollider>(), hit.collider);
 
+        //    if (Physics.Raycast(transform.position, hit.point, missileAttackRange))
+        //    {
+        //        Debug.DrawLine(transform.position, hit.point, Color.green);
+
+        //        weapon.ShootMissile();
+        //        Debug.Log("Shooting Missile");
+        //    }
+        //    else if (Physics.Raycast(transform.position, hit.point, homingMissileAttackRange))
+        //    {
+        //        Debug.DrawLine(transform.position, hit.point, Color.red);
+
+        //        weapon.ShootHomingMissile();
+        //        Debug.Log("Shooting Homing Missile");
+        //    }
+        //    Debug.Log("Result True - Tag Collided with: " + hit.transform.GetComponent<MeshCollider>());
         //    return true;
         //}
 
+        //if (Physics.Raycast(transform.position, transform.forward, out hit, layerMask))
+        //{
+        //    Debug.DrawRay(gameObject.transform.position, hit.point, Color.red);
+
+        //    if (!hit.collider.CompareTag("Player"))
+        //    {
+        //        Debug.Log("Tag Collided with: " + hit.collider.tag);
+        //        return false;
+        //    }
+
+        //    return true;
+
+        //}
+        //Debug.Log("Result False - Tag Collided with: " + hit.transform.GetComponent<MeshCollider>());
+        //return false;
+
+        if(Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, mask))
+        {
+            //Debug.Log("GameObject hit: " + hit.transform.name + " with a distance of: " + hit.distance);
+
+            return true;
+        }
+
         return false;
+    }
+
+    private void AttackPlayer()
+    {
+        //currentBehaviour = Behaviour.Attack;
+        if (weapon.GetNumOfWeapons() > 1)
+        {
+            if (hit.distance <= homingMissileAttackRange && hit.distance >= missileAttackRange)
+            {
+                Debug.Log("Shooting Homing Missile");
+                weapon.ShootHomingMissile();
+            }
+        }
+
+        if (hit.distance <= missileAttackRange)
+        {
+            weapon.ShootMissile();
+            Debug.Log("Shooting Normal Missile");
+        }
+
+        //Debug.Log("Distance: " + dist);
+    }
+
+    private float DistanceFromPlayer()
+    {
+        Vector3 targetPos = playerTransform.position;
+        float dist = Vector3.Distance(transform.position, targetPos);
+
+        return dist;
     }
 
     private float DistanceFromTarget()
@@ -297,27 +346,22 @@ public class EnemyMovement : MonoBehaviour
         Vector3 targetPos = target;
         float dist = Vector3.Distance(transform.position, targetPos);
 
-        if(playerTransform != null)
-        Debug.Log(gameObject.name + " is " + dist + "away from player");
-
         return dist;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag != "Player")
+        if(!other.CompareTag("Player"))
         {
             return;
         }
 
         playerTransform = other.transform;
-
-        Debug.Log("fjsifsjd");
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag != "Player")
+        if(!other.CompareTag("Player"))
         {
             return;
         }

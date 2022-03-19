@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7233758893542661145}
   m_Father: {fileID: 7233758894649881579}
@@ -124,6 +125,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7233758892618405609}
   m_RootOrder: 0
@@ -265,6 +267,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7233758892618405609}
   m_Father: {fileID: 0}
@@ -296,8 +299,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  minModifier: 50
-  maxModifier: 150
+  minModifier: 45
+  maxModifier: 50
+  speed: 0.1
+  moveToPlayer: 5
+  currentMoveToPlayer: 0
+  moveToPlayerSpeed: 5
 --- !u!114 &-8036272740116495316
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -133,6 +133,21 @@ public class Weapon : WeaponManager
         }
     }
 
+    public int GetNumOfWeapons()
+    {
+        if(primaryWeapon != null && secondaryWeapon != null)
+        {
+            return 2;
+        }
+        else if (secondaryWeapon == null)
+        {
+            return 1;
+        }
+
+        Debug.LogWarning(gameObject.transform.name + " does not have any weapons attached");
+        return 0;
+    }
+
     public void BurstShoot()
     {
         if (burstAmount == 0)
