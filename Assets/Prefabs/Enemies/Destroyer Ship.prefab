@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7352432256323601328}
   - {fileID: 7352432255676287417}
@@ -48,21 +49,18 @@ MonoBehaviour:
   weapons: []
   selectedWeapon: 0
   weaponName: 
-  fireMode: 2
+  fireMode: 1
   missileSpawnPoint:
   - {fileID: 7352432256323601328}
   - {fileID: 7352432255676287417}
   homingMissileSpawnPoint: []
   primaryWeapon: {fileID: 3002110568612396956, guid: 51d95304709da7b40a4519df7e1ef9cb, type: 3}
-  muzzleFlash: {fileID: 3583984613307745663, guid: ab35ec01ff121d44a8fac1e7e28d7610, type: 3}
   secondaryWeapon: {fileID: 0}
   burstAmount: 0
-  maxBurstAmount: 5
-  rechargeTime: 5
   fireTimer: 0
   fireRate: 0.45
-  burstFire: 0
-  canHomingMissile: 1
+  canBurstFire: 0
+  canHomingMissile: 0
   homingCooldown: 0
   maxHomingCooldown: 0
 --- !u!1 &2632880528634188441
@@ -92,6 +90,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.3635001, y: 0, z: -2.3744996}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8084544552597035171}
   m_RootOrder: 0
@@ -230,6 +229,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2638406335558366079}
   - {fileID: 8290153070080560221}
@@ -263,6 +263,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.7979991, y: 0, z: 2.0299988}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1399482361108304374}
   m_RootOrder: 1
@@ -293,6 +294,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.7899984, y: 0, z: 2.0299988}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1399482361108304374}
   m_RootOrder: 0
@@ -324,6 +326,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7352432257339605674}
   m_RootOrder: 1
@@ -353,8 +356,9 @@ GameObject:
   - component: {fileID: 7352432257339605672}
   - component: {fileID: 1905893391852048311}
   - component: {fileID: 7352432257339605717}
+  - component: {fileID: 3086246525079477930}
+  - component: {fileID: 9098374281706600758}
   - component: {fileID: 616457744}
-  - component: {fileID: 1966360269}
   m_Layer: 0
   m_Name: Destroyer Ship
   m_TagString: Untagged
@@ -372,6 +376,7 @@ Transform:
   m_LocalRotation: {x: 0.025199875, y: 0, z: 0, w: 0.9996825}
   m_LocalPosition: {x: 0, y: 169.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7351566085677370567}
   - {fileID: 7352432256608124978}
@@ -407,6 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8258640bc3a0734ea73c934255303c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDie: 1
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 2137752759}
@@ -429,6 +435,9 @@ MonoBehaviour:
   currentForwardSpeed: 0
   forwardAcceleration: 25
   detector: {fileID: 7352432256608124979}
+  mask:
+    serializedVersion: 2
+    m_Bits: 256
   rotationSpeed: 0.06
   interpolatingValue: 0
   minIdleTime: 0
@@ -437,11 +446,45 @@ MonoBehaviour:
   targetIdleTime: 0
   wanderRange: 150
   distanceFromTarget: 1
+  isAtDestination: 0
+  hasWanderPos: 0
   distanceFromPlayer: 30
-  missileAttackRange: 100
-  homingMissileAttackRange: 150
-  playerTransform: {fileID: 0}
+  missileAttackRange: 150
+  homingMissileAttackRange: 100
   weapon: {fileID: 209776303}
+--- !u!114 &3086246525079477930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352432257339605673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099c935e0bbc869419c0c13dbb9683ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  currentCountdown: 0
+  maxCountdown: 10
+  countdownSpeed: 1
+  canStartCountdown: 0
+--- !u!114 &9098374281706600758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352432257339605673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f45067f051950645b07f090dca0ad46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minLoot: 2
+  maxLoot: 10
+  lootSpawned: 0
+  objectToDrop: {fileID: 7233758894649881590, guid: 3d9d4fb16bc1df743b990ab1e87099b7, type: 3}
 --- !u!114 &616457744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,21 +502,6 @@ MonoBehaviour:
   needArrowIndicator: 1
   needDistanceText: 1
   indicator: {fileID: 0}
---- !u!114 &1966360269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7352432257339605673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f45067f051950645b07f090dca0ad46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToDrop: {fileID: 7233758894649881590, guid: 3d9d4fb16bc1df743b990ab1e87099b7, type: 3}
-  minRate: 5
-  maxRate: 15
 --- !u!1 &7353593027632414199
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,9 +514,9 @@ GameObject:
   - component: {fileID: 7385709692096301601}
   - component: {fileID: 7375405227910760001}
   - component: {fileID: 7417372028207292881}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ship Model
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -503,6 +531,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8084544552597035171}
   - {fileID: 1399482361108304374}
@@ -600,6 +629,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.326, y: 0, z: -2.3744996}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8084544552597035171}
   m_RootOrder: 1

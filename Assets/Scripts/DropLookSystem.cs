@@ -41,7 +41,7 @@ public class DropLookSystem : MonoBehaviour
     //    Debug.Log("Loot Spawned: " + amountToSpawn);
     //}
 
-    private void DropLoot()
+    public void DropLoot()
     {
         lootSpawned = Random.Range(minLoot, maxLoot);
 

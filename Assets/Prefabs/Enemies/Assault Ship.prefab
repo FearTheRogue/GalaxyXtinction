@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 106266885}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Assault Homing Spawn Point (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.7600021, y: 1.8000002, z: 0.17999268}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 578172754270765473}
   m_RootOrder: 5
@@ -39,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2053515358}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Assault Homing Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
@@ -56,6 +57,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.75, y: 1.8000002, z: 0.17999268}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 578172754270765473}
   m_RootOrder: 4
@@ -87,6 +89,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7333407762416714524}
   - {fileID: 7333407760898944945}
@@ -112,7 +115,7 @@ MonoBehaviour:
   weapons: []
   selectedWeapon: 0
   weaponName: 
-  fireMode: 2
+  fireMode: 0
   missileSpawnPoint:
   - {fileID: 7333407762416714524}
   - {fileID: 7333407760898944945}
@@ -121,16 +124,13 @@ MonoBehaviour:
   homingMissileSpawnPoint:
   - {fileID: 2053515358}
   - {fileID: 106266885}
-  primaryWeapon: {fileID: 1034044667036452259, guid: 64aa87bf5a5652a45a6a7f15db9edcdb, type: 3}
-  muzzleFlash: {fileID: 7675924547957801834, guid: c7e3c1edc7a285a4a85ed52afa38d1d9, type: 3}
+  primaryWeapon: {fileID: 517535268529472904, guid: 0dd74406d3374b340a3a68f9efd256df, type: 3}
   secondaryWeapon: {fileID: 2633950650922247774, guid: 7d1fe6f0fc81c5f4fbbd99cff9b70c43, type: 3}
-  burstAmount: 0
-  maxBurstAmount: 5
-  rechargeTime: 5
+  burstAmount: 5
   fireTimer: 0
   fireRate: 0.45
-  burstFire: 0
-  canHomingMissile: 1
+  canBurstFire: 0
+  canHomingMissile: 0
   homingCooldown: 0
   maxHomingCooldown: 5
 --- !u!1 &7332540094929720908
@@ -145,9 +145,9 @@ GameObject:
   - component: {fileID: 7331230406175090434}
   - component: {fileID: 7318798972781940342}
   - component: {fileID: 7287777336923321398}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ship Model
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,6 +162,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7333407761021077669}
   - {fileID: 578172754270765473}
@@ -241,7 +242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7333407760332364108}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Assault Missile Spawn Point (3)
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
@@ -258,6 +259,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.709999, y: -0.78200006, z: 1.871994}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 578172754270765473}
   m_RootOrder: 3
@@ -271,7 +273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7333407760898944945}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Assault Missile Spawn Point (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
@@ -288,6 +290,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.0699997, y: -0.53499985, z: 1.871994}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 578172754270765473}
   m_RootOrder: 1
@@ -301,7 +304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7333407760955380132}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Assault Missile Spawn Point (2)
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
@@ -318,6 +321,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.703003, y: -0.78200006, z: 1.871994}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 578172754270765473}
   m_RootOrder: 2
@@ -334,6 +338,7 @@ GameObject:
   - component: {fileID: 7333407760982181795}
   - component: {fileID: 2773099621025560800}
   - component: {fileID: 7333407760982181796}
+  - component: {fileID: 2850351310247113638}
   - component: {fileID: 1326759166}
   - component: {fileID: 1881701747}
   m_Layer: 0
@@ -353,6 +358,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 15.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7337912674540716444}
   - {fileID: 7333407761612006588}
@@ -388,6 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8258640bc3a0734ea73c934255303c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDie: 1
   maxHealth: 250
   currentHealth: 0
   healthBar: {fileID: 5574153581031660926}
@@ -405,11 +412,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentBehaviour: 0
   canMove: 1
-  hasBeenSpawned: 0
+  hasBeenSpawned: 1
   forwardSpeed: 40
   currentForwardSpeed: 0
   forwardAcceleration: 25
   detector: {fileID: 7333407761612006587}
+  mask:
+    serializedVersion: 2
+    m_Bits: 256
   rotationSpeed: 0.03
   interpolatingValue: 0
   minIdleTime: 0
@@ -418,11 +428,29 @@ MonoBehaviour:
   targetIdleTime: 0
   wanderRange: 150
   distanceFromTarget: 5
+  isAtDestination: 0
+  hasWanderPos: 0
   distanceFromPlayer: 40
   missileAttackRange: 85
   homingMissileAttackRange: 150
-  playerTransform: {fileID: 0}
   weapon: {fileID: 516032119375687278}
+--- !u!114 &2850351310247113638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7333407760982181798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099c935e0bbc869419c0c13dbb9683ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  currentCountdown: 0
+  maxCountdown: 25
+  countdownSpeed: 2
+  canStartCountdown: 0
 --- !u!114 &1326759166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,9 +480,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f45067f051950645b07f090dca0ad46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minLoot: 1
+  maxLoot: 15
+  lootSpawned: 0
   objectToDrop: {fileID: 7233758894649881590, guid: 3d9d4fb16bc1df743b990ab1e87099b7, type: 3}
-  minRate: 5
-  maxRate: 15
 --- !u!1 &7333407761021077670
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +510,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7337811664563766750}
   - {fileID: 7337811665042426499}
@@ -516,6 +546,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7333407760982181794}
   m_RootOrder: 1
@@ -542,7 +573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7333407762416714524}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Assault Missile Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
@@ -559,6 +590,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.104004, y: -0.53499985, z: 1.871994}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 578172754270765473}
   m_RootOrder: 0
@@ -570,6 +602,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7333407760982181794}
     m_Modifications:
+    - target: {fileID: 2076202116061065662, guid: 6dfb69b64bb32c04d94ca0d17ee00205, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2076202116061065663, guid: 6dfb69b64bb32c04d94ca0d17ee00205, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -577,6 +613,22 @@ PrefabInstance:
     - target: {fileID: 2076202116061065663, guid: 6dfb69b64bb32c04d94ca0d17ee00205, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076202116483308312, guid: 6dfb69b64bb32c04d94ca0d17ee00205, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076202116792470490, guid: 6dfb69b64bb32c04d94ca0d17ee00205, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076202117347291327, guid: 6dfb69b64bb32c04d94ca0d17ee00205, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076202117389731556, guid: 6dfb69b64bb32c04d94ca0d17ee00205, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2076202117389731558, guid: 6dfb69b64bb32c04d94ca0d17ee00205, type: 3}
       propertyPath: m_Pivot.x
@@ -666,6 +718,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Health Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2076202117389731562, guid: 6dfb69b64bb32c04d94ca0d17ee00205, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076202117805030939, guid: 6dfb69b64bb32c04d94ca0d17ee00205, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dfb69b64bb32c04d94ca0d17ee00205, type: 3}
 --- !u!224 &5574153580989311778 stripped
@@ -694,6 +754,10 @@ PrefabInstance:
     - target: {fileID: 1394918349091180, guid: 41eac07628561874e8fd3c1649c10b47, type: 3}
       propertyPath: m_Name
       value: FX_Flame_Booster_Round (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394918349091180, guid: 41eac07628561874e8fd3c1649c10b47, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4604023365360802, guid: 41eac07628561874e8fd3c1649c10b47, type: 3}
       propertyPath: m_RootOrder
@@ -773,6 +837,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_Flame_Booster_Round (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1394918349091180, guid: 41eac07628561874e8fd3c1649c10b47, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4604023365360802, guid: 41eac07628561874e8fd3c1649c10b47, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -851,6 +919,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_Flame_Booster_Round (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1394918349091180, guid: 41eac07628561874e8fd3c1649c10b47, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4604023365360802, guid: 41eac07628561874e8fd3c1649c10b47, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -928,6 +1000,10 @@ PrefabInstance:
     - target: {fileID: 1394918349091180, guid: 41eac07628561874e8fd3c1649c10b47, type: 3}
       propertyPath: m_Name
       value: FX_Flame_Booster_Round
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394918349091180, guid: 41eac07628561874e8fd3c1649c10b47, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4604023365360802, guid: 41eac07628561874e8fd3c1649c10b47, type: 3}
       propertyPath: m_RootOrder

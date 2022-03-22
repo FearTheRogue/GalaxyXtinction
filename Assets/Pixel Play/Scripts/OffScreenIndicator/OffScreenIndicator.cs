@@ -30,7 +30,7 @@ public class OffScreenIndicator : MonoBehaviour
         TargetStateChanged += HandleTargetStateChanged;
     }
 
-    void LateUpdate()
+    void Update()
     {
         DrawIndicators();
     }

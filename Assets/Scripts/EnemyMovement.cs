@@ -34,7 +34,7 @@ public class EnemyMovement : MonoBehaviour
     [Header("Wander Behaviour")]
     [SerializeField] private float wanderRange = 5f;
     [SerializeField] private float distanceFromTarget;
-    private bool isAtDestination, hasWanderPos;
+    public bool isAtDestination, hasWanderPos;
 
     [Header("Pursue Behaviour")]
     [SerializeField] private float distanceFromPlayer;
@@ -45,19 +45,23 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector3 wanderLocation;
     private Vector3 target;
-    [SerializeField] private Transform playerTransform;
+    //[SerializeField] private Transform playerTransform;
 
     [SerializeField] private Weapon weapon;
     private HealthSystem health;
 
     [SerializeField] private RaycastHit hit;
 
+    private DropLookSystem dropLoot;
+    private TargetManager targetManager;
+
     private void Awake()
     {
         isAtDestination = false;
 
-        //weapon = GameObject.Find("Weapon").GetComponent<Weapon>();
         health = GetComponent<HealthSystem>();
+        targetManager = GetComponent<TargetManager>();
+        dropLoot = GetComponent<DropLookSystem>();
     }
 
     private void Start()
@@ -78,11 +82,6 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        if(health.GetCurrentHealth() < 0)
-        {
-            health.Dead();
-        }
-
         if (!canMove)
             return;
 
@@ -92,7 +91,7 @@ public class EnemyMovement : MonoBehaviour
 
                 UpdateIdleBehaviour();
 
-                if(playerTransform != null)
+                if(targetManager.IsTargetIdenified()) //playerTransform != null
                 {
                     currentBehaviour = Behaviour.Pursue;
                 } else
@@ -106,7 +105,7 @@ public class EnemyMovement : MonoBehaviour
 
             case Behaviour.Wandering:
 
-                if(playerTransform != null)
+                if(targetManager.IsTargetIdenified()) //playerTransform != null
                 {
                     currentBehaviour = Behaviour.Pursue;
                 }
@@ -126,7 +125,7 @@ public class EnemyMovement : MonoBehaviour
 
             case Behaviour.Pursue:
 
-                if(playerTransform == null)
+                if(!targetManager.IsTargetIdenified()) //playerTransform == null
                 {
                     StartIdleBehaviour();
                 }
@@ -238,10 +237,10 @@ public class EnemyMovement : MonoBehaviour
 
     private void UpdatePursue()
     {
-        if (playerTransform == null)
+        if (!targetManager.IsTargetIdenified()) //playerTransform == null
             return;
 
-        target = playerTransform.position;
+        target = targetManager.GetTargetPlayer().position;
 
         UpdateRotation(target);
 
@@ -335,7 +334,7 @@ public class EnemyMovement : MonoBehaviour
 
     private float DistanceFromPlayer()
     {
-        Vector3 targetPos = playerTransform.position;
+        Vector3 targetPos = targetManager.GetTargetPlayer().position;
         float dist = Vector3.Distance(transform.position, targetPos);
 
         return dist;
@@ -349,23 +348,23 @@ public class EnemyMovement : MonoBehaviour
         return dist;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(!other.CompareTag("Player"))
-        {
-            return;
-        }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(!other.CompareTag("Player"))
+    //    {
+    //        return;
+    //    }
 
-        playerTransform = other.transform;
-    }
+    //    playerTransform = other.transform;
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if(!other.CompareTag("Player"))
-        {
-            return;
-        }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if(!other.CompareTag("Player"))
+    //    {
+    //        return;
+    //    }
 
-        playerTransform = null;
-    }
+    //    playerTransform = null;
+    //}
 }

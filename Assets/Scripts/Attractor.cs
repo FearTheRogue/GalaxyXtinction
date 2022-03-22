@@ -14,6 +14,8 @@ public class Attractor : MonoBehaviour
     [SerializeField] private float currentMoveToPlayer;
     [SerializeField] private float moveToPlayerSpeed;
 
+    [SerializeField] private float healthModifier;
+
     Vector3 velocity = Vector3.zero;
 
     private void Update()
@@ -34,5 +36,15 @@ public class Attractor : MonoBehaviour
         {
             target = GameObject.Find("Drop Loot Tracker").gameObject.transform;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+            return;
+
+        HealthSystem health = other.transform.GetComponentInParent<HealthSystem>();
+
+        health.ApplyHealth((int)healthModifier);
     }
 }

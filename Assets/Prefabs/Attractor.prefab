@@ -305,6 +305,7 @@ MonoBehaviour:
   moveToPlayer: 5
   currentMoveToPlayer: 0
   moveToPlayerSpeed: 5
+  healthModifier: 2
 --- !u!114 &-8036272740116495316
 MonoBehaviour:
   m_ObjectHideFlags: 0

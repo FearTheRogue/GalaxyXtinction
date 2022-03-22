@@ -6,14 +6,20 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemiesToSpawn;
 
+    [SerializeField] private bool canSpawn;
+
     [SerializeField] private int destroyerAmountToSpawn;
     [SerializeField] private int assaultAmountToSpawn;
 
     private EnemyMovement enemyMovement;
 
+    public GameObject targetObject;
+
+    private TargetManager targetManager;
+
     private void Awake()
     {
-
+        StopAllCoroutines();
     }
 
     private void Start()
@@ -28,6 +34,12 @@ public class Spawner : MonoBehaviour
             enemyMovement = enemy.GetComponent<EnemyMovement>();
             Instantiate(enemy, transform.position, Quaternion.identity);
             enemyMovement.hasBeenSpawned = true;
+
+            targetManager = enemy.GetComponent<TargetManager>();
+
+            StartCoroutine(targetManager.LocatePlayerFromSpawning(targetObject));
+
+            yield return new WaitForSeconds(2);
         }
 
         yield return null;
@@ -40,7 +52,9 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-        StartCoroutine(SpawnEnemy());
-    }
+        targetObject = other.gameObject;
 
+        if (canSpawn)
+            StartCoroutine(SpawnEnemy());
+    }
 }

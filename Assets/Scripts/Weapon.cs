@@ -2,29 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum FireMode { Semi, Burst, Auto };
+public enum FireMode { Burst, Auto };
 
 public class Weapon : WeaponManager
 {
     [SerializeField] private string weaponName;
 
     [Header("Weapon Properties")]
-    [SerializeField] private FireMode fireMode = FireMode.Semi;
+    [SerializeField] private FireMode fireMode = FireMode.Auto;
     [SerializeField] private Transform[] missileSpawnPoint;
     [SerializeField] private Transform[] homingMissileSpawnPoint;
     
     [SerializeField] private GameObject primaryWeapon;
-    [SerializeField] private GameObject muzzleFlash;
     [SerializeField] private GameObject secondaryWeapon;
 
     [Header("Missile Settings")]
-    [SerializeField] private int burstAmount, maxBurstAmount;
-    [SerializeField] private float rechargeTime;
-
+    [SerializeField] private int burstAmount;
     [SerializeField] private float fireTimer = 0;
     [SerializeField] private float fireRate;
-
-    [SerializeField] private bool burstFire;
+    [SerializeField] private bool canBurstFire;
 
     [Header("Homing Missile Settings")]
     [SerializeField] private bool canHomingMissile = true;
@@ -41,9 +37,6 @@ public class Weapon : WeaponManager
     {
         switch (fireMode)
         {
-            case FireMode.Semi:
-                fireMode = FireMode.Semi;
-                break;
             case FireMode.Burst:
                 fireMode = FireMode.Burst;
                 break;
@@ -69,47 +62,41 @@ public class Weapon : WeaponManager
 
     public void ShootMissile()
     {
-        if(fireTimer < fireRate + 1.0f)
+        if (Time.time > fireTimer && !canBurstFire)
         {
-            fireTimer += Time.deltaTime;
-        }
-
-        if (fireMode == FireMode.Auto)
-        {
-            if (fireTimer > fireRate)
+            if (fireMode == FireMode.Auto)
             {
-                foreach (Transform origin in missileSpawnPoint)
-                {
-                    GameObject projectile = Instantiate(primaryWeapon, origin.transform.position, origin.transform.rotation);
-
-                    if (muzzleFlash != null)
-                    {
-                        GameObject muzzle = Instantiate(muzzleFlash, origin.transform.position, transform.rotation, origin.transform);
-                    }
-
-                    Physics.IgnoreCollision(projectile.GetComponent<Collider>(), this.transform.parent.GetComponent<Collider>());
-                }
-
-                fireTimer = 0f;
+                Shoot();
             }
-        }
 
-        if(fireMode == FireMode.Burst)
-        {
-            if (fireTimer > fireRate)
+            if(fireMode == FireMode.Burst)
             {
-                if (burstAmount >= maxBurstAmount)
-                {
-                    foreach (Transform origin in missileSpawnPoint)
-                    {
-                        Instantiate(primaryWeapon, origin.transform.position, origin.transform.rotation);
-                    }
+                canBurstFire = true;
 
-                    burstAmount++;
-                }
-
-                fireTimer = 0f;
+                StartCoroutine(BurstFire());
             }
+
+            fireTimer = Time.time + fireRate;
+        } 
+        else 
+        { 
+            return;
+        }
+    }
+
+    private void Shoot()
+    {
+        foreach (Transform origin in missileSpawnPoint)
+        {
+            GameObject projectile = Instantiate(primaryWeapon, origin.transform.position, origin.transform.rotation);
+            var flash = projectile.GetComponent<ProjectileMovement>();
+
+            if (flash.GetMuzzelFlashObject() != null)
+            {
+                Instantiate(flash.GetMuzzelFlashObject().gameObject, origin.transform.position, transform.rotation, origin.transform);
+            }
+
+            Physics.IgnoreCollision(projectile.GetComponent<Collider>(), this.transform.parent.GetComponent<Collider>());
         }
     }
 
@@ -148,15 +135,16 @@ public class Weapon : WeaponManager
         return 0;
     }
 
-    public void BurstShoot()
+    private IEnumerator BurstFire()
     {
-        if (burstAmount == 0)
-            return;
+        yield return new WaitForSeconds(fireRate);
 
-        for (int i = 0; i <= maxBurstAmount; i++)
+        for (int i = 0; i < burstAmount; i++)
         {
-            ShootMissile();
-            burstAmount--;
+            Shoot();
+            yield return new WaitForSeconds(fireRate);
         }
+
+        canBurstFire = false;
     }
 }

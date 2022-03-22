@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3000171316056588728}
-  - component: {fileID: 2898380890975226906}
   - component: {fileID: 3127982875753320736}
   - component: {fileID: 3129509397594883688}
+  - component: {fileID: 3242836701971244814}
   - component: {fileID: 2974003275283216896}
   - component: {fileID: 2985588961829985690}
   m_Layer: 0
   m_Name: Projectile_RedLaser
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,33 +31,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.65, y: 2, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2898380890975226906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3002110568612396956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ba759cd568c0e47a7018ab70867a0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotate: 0
-  rotateAmount: 45
-  bounce: 0
-  bounceForce: 10
-  speed: 150
-  accuracy: 99
-  fireRate: 6
-  muzzlePrefab: {fileID: 0}
-  hitPrefab: {fileID: 1594239829313766, guid: 26b29734bf3bebe4fb390f7cb3db7530, type: 3}
-  trails: []
-  damage: 5
 --- !u!199 &3127982875753320736
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -101,6 +79,7 @@ ParticleSystemRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_RenderMode: 0
+  m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 3
@@ -124,6 +103,10 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+  m_MeshWeighting: 1
+  m_MeshWeighting1: 1
+  m_MeshWeighting2: 1
+  m_MeshWeighting3: 1
   m_MaskInteraction: 0
 --- !u!198 &3129509397594883688
 ParticleSystem:
@@ -4929,6 +4912,23 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &3242836701971244814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002110568612396956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1185e9bdd4d487f44b788bfdce33a649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzelFlash: {fileID: 3583984613307745663, guid: ab35ec01ff121d44a8fac1e7e28d7610, type: 3}
+  trail: {fileID: 0}
+  speed: 150
+  accuracy: 99.5
+  damage: 5
 --- !u!65 &2974003275283216896
 BoxCollider:
   m_ObjectHideFlags: 0

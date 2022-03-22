@@ -96,7 +96,7 @@ public class ProjectileMoveScript : MonoBehaviour {
             {
                 collided = true;
 
-                HealthSystem health = co.gameObject.GetComponent<HealthSystem>();
+                HealthSystem health = co.gameObject.transform.parent.GetComponent<HealthSystem>();
 
                 if(health != null)
                 {
