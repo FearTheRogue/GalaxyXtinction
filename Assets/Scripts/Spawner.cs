@@ -8,8 +8,8 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] private bool canSpawn;
 
-    [SerializeField] private int destroyerAmountToSpawn;
-    [SerializeField] private int assaultAmountToSpawn;
+    [SerializeField] public int destroyerAmountToSpawn;
+    [SerializeField] public int assaultAmountToSpawn;
 
     private EnemyMovement enemyMovement;
 
@@ -29,19 +29,47 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        foreach (GameObject enemy in enemiesToSpawn)
+        for (int i = 0; i < destroyerAmountToSpawn; i++)
         {
+            GameObject enemy;
+            enemy = Instantiate(enemiesToSpawn[0], transform.position, Quaternion.identity, this.transform);
+
             enemyMovement = enemy.GetComponent<EnemyMovement>();
-            Instantiate(enemy, transform.position, Quaternion.identity);
             enemyMovement.hasBeenSpawned = true;
 
             targetManager = enemy.GetComponent<TargetManager>();
+            targetManager.enemySpawnedFromSpawner = true;
 
-            StartCoroutine(targetManager.LocatePlayerFromSpawning(targetObject));
-
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1f);
         }
 
+        for (int i = 0; i < assaultAmountToSpawn; i++)
+        {
+            GameObject enemy;
+            enemy = Instantiate(enemiesToSpawn[1], transform.position, Quaternion.identity, this.transform);
+
+            enemyMovement = enemy.GetComponent<EnemyMovement>();
+            enemyMovement.hasBeenSpawned = true;
+
+            targetManager = enemy.GetComponent<TargetManager>();
+            targetManager.enemySpawnedFromSpawner = true;
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        //foreach (GameObject enemy in enemiesToSpawn)
+        //{
+        //    enemyMovement = enemy.GetComponent<EnemyMovement>();
+        //    Instantiate(enemy, transform.position, Quaternion.identity, this.transform);
+        //    enemyMovement.hasBeenSpawned = true;
+
+        //    targetManager = enemy.GetComponent<TargetManager>();
+        //    targetManager.enemySpawnedFromSpawner = true;
+
+        //    yield return new WaitForSeconds(1.5f);
+        //}
+
+        canSpawn = false;
         yield return null;
     }
 

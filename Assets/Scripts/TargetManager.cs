@@ -12,6 +12,8 @@ public class TargetManager : MonoBehaviour
     [SerializeField] private float countdownSpeed;
     [SerializeField] private bool canStartCountdown;
 
+    public bool enemySpawnedFromSpawner = false;
+
     private Spawner spawner;
 
     private void Awake()
@@ -24,17 +26,24 @@ public class TargetManager : MonoBehaviour
         }
 
         canStartCountdown = false;
+
+        spawner = transform.parent.GetComponent<Spawner>();
     }
 
     private void Start()
     {
         StopAllCoroutines();
+
+        this.transform.parent = null;
     }
 
     private void Update()
     {
         if (canStartCountdown)
             StartCoroutine(StartCountdown());
+
+        if(enemySpawnedFromSpawner)
+            StartCoroutine(LocatePlayerFromSpawning(spawner.targetObject));
     }
 
     IEnumerator StartCountdown()
@@ -53,6 +62,8 @@ public class TargetManager : MonoBehaviour
 
         Debug.Log("Setting enemy target");
         SetPlayerTarget(player.transform);
+
+        enemySpawnedFromSpawner = false;
     }
 
     public void SetPlayerTarget(Transform transform)

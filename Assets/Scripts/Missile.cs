@@ -30,7 +30,7 @@ public class Missile : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponentInParent<ShipController>();
     }
 
     private void Update()

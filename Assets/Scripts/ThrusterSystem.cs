@@ -6,6 +6,9 @@ public class ThrusterSystem : MonoBehaviour
     private ShipController shipController;
     private CameraMovement shipCamera;
 
+    [SerializeField] private GameObject thrusterFX;
+    [SerializeField] private ParticleSystem thrusterFXtest;
+
     [Header("Thruster Speed Settings")]
     [SerializeField] private ThrusterBar thrusters;
     [SerializeField] private float thrusterSpeed;
@@ -16,6 +19,13 @@ public class ThrusterSystem : MonoBehaviour
     [SerializeField] private float rechargeDelay;
     [SerializeField] private bool isThrusting;
     [SerializeField] private bool canThrust;
+
+    private void Awake()
+    {
+        //thrusterFX.SetActive(false);
+        //thrusterFXtest.gameObject.SetActive(false);
+        thrusterFXtest.Stop();
+    }
 
     private void Start()
     {
@@ -57,6 +67,9 @@ public class ThrusterSystem : MonoBehaviour
 
         yield return new WaitForSeconds(rechargeDelay);
 
+        //thrusterFX.SetActive(false);
+        thrusterFXtest.Stop();
+
         thrusterStock = Mathf.MoveTowards(thrusterStock, maxThrusterStock, (IncreaseThrusterAmount * Time.deltaTime));
 
         if (thrusterStock == maxThrusterStock)
@@ -78,6 +91,9 @@ public class ThrusterSystem : MonoBehaviour
     private void ThrusterBoost()
     {
         shipCamera.AdjustCamera(shipCamera.boostSpeedFOV);
+
+        //thrusterFX.SetActive(true);
+        thrusterFXtest.Play();
 
         thrusterStock = Mathf.MoveTowards(thrusterStock, 0, (decreaseThrusterAmount * Time.deltaTime));
     }

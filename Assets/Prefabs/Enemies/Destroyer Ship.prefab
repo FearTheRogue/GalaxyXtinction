@@ -54,7 +54,7 @@ MonoBehaviour:
   - {fileID: 7352432256323601328}
   - {fileID: 7352432255676287417}
   homingMissileSpawnPoint: []
-  primaryWeapon: {fileID: 3002110568612396956, guid: 51d95304709da7b40a4519df7e1ef9cb, type: 3}
+  primaryWeapon: {fileID: 4912844109102603463, guid: 0856bda6915697f4dac3b211a7851bce, type: 3}
   secondaryWeapon: {fileID: 0}
   burstAmount: 0
   fireTimer: 0
@@ -469,6 +469,7 @@ MonoBehaviour:
   maxCountdown: 10
   countdownSpeed: 1
   canStartCountdown: 0
+  enemySpawnedFromSpawner: 0
 --- !u!114 &9098374281706600758
 MonoBehaviour:
   m_ObjectHideFlags: 0

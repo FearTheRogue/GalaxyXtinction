@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     Vector3 velocity;
-    bool isGrounded;
+    public bool isGrounded;
 
     void Update()
     {
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * 12f * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
