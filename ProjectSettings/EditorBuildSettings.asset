@@ -9,18 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 4df5575ddbb1b2447b0169e603a5411e
   - enabled: 1
-    path: Assets/Scenes/Testing/TestingV2.unity
-    guid: 3d73e44377be06147abf9c3bff0f0f1b
-  - enabled: 1
     path: Assets/Scenes/Space/Space.unity
     guid: 722282b732a7c9f4d8b6064cd58af110
   - enabled: 1
     path: Assets/Scenes/Planets/Planet-1 2.unity
     guid: a91a39bf3ebfef64b8fbb0e3d8a268c6
   - enabled: 1
-    path: Assets/Scenes/Planets/Planet-1 1.unity
-    guid: 6aa152b4da12b8543b32cb507a223dd8
-  - enabled: 1
     path: Assets/Scenes/Planets/Planet 2.unity
     guid: e0ebd6228e75d6142927d5ee8308ab0c
+  - enabled: 1
+    path: Assets/Scenes/Planets/Planet 3.unity
+    guid: e8e22249933c1964abcbcda790239d04
   m_configObjects: {}

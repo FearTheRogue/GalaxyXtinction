@@ -9,6 +9,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject closeTestingPopup, aboutGamePopup;
     [SerializeField] string levelToLoad;
 
+    
+
     private void Start()
     {
         Time.timeScale = 1f;
@@ -17,6 +19,7 @@ public class MenuManager : MonoBehaviour
 
     public void PlayGame()
     {
+        PlayerPrefs.DeleteAll();
         GameManager.instance.SceneToLoad(levelToLoad);
     }
 

@@ -11,7 +11,7 @@ public class ProjectileMovement : MonoBehaviour
     [Header("Details")]
     [SerializeField] private float speed;
     [SerializeField] private float accuracy;
-    [SerializeField] private float damage;
+    [SerializeField] public float damage;
 
     private Vector3 startPosition;
     private Vector3 offset;
@@ -72,11 +72,16 @@ public class ProjectileMovement : MonoBehaviour
     {
         if(collision.gameObject.tag != "Projectile")
         {
-            Debug.Log("Projectile has hit: " + collision.transform.root.name);
+            Debug.Log("Projectile has hit: " + collision.collider.gameObject.name);
 
-            HealthSystem healthSystem = collision.transform.root.GetComponent<HealthSystem>();
+            HealthSystem healthSystem = collision.gameObject.GetComponent<HealthSystem>();
 
-            if(healthSystem != null)
+            if (healthSystem == null)
+            {
+                healthSystem = collision.gameObject.GetComponentInParent<HealthSystem>();
+            }
+
+            if (healthSystem != null)
             {
                 healthSystem.TakeDamage((int)damage);
                 DestroyProjectile();
@@ -85,6 +90,7 @@ public class ProjectileMovement : MonoBehaviour
             {
                 return;
             }
+            DestroyProjectile();
         }
     }
 

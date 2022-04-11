@@ -5,23 +5,28 @@ using UnityEngine;
 
 public class DisplayText : MonoBehaviour
 {
-    [SerializeField] private TMP_Text text;
+    [SerializeField] private GameObject hintPanel;
 
     private void Start()
     {
-        text.gameObject.SetActive(false);
+        if(hintPanel == null)
+        {
+            hintPanel = GameObject.Find("Hint Panel");
+        }
+
+        hintPanel.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
-            text.gameObject.SetActive(true);
+            hintPanel.SetActive(true);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        text.gameObject.SetActive(false);
+        hintPanel.SetActive(false);
     }
 }

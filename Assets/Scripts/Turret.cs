@@ -99,7 +99,6 @@ public class Turret : MonoBehaviour
 
         if(Physics.Raycast(firePoint.transform.position, firePoint.transform.forward, out hit, 100,layerMask))
         {
-            Debug.Log("hit: " + hit.collider.name);
             return true;
         }
 

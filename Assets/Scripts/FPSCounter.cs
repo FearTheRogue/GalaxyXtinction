@@ -7,7 +7,7 @@ public class FPSCounter : MonoBehaviour
     [SerializeField] private TMP_Text fpsDisplay;
     [SerializeField] private TMP_Text avgFPSDisplay;
     int framesPassed = 0;
-    float fpsTotal = 0f;
+    //float fpsTotal = 0f;
 
     private float[] frameDeltaTimeArray;
 

@@ -617,7 +617,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 43051417309601214, guid: c1cb74d542589ea4ca2651fd49669fb6, type: 2}
 --- !u!1 &6868869152821925789
@@ -717,7 +717,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 43729295899236186, guid: 0278206bf8555d145857bf250f070f4d, type: 2}
 --- !u!65 &1005337171626363949
@@ -729,7 +729,7 @@ BoxCollider:
   m_GameObject: {fileID: 6868869152821925789}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 4.1898155, y: 2.9335418, z: 4.1898146}
   m_Center: {x: 0.00000047683716, y: 1.1185415, z: 0}
@@ -829,7 +829,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 43408167137704066, guid: 68381cc577c754c47a6b749dd59ef8fa, type: 2}
 --- !u!1 &7833853069878698558
@@ -929,6 +929,8 @@ MonoBehaviour:
   canDie: 1
   maxHealth: 50
   currentHealth: 0
+  explosionFX: {fileID: 0}
+  timeToWait: 0
   healthBar: {fileID: 4905392713468179978}
 --- !u!114 &6278522997489792400
 MonoBehaviour:
@@ -973,7 +975,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons: []
-  selectedWeapon: 0
   weaponName: 
   fireMode: 1
   missileSpawnPoint:

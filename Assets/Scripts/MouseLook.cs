@@ -11,15 +11,9 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.GameIsPaused)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            return;
-        }
-
         if (!PauseMenu.GameIsPaused)
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
 
             float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;

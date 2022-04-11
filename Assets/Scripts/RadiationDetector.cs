@@ -21,6 +21,8 @@ public class RadiationDetector : MonoBehaviour
 
     [SerializeField] private Animator radiationPanelAnim;
 
+    [SerializeField] private FPSHealth health;
+
     private void Awake()
     {
         timer.text = "00:00";
@@ -40,7 +42,9 @@ public class RadiationDetector : MonoBehaviour
                 }
                 else
                 {
-                    timeValue += 10;
+                    this.enabled = false;
+                    radiationPanel.SetActive(false);
+                    health.PlayerDie();
                 }
 
                 DisplayTime(timeValue);

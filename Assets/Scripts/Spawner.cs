@@ -17,14 +17,23 @@ public class Spawner : MonoBehaviour
 
     private TargetManager targetManager;
 
+    private HealthSystem health;
+
     private void Awake()
     {
         StopAllCoroutines();
+
+        health = gameObject.GetComponentInParent<HealthSystem>();
+        health.canDie = false;
     }
 
-    private void Start()
+    private void Update()
     {
-        
+        if(this.transform.childCount <= 0 && !canSpawn)
+        {
+            // has no enemies
+            health.canDie = true;
+        }
     }
 
     IEnumerator SpawnEnemy()
@@ -56,18 +65,6 @@ public class Spawner : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
         }
-
-        //foreach (GameObject enemy in enemiesToSpawn)
-        //{
-        //    enemyMovement = enemy.GetComponent<EnemyMovement>();
-        //    Instantiate(enemy, transform.position, Quaternion.identity, this.transform);
-        //    enemyMovement.hasBeenSpawned = true;
-
-        //    targetManager = enemy.GetComponent<TargetManager>();
-        //    targetManager.enemySpawnedFromSpawner = true;
-
-        //    yield return new WaitForSeconds(1.5f);
-        //}
 
         canSpawn = false;
         yield return null;

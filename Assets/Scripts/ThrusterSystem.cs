@@ -20,6 +20,8 @@ public class ThrusterSystem : MonoBehaviour
     [SerializeField] private bool isThrusting;
     [SerializeField] private bool canThrust;
 
+    [SerializeField] private bool unlimitedBoost = false;
+
     private void Awake()
     {
         //thrusterFX.SetActive(false);
@@ -95,7 +97,8 @@ public class ThrusterSystem : MonoBehaviour
         //thrusterFX.SetActive(true);
         thrusterFXtest.Play();
 
-        thrusterStock = Mathf.MoveTowards(thrusterStock, 0, (decreaseThrusterAmount * Time.deltaTime));
+        if(!unlimitedBoost)
+            thrusterStock = Mathf.MoveTowards(thrusterStock, 0, (decreaseThrusterAmount * Time.deltaTime));
     }
 
 

@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     Coroutine loadingSceneInProgress;
 
+    private HiveManager hiveManager;
+
     private void Awake()
     {
         if (instance == null)
@@ -34,17 +36,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    //private void OnEnable()
-    //{
-    //    SceneManager.sceneLoaded += OnLevelFinishedLoading;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    SceneManager.sceneLoaded -= OnLevelFinishedLoading;
-    //}
-
     private void OnLevelFinishedLoading(int comingFromSceneIndex)
     {
         Debug.Log("Scene has loaded");
@@ -58,6 +49,15 @@ public class GameManager : MonoBehaviour
                 portal = warpPortals[i].GetComponent<WarpHandler>();
 
                 player = GameObject.FindGameObjectWithTag("Player");
+
+                if(player.transform.parent != null)
+                {
+                    player = player.transform.root.gameObject;
+
+                    hiveManager = GameObject.Find("Hive Manager").GetComponent<HiveManager>();
+                    hiveManager.GetHiveShipSpawner();
+                    Debug.Log("Loading into space");
+                }
 
                 if (player.GetComponent<CharacterController>() != null)
                 {
@@ -79,8 +79,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnMouseDown()
+    {
+        Debug.Log("click");
+    }
+
     public void StartToLoadLevel(int levelToLoad)
     {
+        if(levelToLoad != 1)
+        {
+            hiveManager = GameObject.Find("Hive Manager").GetComponent<HiveManager>();
+            hiveManager.SetHiveShipSpawner();
+        }
+
         if(loadingSceneInProgress != null)
         {
             return;

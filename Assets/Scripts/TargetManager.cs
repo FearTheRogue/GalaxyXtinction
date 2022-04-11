@@ -34,7 +34,7 @@ public class TargetManager : MonoBehaviour
     {
         StopAllCoroutines();
 
-        this.transform.parent = null;
+        //this.transform.parent = null;
     }
 
     private void Update()
@@ -60,7 +60,6 @@ public class TargetManager : MonoBehaviour
         GameObject player = target;
         yield return new WaitForSeconds(2);
 
-        Debug.Log("Setting enemy target");
         SetPlayerTarget(player.transform);
 
         enemySpawnedFromSpawner = false;

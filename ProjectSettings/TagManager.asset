@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Projectile
   - Bullet
+  - Planet
+  - Death Barrier
   layers:
   - Default
   - TransparentFX

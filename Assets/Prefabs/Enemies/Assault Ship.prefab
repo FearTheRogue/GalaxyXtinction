@@ -113,7 +113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons: []
-  selectedWeapon: 0
   weaponName: 
   fireMode: 0
   missileSpawnPoint:
@@ -230,7 +229,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: a45c7ea627ee03d49952bc9d2bf4ebda, type: 3}
 --- !u!1 &7333407760332364109
@@ -397,6 +396,8 @@ MonoBehaviour:
   canDie: 1
   maxHealth: 250
   currentHealth: 0
+  explosionFX: {fileID: 0}
+  timeToWait: 0
   healthBar: {fileID: 5574153581031660926}
 --- !u!114 &7333407760982181796
 MonoBehaviour:
@@ -432,7 +433,7 @@ MonoBehaviour:
   hasWanderPos: 0
   distanceFromPlayer: 40
   missileAttackRange: 85
-  homingMissileAttackRange: 150
+  homingMissileAttackRange: 250
   weapon: {fileID: 516032119375687278}
 --- !u!114 &2850351310247113638
 MonoBehaviour:

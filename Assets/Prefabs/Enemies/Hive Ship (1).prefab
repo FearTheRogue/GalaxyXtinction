@@ -5248,6 +5248,8 @@ MonoBehaviour:
   canDie: 1
   maxHealth: 400
   currentHealth: 0
+  explosionFX: {fileID: 0}
+  timeToWait: 0
   healthBar: {fileID: 961597239783059091}
 --- !u!114 &3030742692650907256
 MonoBehaviour:

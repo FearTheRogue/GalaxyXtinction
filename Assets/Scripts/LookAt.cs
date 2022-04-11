@@ -13,6 +13,7 @@ public class LookAt : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.LookAt(player.transform.position);
+        if(player != null)
+            transform.LookAt(player.transform.position);
     }
 }

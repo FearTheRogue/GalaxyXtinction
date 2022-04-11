@@ -318,7 +318,6 @@ public class EnemyMovement : MonoBehaviour
         {
             if (hit.distance <= homingMissileAttackRange && hit.distance >= missileAttackRange)
             {
-                Debug.Log("Shooting Homing Missile");
                 weapon.ShootHomingMissile();
             }
         }
@@ -326,7 +325,6 @@ public class EnemyMovement : MonoBehaviour
         if (hit.distance <= missileAttackRange)
         {
             weapon.ShootMissile();
-            Debug.Log("Shooting Normal Missile");
         }
 
         //Debug.Log("Distance: " + dist);

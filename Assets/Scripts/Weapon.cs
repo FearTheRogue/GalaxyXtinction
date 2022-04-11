@@ -91,10 +91,10 @@ public class Weapon : WeaponManager
             GameObject projectile = Instantiate(primaryWeapon, origin.transform.position, origin.transform.rotation);
             var flash = projectile.GetComponent<ProjectileMovement>();
 
-            if (flash.GetMuzzelFlashObject() != null)
-            {
-                Instantiate(flash.GetMuzzelFlashObject().gameObject, origin.transform.position, transform.rotation, origin.transform);
-            }
+            //if (flash.GetMuzzelFlashObject() != null)
+            //{
+            //    Instantiate(flash.GetMuzzelFlashObject().gameObject, origin.transform.position, transform.rotation, origin.transform);
+            //}
 
             Physics.IgnoreCollision(projectile.GetComponent<Collider>(), this.transform.parent.GetComponent<Collider>());
         }
