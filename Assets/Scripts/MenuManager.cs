@@ -5,11 +5,9 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] Button playBtn, closeTestingBtn, okayBtn, quitBtn;
-    [SerializeField] GameObject closeTestingPopup, aboutGamePopup;
+    [SerializeField] Button playBtn, closeTestingBtn, okayBtn, settingsBtn,quitBtn;
+    [SerializeField] GameObject closeTestingPopup, aboutGamePopup, settingsPopUp;
     [SerializeField] string levelToLoad;
-
-    
 
     private void Start()
     {
@@ -28,14 +26,21 @@ public class MenuManager : MonoBehaviour
         aboutGamePopup.gameObject.SetActive(true);
     }
 
-    public void CloseAboutGame()
+    public void CloseWindow()
     {
-        aboutGamePopup.gameObject.SetActive(false);
+        if(aboutGamePopup.activeInHierarchy)
+            aboutGamePopup.gameObject.SetActive(false);
+
+        if(closeTestingPopup)
+            closeTestingPopup.gameObject.SetActive(false);
+    
+        if(settingsPopUp)
+            settingsPopUp.gameObject.SetActive(false);
     }
 
-    public void CloseTestingPopUp()
+    public void OpenSettingsMenu()
     {
-        closeTestingPopup.gameObject.SetActive(false);
+        settingsPopUp.gameObject.SetActive(true);
     }
 
     public void QuitGame()
