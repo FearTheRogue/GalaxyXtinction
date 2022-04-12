@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -10,6 +11,15 @@ public class SettingsManager : MonoBehaviour
 
     [SerializeField] private List<ResItem> resolutions = new List<ResItem>();
     private int selectedResolution;
+
+    [SerializeField] private AudioMixer mixer;
+    [SerializeField] private Text masterText, musicText, sfxText;
+    [SerializeField] private Slider masterSlider, musicSlider, sfxSlider;
+
+    //[SerializeField] private static Display[] displays;
+    //[SerializeField] private List<Display> dis = new List<Display>();
+    //[SerializeField] private Dropdown displaysDropdown;
+    //[SerializeField] private Text numdisplays; 
 
     private void Start()
     {
@@ -55,6 +65,29 @@ public class SettingsManager : MonoBehaviour
             resolutions.Sort(SortByRes);
             resolutions.Reverse();
         }
+
+        //List<DisplayInfo> displayInfos = new List<DisplayInfo>();
+
+        //for (int i = 0; i < Display.displays.Length; i++)
+        //{
+        //    Debug.Log(Display.displays[i]);
+        //    dis.Add(Display.displays[i]);
+        //    displayInfos.Add(Display.displays[i]);
+        //}
+
+        //numdisplays.text = displayInfos.Count.ToString();
+
+        float volume = 0;
+        mixer.GetFloat("MasterVol", out volume);
+        masterSlider.value = volume;
+        mixer.GetFloat("MusicVol", out volume);
+        musicSlider.value = volume;
+        mixer.GetFloat("SFXVol", out volume);
+        sfxSlider.value = volume;
+
+        masterText.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
+        musicText.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
+        sfxText.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
     }
 
     static int SortByRes(ResItem item1, ResItem item2)
@@ -96,6 +129,30 @@ public class SettingsManager : MonoBehaviour
 
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenToggle.isOn);
     } 
+
+    public void SetMasterVolume()
+    {
+        masterText.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
+
+        mixer.SetFloat("MasterVol", masterSlider.value);
+        PlayerPrefs.SetFloat("MasterVol", masterSlider.value);
+    }
+
+    public void SetMusicVolume()
+    {
+        musicText.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
+
+        mixer.SetFloat("MusicVol", musicSlider.value);
+        PlayerPrefs.SetFloat("MusicVol", musicSlider.value);
+    }
+
+    public void SetSFXVolume()
+    {
+        sfxText.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
+
+        mixer.SetFloat("SFXVol", sfxSlider.value);
+        PlayerPrefs.SetFloat("SFXVol", sfxSlider.value);
+    }
 }
 
 [System.Serializable]

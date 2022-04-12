@@ -17,18 +17,24 @@ public class MenuManager : MonoBehaviour
 
     public void PlayGame()
     {
+        AudioManager.instance.Play("UI Selected");
+
         PlayerPrefs.DeleteAll();
         GameManager.instance.SceneToLoad(levelToLoad);
     }
 
     public void AboutGame()
     {
+        AudioManager.instance.Play("UI Selected");
+
         aboutGamePopup.gameObject.SetActive(true);
     }
 
     public void CloseWindow()
     {
-        if(aboutGamePopup.activeInHierarchy)
+        AudioManager.instance.Play("UI Selected");
+
+        if (aboutGamePopup.activeInHierarchy)
             aboutGamePopup.gameObject.SetActive(false);
 
         if(closeTestingPopup)
@@ -40,11 +46,15 @@ public class MenuManager : MonoBehaviour
 
     public void OpenSettingsMenu()
     {
+        AudioManager.instance.Play("UI Selected");
+
         settingsPopUp.gameObject.SetActive(true);
     }
 
     public void QuitGame()
     {
+        AudioManager.instance.Play("UI Selected");
+
         Application.Quit();
     }
 }

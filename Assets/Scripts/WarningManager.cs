@@ -26,6 +26,8 @@ public class WarningManager : MonoBehaviour
     {
         if (timer.color.a == 1)
         {
+
+
             if (timeValue > 0)
             {
                 timeValue -= Time.deltaTime;
@@ -33,6 +35,10 @@ public class WarningManager : MonoBehaviour
             else
             {
                 warningPanel.SetActive(false);
+
+                if (AudioManager.instance.IsClipPlaying("Warning Sound"))
+                    AudioManager.instance.Stop("Warning Sound");
+
                 health.PlayerDead();
             }
 
@@ -76,6 +82,11 @@ public class WarningManager : MonoBehaviour
         }
 
         isWarning = true;
+
+        if (!AudioManager.instance.IsClipPlaying("Warning Sound"))
+        {
+            AudioManager.instance.Play("Warning Sound");
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -87,5 +98,8 @@ public class WarningManager : MonoBehaviour
 
         isWarning = false;
         timeValue = 5f;
+
+        if (AudioManager.instance.IsClipPlaying("Warning Sound"))
+            AudioManager.instance.Stop("Warning Sound");
     }
 }

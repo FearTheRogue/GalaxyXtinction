@@ -36,6 +36,11 @@ public class RadiationDetector : MonoBehaviour
 
             if (timer.color.a == 1)
             {
+                if (!AudioManager.instance.IsClipPlaying("Warning Sound"))
+                {
+                    AudioManager.instance.Play("Warning Sound");
+                }
+
                 if (timeValue > 0)
                 {
                     timeValue -= Time.deltaTime;
@@ -44,6 +49,8 @@ public class RadiationDetector : MonoBehaviour
                 {
                     this.enabled = false;
                     radiationPanel.SetActive(false);
+
+                    AudioManager.instance.Stop("Warning Sound");
                     health.PlayerDie();
                 }
 
@@ -53,6 +60,7 @@ public class RadiationDetector : MonoBehaviour
         else
         {
             radiationPanelAnim.SetBool("hasRadiation", false);
+            AudioManager.instance.Stop("Warning Sound");
             timeValue = 5;
         }
     }

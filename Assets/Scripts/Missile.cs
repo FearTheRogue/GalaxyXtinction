@@ -51,6 +51,9 @@ public class Missile : MonoBehaviour
         if (!isHoming)
             return;
 
+        if (!AudioManager.instance.IsClipPlaying("Homing Missile Engine"))
+            AudioManager.instance.Play("Homing Missile Engine");
+
         rb.velocity = transform.forward * speed;
 
         var leadTimePercentage = Mathf.InverseLerp(minDistancePredict, maxDistancePredict, Vector3.Distance(transform.position, player.transform.position));
@@ -97,6 +100,9 @@ public class Missile : MonoBehaviour
 
     private void MissileDie()
     {
+        if (AudioManager.instance.IsClipPlaying("Homing Missile Engine"))
+            AudioManager.instance.Stop("Homing Missile Engine");
+
         if (explosionPrefab) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

@@ -67,6 +67,7 @@ public class HealthSystem : MonoBehaviour
 
             if (explosionFX != null)
             {
+                AudioManager.instance.Play("Explosion");
                 Instantiate(explosionFX, this.transform.position, this.transform.rotation);
             }
 
@@ -76,24 +77,9 @@ public class HealthSystem : MonoBehaviour
 
     public void PlayerDead()
     {
-        //GameObject obj;
-        //obj = GameObject.FindWithTag("Player");
-
-        //Destroy(obj.gameObject);
-
-        //MonoBehaviour[] scripts = gameObject.GetComponents<MonoBehaviour>();
-
-        //foreach(MonoBehaviour script in scripts)
-        //{
-        //    script.enabled = false;
-        //}
-
-        //obj = GameObject.Find("HUD");
-
-        //obj.SetActive(false);
-
         if (explosionFX != null)
         {
+            AudioManager.instance.Play("Explosion");
             Instantiate(explosionFX, this.transform.position, this.transform.rotation);
         }
 

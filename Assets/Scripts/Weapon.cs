@@ -66,6 +66,7 @@ public class Weapon : WeaponManager
         {
             if (fireMode == FireMode.Auto)
             {
+                AudioManager.instance.PlayOnce("Weapon Shoot");
                 Shoot();
             }
 

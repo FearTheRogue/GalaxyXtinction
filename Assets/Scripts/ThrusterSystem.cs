@@ -22,6 +22,8 @@ public class ThrusterSystem : MonoBehaviour
 
     [SerializeField] private bool unlimitedBoost = false;
 
+    private bool hasInitialSFXPlayed = false;
+
     private void Awake()
     {
         //thrusterFX.SetActive(false);
@@ -66,6 +68,10 @@ public class ThrusterSystem : MonoBehaviour
     private IEnumerator RechargeThrusters()
     {
         canThrust = false;
+        hasInitialSFXPlayed = false;
+
+        if (AudioManager.instance.IsClipPlaying("Thruster Boost"))
+            AudioManager.instance.Stop("Thruster Boost");
 
         yield return new WaitForSeconds(rechargeDelay);
 
@@ -96,6 +102,17 @@ public class ThrusterSystem : MonoBehaviour
 
         //thrusterFX.SetActive(true);
         thrusterFXtest.Play();
+
+        if (!hasInitialSFXPlayed)
+        {
+            if (!AudioManager.instance.IsClipPlaying("Initial Boost"))
+                AudioManager.instance.Play("Initial Boost");
+
+            hasInitialSFXPlayed = true;
+        }
+
+        if (!AudioManager.instance.IsClipPlaying("Thruster Boost"))
+            AudioManager.instance.Play("Thruster Boost");
 
         if(!unlimitedBoost)
             thrusterStock = Mathf.MoveTowards(thrusterStock, 0, (decreaseThrusterAmount * Time.deltaTime));

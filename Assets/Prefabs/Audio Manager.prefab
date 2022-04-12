@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &821509056648778777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 821509056648778759}
+  - component: {fileID: 821509056648778776}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &821509056648778759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821509056648778777}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &821509056648778776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821509056648778777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47667a1777e00ba4ea1ed0e7b576b024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: d370ca80fd4297a4690b102707ef9a8c, type: 2}
+  sounds:
+  - name: Main Music
+    group: {fileID: -1411040902208284877, guid: d370ca80fd4297a4690b102707ef9a8c, type: 2}
+    clip: {fileID: 8300000, guid: 259f23ea60979f44682576942dfe2d8a, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: UI Selected
+    group: {fileID: 0}
+    clip: {fileID: 8300000, guid: b3681e816e341d94da74a554fcfe9758, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Warning Sound
+    group: {fileID: 678660800024088518, guid: d370ca80fd4297a4690b102707ef9a8c, type: 2}
+    clip: {fileID: 8300000, guid: 19570a929f2eacb43af8edca2308a39d, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: Engine Start
+    group: {fileID: 678660800024088518, guid: d370ca80fd4297a4690b102707ef9a8c, type: 2}
+    clip: {fileID: 8300000, guid: 011f08379978e7147a58fa1bfc806e41, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - name: Regular Boost
+    group: {fileID: 678660800024088518, guid: d370ca80fd4297a4690b102707ef9a8c, type: 2}
+    clip: {fileID: 8300000, guid: df0021baedd5e4b41b0aab260055c036, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - name: Initial Boost
+    group: {fileID: 678660800024088518, guid: d370ca80fd4297a4690b102707ef9a8c, type: 2}
+    clip: {fileID: 8300000, guid: 87b7c746c2472804e81eb558a2220b13, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - name: Thruster Boost
+    group: {fileID: 678660800024088518, guid: d370ca80fd4297a4690b102707ef9a8c, type: 2}
+    clip: {fileID: 8300000, guid: 74735a334e84df942916701098512a3d, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0.5
+    loop: 1
+    source: {fileID: 0}
+  - name: Weapon Shoot
+    group: {fileID: 678660800024088518, guid: d370ca80fd4297a4690b102707ef9a8c, type: 2}
+    clip: {fileID: 8300000, guid: 8d18a235cf67350408cc06fea5e24b01, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - name: Explosion
+    group: {fileID: 678660800024088518, guid: d370ca80fd4297a4690b102707ef9a8c, type: 2}
+    clip: {fileID: 8300000, guid: 4639585b16e536a4ea7ff04fff0afac5, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0.75
+    loop: 0
+    source: {fileID: 0}
+  - name: Homing Missile Engine
+    group: {fileID: 678660800024088518, guid: d370ca80fd4297a4690b102707ef9a8c, type: 2}
+    clip: {fileID: 8300000, guid: 507d474a2e7a22544af9e1f096a8a5ac, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0.95
+    loop: 0
+    source: {fileID: 0}

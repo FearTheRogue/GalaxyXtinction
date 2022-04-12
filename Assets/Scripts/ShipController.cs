@@ -26,6 +26,8 @@ public class ShipController : MonoBehaviour
     private Vector2 mouseLookInput, screenCenter, mouseDistance;
     public Rigidbody Rb => rb;
 
+    private bool hasEngineStartPlayed = false;
+
     private void Awake()
     {
         shipCamera = GetComponent<CameraMovement>();
@@ -74,10 +76,29 @@ public class ShipController : MonoBehaviour
             if (currentForwardSpeed <= 50)
             {
                 shipCamera.AdjustCamera(shipCamera.startFOV);
+
+                if (AudioManager.instance.IsClipPlaying("Engine Start"))
+                    AudioManager.instance.Stop("Engine Start");
+
+                hasEngineStartPlayed = false;
+
+                if (AudioManager.instance.IsClipPlaying("Regular Boost"))
+                    AudioManager.instance.Stop("Regular Boost");
             }
             else
             { 
                 shipCamera.AdjustCamera(shipCamera.normalSpeedFOV);
+
+                if (!hasEngineStartPlayed)
+                {
+                    if (!AudioManager.instance.IsClipPlaying("Engine Start"))
+                        AudioManager.instance.Play("Engine Start");
+
+                    hasEngineStartPlayed = true;
+                }
+
+                if (!AudioManager.instance.IsClipPlaying("Regular Boost"))
+                    AudioManager.instance.Play("Regular Boost");
             }
         }
 
