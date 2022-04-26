@@ -12,11 +12,13 @@ public class HiveManager : MonoBehaviour
 
     [SerializeField] private bool[] hasBeenDestroyed;
 
+    [SerializeField] private float currentTime;
+    [SerializeField] private float maxTime;
+
     private Spawner spawner;
 
     private void Awake()
     {
-
     }
 
     private void Start()
@@ -32,6 +34,23 @@ public class HiveManager : MonoBehaviour
                 spawner.destroyerAmountToSpawn = enemy1AmountToSpawn[i];
                 spawner.assaultAmountToSpawn = enemy2AmountToSpawn[i];
             }
+        }
+    }
+
+    private void Update()
+    {
+        currentTime += Time.deltaTime;
+
+        if (currentTime >= maxTime)
+        {
+            CanHiveShipSpawn();
+
+            currentTime = 0;
+        }
+
+        if (hasBeenDestroyed[0] && hasBeenDestroyed[1] && hasBeenDestroyed[2])
+        {
+            InGameMenu.instance.PlayerHasWon = true;
         }
     }
 
@@ -61,7 +80,7 @@ public class HiveManager : MonoBehaviour
         }
     }
 
-    private void CanHiveShipSpawn()
+    public void CanHiveShipSpawn()
     {
         for (int i = 0; i < hiveSpawnerPos.Length; i++)
         {

@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
             hiveManager.SetHiveShipSpawner();
         }
 
-        if(loadingSceneInProgress != null)
+        if (loadingSceneInProgress != null)
         {
             return;
         }

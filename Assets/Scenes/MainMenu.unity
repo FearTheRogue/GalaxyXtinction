@@ -5393,60 +5393,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: currentCursor
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: cursors.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: cursors.Array.data[0]
-      value: 
-      objectReference: {fileID: 2800000, guid: 10c12ef630bc26049a0b93af90e4390f, type: 3}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: cursors.Array.data[1]
-      value: 
-      objectReference: {fileID: 2800000, guid: 9e406253d198e3144bfc5127c13048a1, type: 3}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: cursors.Array.data[0].name
-      value: Menu Cursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: cursors.Array.data[1].name
-      value: Attack Cursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: cursors.Array.data[0].cursorImage
-      value: 
-      objectReference: {fileID: 2800000, guid: 10c12ef630bc26049a0b93af90e4390f, type: 3}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: cursors.Array.data[1].cursorImage
-      value: 
-      objectReference: {fileID: 2800000, guid: 9e406253d198e3144bfc5127c13048a1, type: 3}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: cursors.Array.data[0].cursorHotspot.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: cursors.Array.data[0].cursorHotspot.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: cursors.Array.data[1].cursorHotspot.x
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-      propertyPath: cursors.Array.data[1].cursorHotspot.y
-      value: 65
-      objectReference: {fileID: 0}
     - target: {fileID: 2640916524845787963, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
       propertyPath: m_Name
       value: Cursor Manager
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2640916524845787962, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
 --- !u!1 &206975985
 GameObject:
@@ -16334,6 +16285,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650552161}
   m_CullTransparentMesh: 0
+--- !u!114 &652109200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1597996977953504984, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+  m_PrefabInstance: {fileID: 1281051014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d78afe0f7bca64895e9729d2f383bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &659959424
 GameObject:
   m_ObjectHideFlags: 0
@@ -33149,6 +33111,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2341522984849786334, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341522984849786334, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341522984849786334, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341522984849786334, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4311820579852550298, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -33198,6 +33176,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5248416929039242598, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5770620302000291325, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 652109200}
+    - target: {fileID: 5770620302000291325, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5770620302000291325, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InGameMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483636723066986578, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483636723066986578, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483636723066986578, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483636723066986578, guid: 3ef81e28d4d289341874751b0d98af5f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -43957,29 +43963,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744277135}
   m_CullTransparentMesh: 0
---- !u!1 &1749201280 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2640916524845787963, guid: eba6a6e59d6d0344d896279de2ed287e, type: 3}
-  m_PrefabInstance: {fileID: 199430468}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1749201285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1749201280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d414513a05d18f4459bc388519d3e24e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentCursor: {fileID: 0}
-  previousCursor: {fileID: 0}
-  cursors:
-  - {fileID: 2800000, guid: 10c12ef630bc26049a0b93af90e4390f, type: 3}
-  - {fileID: 2800000, guid: 9e406253d198e3144bfc5127c13048a1, type: 3}
-  - {fileID: 2800000, guid: 3effb11a746d2264c9316ee343e672d8, type: 3}
 --- !u!1 &1755145092
 GameObject:
   m_ObjectHideFlags: 0

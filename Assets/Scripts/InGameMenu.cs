@@ -10,8 +10,10 @@ public class InGameMenu : MonoBehaviour
 
     public static bool GameIsPaused = false;
     public bool PlayerIsDead = false;
+    public bool PlayerHasWon = false;
     public GameObject pauseMenuUI;
     public GameObject deathMenuUI;
+    public GameObject winMenuUI;
     public GameObject loadingScreen;
 
     public bool GameState;
@@ -34,6 +36,18 @@ public class InGameMenu : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (deathMenuUI.activeInHierarchy)
+            deathMenuUI.SetActive(false);
+
+        if (pauseMenuUI.activeInHierarchy)
+            pauseMenuUI.SetActive(false);
+
+        if (winMenuUI.activeInHierarchy)
+            winMenuUI.SetActive(false);
+    }
+
     private void Update()
     {
         GameState = GameIsPaused;
@@ -54,6 +68,11 @@ public class InGameMenu : MonoBehaviour
 
         if (PlayerIsDead)
             DisplayDeathMenu();
+
+        if (PlayerHasWon)
+            DisplayWinScreenMenu();
+        else
+            winMenuUI.SetActive(false);
     }
 
     public void Resume()
@@ -86,13 +105,19 @@ public class InGameMenu : MonoBehaviour
         CursorManager.instance.ActivateCrosshairCursor();
 
         PlayerIsDead = false;
+        PlayerHasWon = false;
         GameIsPaused = false;
+
+        Time.timeScale = 1f;
 
         if (deathMenuUI.activeInHierarchy)
             deathMenuUI.SetActive(false);
 
         if (pauseMenuUI.activeInHierarchy)
             pauseMenuUI.SetActive(false);
+
+        if (winMenuUI.activeInHierarchy)
+            winMenuUI.SetActive(false);
 
         PlayerPrefs.DeleteAll();
 
@@ -110,12 +135,20 @@ public class InGameMenu : MonoBehaviour
 
         deathMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
+        winMenuUI.SetActive(false);
     }
 
     public void ReturnToMainMenu()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            hiveManager = GameObject.Find("Hive Manager").GetComponent<HiveManager>();
+            hiveManager.ResetHiveShipSpawner();
+        }
+
         GameIsPaused = false;
         PlayerIsDead = false;
+        PlayerHasWon = false;
 
         if (deathMenuUI.activeInHierarchy)
             deathMenuUI.SetActive(false);
@@ -123,7 +156,23 @@ public class InGameMenu : MonoBehaviour
         if (pauseMenuUI.activeInHierarchy)
             pauseMenuUI.SetActive(false);
 
+        if (winMenuUI.activeInHierarchy)
+            winMenuUI.SetActive(false);
+
         SceneManager.LoadScene(mainMenuScene);
+    }
+
+    public void DisplayWinScreenMenu()
+    {
+        CursorManager.instance.ActivateNormalCursor();
+
+        GameIsPaused = true;
+
+        Time.timeScale = 0f;
+
+        winMenuUI.SetActive(true);
+        deathMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(false);
     }
 
     public GameObject GetLoadingPanel()
