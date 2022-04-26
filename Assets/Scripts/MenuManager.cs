@@ -5,19 +5,27 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] Button playBtn, closeTestingBtn, okayBtn, settingsBtn,quitBtn;
     [SerializeField] GameObject closeTestingPopup, aboutGamePopup, settingsPopUp;
     [SerializeField] string levelToLoad;
 
     private void Start()
     {
         Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Confined;
+
+        CursorManager.instance.ActivateNormalCursor();
     }
 
     public void PlayGame()
     {
+        //if (AudioManager.instance.IsClipPlaying("Thruster Boost"))
+        //{
+        //    AudioManager.instance.Stop("Thruster Boost");
+        //}
+
         AudioManager.instance.Play("UI Selected");
+        CursorManager.instance.ActivateCrosshairCursor();
+
+        //GameManager.instance.ActivateLoadingScene();
 
         PlayerPrefs.DeleteAll();
         GameManager.instance.SceneToLoad(levelToLoad);

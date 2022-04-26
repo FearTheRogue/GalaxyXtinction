@@ -11,7 +11,6 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private GameObject explosionFX;
 
     [SerializeField] private float timeToWait;
-    private PauseMenu deadPanel;
 
     public int GetCurrentHealth() { return currentHealth; }
 
@@ -83,13 +82,15 @@ public class HealthSystem : MonoBehaviour
             Instantiate(explosionFX, this.transform.position, this.transform.rotation);
         }
 
+        if (AudioManager.instance.IsClipPlaying("Thruster Boost"))
+            AudioManager.instance.Stop("Thruster Boost");
+
         Camera cam;
         cam = Camera.main;
 
         cam.transform.parent = null;
 
-        deadPanel = FindObjectOfType<PauseMenu>();
-        deadPanel.PlayerIsDead = true;
+        InGameMenu.instance.PlayerIsDead = true;
 
         Destroy(gameObject);
     }

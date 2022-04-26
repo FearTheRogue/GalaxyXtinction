@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using TMPro;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Text masterText, musicText, sfxText;
     [SerializeField] private Slider masterSlider, musicSlider, sfxSlider;
 
+    [SerializeField] private Toggle fpsToggle;
+
     //[SerializeField] private static Display[] displays;
     //[SerializeField] private List<Display> dis = new List<Display>();
     //[SerializeField] private Dropdown displaysDropdown;
@@ -24,6 +27,8 @@ public class SettingsManager : MonoBehaviour
     private void Start()
     {
         fullscreenToggle.isOn = Screen.fullScreen;
+
+        fpsToggle.isOn = FPSCounter.instance.isDisplayed;
 
         if(QualitySettings.vSyncCount == 0)
         {
@@ -126,6 +131,9 @@ public class SettingsManager : MonoBehaviour
             QualitySettings.vSyncCount = 1;
         else
             QualitySettings.vSyncCount = 0;
+
+        FPSCounter.instance.isDisplayed = fpsToggle.isOn;
+        FPSCounter.instance.SaveDisplay();
 
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenToggle.isOn);
     } 

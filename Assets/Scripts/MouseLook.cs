@@ -11,7 +11,7 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        if (!PauseMenu.GameIsPaused)
+        if (!InGameMenu.GameIsPaused)
         {
             //Cursor.lockState = CursorLockMode.Locked;
 

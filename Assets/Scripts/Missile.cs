@@ -56,6 +56,12 @@ public class Missile : MonoBehaviour
 
         rb.velocity = transform.forward * speed;
 
+        if (player == null)
+        {
+            MissileDie();
+            return;
+        }
+
         var leadTimePercentage = Mathf.InverseLerp(minDistancePredict, maxDistancePredict, Vector3.Distance(transform.position, player.transform.position));
         PredictMovement(leadTimePercentage);
         AddDeviation(leadTimePercentage);

@@ -42,7 +42,7 @@ public class ShipController : MonoBehaviour
         screenCenter.x = Screen.width * .5f;
         screenCenter.y = Screen.height * .5f;
 
-        Cursor.lockState = CursorLockMode.Confined;
+        //Cursor.lockState = CursorLockMode.Confined;
     }
 
     void Update()
@@ -107,7 +107,7 @@ public class ShipController : MonoBehaviour
 
     private bool CheckShoot()
     {
-        if(Input.GetMouseButtonDown(0) && !PauseMenu.GameIsPaused && currentForwardSpeed <= 150)
+        if(Input.GetMouseButtonDown(0) && !InGameMenu.GameIsPaused && currentForwardSpeed <= 150)
         {
             return true;
         }

@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
+
+    [SerializeField] private int currentSceneIndex;
+
+    //[SerializeField] private GameObject loadingScreen;
+    //[SerializeField] private Slider loadingBar;
+    //[SerializeField] private Text loadingText;
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject[] warpPortals;
@@ -30,6 +37,18 @@ public class GameManager : MonoBehaviour
 
         warpPortals = GameObject.FindGameObjectsWithTag("Warp");
 
+        //if (loadingScreen == null)
+        //    loadingScreen = InGameMenu.instance.GetLoadingPanel();
+
+        //loadingScreen.SetActive(true);
+
+        //if (loadingBar == null)
+        //    loadingBar = loadingScreen.GetComponentInChildren<Slider>();
+        //if (loadingText == null)
+        //    loadingText = loadingScreen.GetComponentInChildren<Text>();
+
+        //loadingScreen.SetActive(false);
+
         if (portal == null)
         {
             return;
@@ -39,6 +58,10 @@ public class GameManager : MonoBehaviour
     private void OnLevelFinishedLoading(int comingFromSceneIndex)
     {
         Debug.Log("Scene has loaded");
+
+        FPSCounter.instance.ResetMinAndMax();
+
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         warpPortals = GameObject.FindGameObjectsWithTag("Warp");
 
@@ -56,12 +79,17 @@ public class GameManager : MonoBehaviour
 
                     hiveManager = GameObject.Find("Hive Manager").GetComponent<HiveManager>();
                     hiveManager.GetHiveShipSpawner();
+
+                    CursorManager.instance.ActivateCrosshairCursor();
+
                     Debug.Log("Loading into space");
                 }
 
                 if (player.GetComponent<CharacterController>() != null)
                 {
                     player.GetComponent<CharacterController>().enabled = false;
+
+                    CursorManager.instance.ActivateCenter();
                 }
 
                 player.transform.position = portal.GetSpawnPoint().position;
@@ -79,14 +107,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
-    {
-        Debug.Log("click");
-    }
-
     public void StartToLoadLevel(int levelToLoad)
     {
-        if(levelToLoad != 1)
+        //loadingScreen.SetActive(true);
+
+        if (levelToLoad != 1)
         {
             hiveManager = GameObject.Find("Hive Manager").GetComponent<HiveManager>();
             hiveManager.SetHiveShipSpawner();
@@ -114,8 +139,57 @@ public class GameManager : MonoBehaviour
 
     public void SceneToLoad(string sceneToBeLoaded)
     {
-        PauseMenu.GameIsPaused = false;
+       // loadingScreen.SetActive(true);
+
+        InGameMenu.GameIsPaused = false;
+
+        FPSCounter.instance.ResetMinAndMax();
+
         SceneManager.LoadScene(sceneToBeLoaded);
+
+        //StartCoroutine(LoadLoad(sceneToBeLoaded));
+    }
+
+    //private IEnumerator LoadLoad(string sceneToBeLoaded)
+    //{
+    //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToBeLoaded);
+
+    //    asyncLoad.allowSceneActivation = false;
+
+    //    while (!asyncLoad.isDone)
+    //    {
+    //        loadingBar.value = asyncLoad.progress;
+    //        loadingText.text = (asyncLoad.progress * 100).ToString() + "%";
+
+    //        if (asyncLoad.progress >= 0.9f && !asyncLoad.allowSceneActivation)
+    //        {
+    //            if (AudioManager.instance.IsClipPlaying("Thruster Boost"))
+    //            {
+    //                AudioManager.instance.Stop("Thruster Boost");
+    //            }
+
+
+    //            if (Input.GetMouseButtonDown(0))
+    //            {
+    //                asyncLoad.allowSceneActivation = true;
+    //            }
+    //        }
+
+    //        yield return null;
+    //    }
+    //}
+
+    public void CheckCursor()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            CursorManager.instance.ActivateCenter();
+        }
+    }
+
+    public void ActivateLoadingScene()
+    {
+        //loadingScreen.SetActive(true);
     }
 
     public void QuitGame()
