@@ -107,7 +107,7 @@ public class ShipController : MonoBehaviour
 
     private bool CheckShoot()
     {
-        if(Input.GetMouseButtonDown(0) && !InGameMenu.GameIsPaused && currentForwardSpeed <= 150)
+        if(Input.GetMouseButton(0) && !InGameMenu.GameIsPaused && currentForwardSpeed <= 150)
         {
             return true;
         }
