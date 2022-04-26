@@ -5282,7 +5282,7 @@ MonoBehaviour:
   secondaryWeapon: {fileID: 0}
   burstAmount: 4
   fireTimer: 0
-  fireRate: 0.2
+  fireRate: 0.3
   canBurstFire: 0
   canHomingMissile: 1
   homingCooldown: 0
@@ -5359,7 +5359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canDie: 1
-  maxHealth: 150
+  maxHealth: 200
   currentHealth: 0
   explosionFX: {fileID: 8461663252473613393, guid: 826c8be82233370409a48d732ef090a1, type: 3}
   timeToWait: 2
@@ -5385,6 +5385,8 @@ MonoBehaviour:
   forwardSpeed: 100
   currentForwardSpeed: 0
   forwardAcceleration: 25
+  rollSpeed: 120
+  rollAcceleration: 15
 --- !u!114 &1360476382555285711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5438,18 +5440,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5379dea21c58b4aaed0aa1af2a4e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrusterFX: {fileID: 512806935632087084}
-  thrusterFXtest: {fileID: 421465831436330634}
+  thrusterFX: {fileID: 421465831436330634}
   thrusters: {fileID: 4259926374134507401}
-  thrusterSpeed: 200
+  thrusterSpeed: 500
   thrusterStock: 0
   maxThrusterStock: 25
-  decreaseThrusterAmount: 5
-  IncreaseThrusterAmount: 5
-  rechargeDelay: 1
+  decreaseThrusterAmount: 3
+  IncreaseThrusterAmount: 8
+  rechargeDelay: 1.5
   isThrusting: 0
   canThrust: 0
-  unlimitedBoost: 1
+  unlimitedBoost: 0
+  currentTime: 0
+  maxTime: 2
 --- !u!114 &1360476382555285709
 MonoBehaviour:
   m_ObjectHideFlags: 0

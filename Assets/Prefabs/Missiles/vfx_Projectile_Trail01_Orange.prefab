@@ -5127,7 +5127,7 @@ MonoBehaviour:
   trail: {fileID: 4912708162938016071}
   speed: 150
   accuracy: 98
-  damage: 12
+  damage: 3
 --- !u!54 &4966221436006378863
 Rigidbody:
   m_ObjectHideFlags: 0

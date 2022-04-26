@@ -6,8 +6,7 @@ public class ThrusterSystem : MonoBehaviour
     private ShipController shipController;
     private CameraMovement shipCamera;
 
-    [SerializeField] private GameObject thrusterFX;
-    [SerializeField] private ParticleSystem thrusterFXtest;
+    [SerializeField] private ParticleSystem thrusterFX;
 
     [Header("Thruster Speed Settings")]
     [SerializeField] private ThrusterBar thrusters;
@@ -17,18 +16,19 @@ public class ThrusterSystem : MonoBehaviour
     [SerializeField] private float decreaseThrusterAmount;
     [SerializeField] private float IncreaseThrusterAmount;
     [SerializeField] private float rechargeDelay;
-    [SerializeField] private bool isThrusting;
-    [SerializeField] private bool canThrust;
+    [SerializeField] public bool isThrusting;
+    [SerializeField] public bool canThrust;
 
     [SerializeField] private bool unlimitedBoost = false;
 
     private bool hasInitialSFXPlayed = false;
 
+    [SerializeField] private float currentTime = 0;
+    [SerializeField] private float maxTime;
+
     private void Awake()
     {
-        //thrusterFX.SetActive(false);
-        //thrusterFXtest.gameObject.SetActive(false);
-        thrusterFXtest.Stop();
+        thrusterFX.Stop();
     }
 
     private void Start()
@@ -42,66 +42,63 @@ public class ThrusterSystem : MonoBehaviour
 
     private void Update()
     {
-        isThrusting = CheckCanThrust();
-
-        if (!CheckCanThrust() && thrusterStock < maxThrusterStock)
+        if (Input.GetKey(KeyCode.LeftShift) && thrusterStock > 0f && shipController.GetCurrentSpeed() >= 95 && canThrust)
         {
-            StartCoroutine(RechargeThrusters());
+            ThrusterBoost();
+            isThrusting = true;
         }
         else
         {
-            StopCoroutine(RechargeThrusters());
+            shipCamera.AdjustCamera(shipCamera.normalSpeedFOV);
+            isThrusting = false;
             canThrust = true;
         }
 
-        thrusters.SetThruster(thrusterStock);
-    }
-
-    private void LateUpdate()
-    {
-        if (CheckCanThrust())
+        if(thrusterStock <= 0.5)
         {
-            ThrusterBoost();
+            canThrust = false;
+        }
+        else if (thrusterStock < maxThrusterStock && !isThrusting && canThrust)
+        {
+            RechargeThrusters();
+        }
+
+        if (!canThrust)
+        {
+            currentTime += Time.deltaTime;
+
+            thrusterFX.Stop();
+
+            if (currentTime >= maxTime)
+            {
+                RechargeThrusters();
+                currentTime = 0;
+            }
         }
     }
 
-    private IEnumerator RechargeThrusters()
+    private void RechargeThrusters()
     {
-        canThrust = false;
         hasInitialSFXPlayed = false;
 
         if (AudioManager.instance.IsClipPlaying("Thruster Boost"))
             AudioManager.instance.Stop("Thruster Boost");
 
-        yield return new WaitForSeconds(rechargeDelay);
-
-        //thrusterFX.SetActive(false);
-        thrusterFXtest.Stop();
+        thrusterFX.Stop();
 
         thrusterStock = Mathf.MoveTowards(thrusterStock, maxThrusterStock, (IncreaseThrusterAmount * Time.deltaTime));
 
+        thrusters.SetThruster(thrusterStock);
+
         if (thrusterStock == maxThrusterStock)
             canThrust = true;
-    }
-
-    public bool CheckCanThrust()
-    {
-        if (Input.GetKey(KeyCode.LeftShift) && thrusterStock > 0f && shipController.GetCurrentSpeed() >= 95 && canThrust)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     private void ThrusterBoost()
     {
         shipCamera.AdjustCamera(shipCamera.boostSpeedFOV);
 
-        //thrusterFX.SetActive(true);
-        thrusterFXtest.Play();
+        thrusterFX.Play();
 
         if (!hasInitialSFXPlayed)
         {
@@ -116,8 +113,9 @@ public class ThrusterSystem : MonoBehaviour
 
         if(!unlimitedBoost)
             thrusterStock = Mathf.MoveTowards(thrusterStock, 0, (decreaseThrusterAmount * Time.deltaTime));
+        
+        thrusters.SetThruster(thrusterStock);
     }
-
 
     public float GetThrusterSpeed()
     {
