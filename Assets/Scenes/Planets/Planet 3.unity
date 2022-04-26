@@ -494,6 +494,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Ship_Fighter_03_Landed
       objectReference: {fileID: 0}
+    - target: {fileID: 1639041798820178118, guid: c4634a88a3298bb42a783c256bc19938, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 9127226244428303145, guid: c4634a88a3298bb42a783c256bc19938, type: 3}
       propertyPath: timer
       value: 

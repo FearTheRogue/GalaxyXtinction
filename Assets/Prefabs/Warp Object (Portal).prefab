@@ -231,19 +231,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1930287293564321099, guid: 6baf2ecc8f9a0f54592b79ec0c33fba0, type: 3}
       propertyPath: m_Size.x
-      value: 22
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1930287293564321099, guid: 6baf2ecc8f9a0f54592b79ec0c33fba0, type: 3}
       propertyPath: m_Size.y
-      value: 22
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1930287293564321099, guid: 6baf2ecc8f9a0f54592b79ec0c33fba0, type: 3}
       propertyPath: m_Size.z
-      value: 1.5
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 1930287293564321099, guid: 6baf2ecc8f9a0f54592b79ec0c33fba0, type: 3}
       propertyPath: m_Center.z
-      value: 5
+      value: -12.189901
       objectReference: {fileID: 0}
     - target: {fileID: 1930287293564321099, guid: 6baf2ecc8f9a0f54592b79ec0c33fba0, type: 3}
       propertyPath: m_IsTrigger

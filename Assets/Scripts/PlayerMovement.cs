@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    [SerializeField] private float sprintSpeed;
+    [SerializeField] private bool isSprinting;
+
     Vector3 velocity;
     public bool isGrounded;
 
@@ -30,11 +33,20 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * 12f * Time.deltaTime);
-
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)
+        {
+            controller.Move(move * sprintSpeed * Time.deltaTime);
+            isSprinting = true;
+        }
+        else
+        {
+            controller.Move(move * speed * Time.deltaTime);
+            isSprinting = false;
         }
 
         velocity.y += gravity * Time.deltaTime;
