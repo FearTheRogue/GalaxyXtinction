@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// 
+/// Handles the In-game menus in the project.
+/// 
+/// </summary>
+
 public class InGameMenu : MonoBehaviour
 {
     public static InGameMenu instance;
@@ -36,6 +42,7 @@ public class InGameMenu : MonoBehaviour
         }
     }
 
+    // Initially sets all panels to deactivate
     private void Start()
     {
         if (deathMenuUI.activeInHierarchy)
@@ -55,6 +62,7 @@ public class InGameMenu : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 0)
             return;
 
+        // Toggle pause button
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused)
@@ -75,8 +83,10 @@ public class InGameMenu : MonoBehaviour
             winMenuUI.SetActive(false);
     }
 
+    // Resumes the game
     public void Resume()
     {
+        // Sets the correct cursor
         if(SceneManager.GetActiveScene().buildIndex == 1)
         {
             CursorManager.instance.ActivateCrosshairCursor();
@@ -91,8 +101,10 @@ public class InGameMenu : MonoBehaviour
         GameIsPaused = false;
     }
 
+    // Pauses the game
     public void Pause()
     {
+        // Sets the right cursor
         CursorManager.instance.ActivateNormalCursor();
 
         pauseMenuUI.SetActive(true);
@@ -100,6 +112,7 @@ public class InGameMenu : MonoBehaviour
         GameIsPaused = true;
     }
 
+    // Restarts the game
     public void RestartGame()
     {
         CursorManager.instance.ActivateCrosshairCursor();
@@ -119,6 +132,7 @@ public class InGameMenu : MonoBehaviour
         if (winMenuUI.activeInHierarchy)
             winMenuUI.SetActive(false);
 
+        // Delete all the PlayerPrefs for the state of the Hive ship
         PlayerPrefs.DeleteAll();
 
         SceneManager.LoadScene(restartScene);
@@ -130,6 +144,7 @@ public class InGameMenu : MonoBehaviour
 
         GameIsPaused = true;
 
+        // Stops audio clip, if its playing
         if (AudioManager.instance.IsClipPlaying("Warning Sound"))
             AudioManager.instance.Stop("Warning Sound");
 

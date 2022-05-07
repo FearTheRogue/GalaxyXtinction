@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// Handles the camera position for the players ship.
+/// The AdjustCamera() method is called and updated using the FOV target set in the Inspector
+/// 
+/// </summary>
+
 public class CameraMovement : MonoBehaviour
 {
     [Header("Camera Settings")]

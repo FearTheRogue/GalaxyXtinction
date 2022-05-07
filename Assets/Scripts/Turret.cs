@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// Handles the turret functionality. The turret gameobject connected to the Hive ships.
+/// 
+/// </summary>
+
 public class Turret : MonoBehaviour
 {
     [SerializeField] private GameObject rotatePivot;
@@ -30,6 +36,7 @@ public class Turret : MonoBehaviour
 
     private void Start()
     {
+        // Assigns the initial starting position and rotation of the turret pivots
         startingLocation = anglePivot.transform.position;
         startingRotation = rotatePivot.transform.localEulerAngles;
     }
@@ -38,10 +45,12 @@ public class Turret : MonoBehaviour
     {
         if (target == null)
         {
+            // Reset Position to startingLocation
             ResetPosition();
             return;
         }
 
+        // If target is found
         MoveToTarget();
     }
 
@@ -53,11 +62,15 @@ public class Turret : MonoBehaviour
 
     private void MoveToTarget()
     {
+        // Rotates the base pivot to the target position
         UpdateRotationBase(target.transform.position);
+
+        // Rotates the angle pivot to the target position
         UpdateAngle(target.transform.position);
 
         if (CheckCanShoot())
         {
+            // Adds delay to the rate of fire
             if (Time.time > fireTimer)
             {
                 ShootMissile();
@@ -69,27 +82,33 @@ public class Turret : MonoBehaviour
 
     private void UpdateRotationBase(Vector3 position)
     {
+        // Gets the direction, and rotates to that direction
         direction = (position - rotatePivot.transform.position).normalized;
         rotation = Quaternion.LookRotation(direction);
 
+        // Rotates the base of the turret to the rotation, by a specific speed
         rotatePivot.transform.rotation = Quaternion.Slerp(rotatePivot.transform.rotation, rotation, (rotateSpeed * Time.deltaTime));
         rotatePivot.transform.rotation = Quaternion.Euler(new Vector3(0f, rotatePivot.transform.rotation.eulerAngles.y, 0f));
     }
 
     private void UpdateAngle(Vector3 position)
     {
+        // Gets the direction, and rotates to that direction
         direction = (position - anglePivot.transform.position).normalized;
         rotation = Quaternion.LookRotation(direction);
 
+        // Rotates the base of the turret to the rotation, by a specific speed
         anglePivot.transform.rotation = Quaternion.Slerp(anglePivot.transform.rotation, rotation, (angleSpeed * Time.deltaTime));
         anglePivot.transform.rotation = Quaternion.Euler(new Vector3(anglePivot.transform.rotation.eulerAngles.x, rotatePivot.transform.rotation.eulerAngles.y, 0f));
 
         Vector3 angle = anglePivot.transform.eulerAngles;
 
+        // Clamping the angle pivot
         angle.x = Mathf.Clamp(anglePivot.transform.eulerAngles.x, angleMin, angleMax);
         anglePivot.transform.rotation = Quaternion.Euler(angle);
     }
 
+    // If the target is found and the Raycast has hit, return true
     private bool CheckCanShoot()
     {
         if (target == null)
@@ -113,6 +132,7 @@ public class Turret : MonoBehaviour
         //Physics.IgnoreCollision(proj.GetComponent<Collider>(), transform.GetComponentsInChildren<BoxCollider>().;
     }
 
+    // Assigns the target
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Player")
@@ -123,6 +143,7 @@ public class Turret : MonoBehaviour
         target = other.gameObject;
     }
 
+    // Unassigns the target
     private void OnTriggerExit(Collider other)
     {
         if (other.tag != "Player")

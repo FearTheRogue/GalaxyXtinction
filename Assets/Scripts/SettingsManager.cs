@@ -5,6 +5,17 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using TMPro;
 
+/// <summary>
+/// 
+/// A video tutorial was used as an initial starting point for this script
+/// 
+/// Tutoral Video: https://www.youtube.com/watch?v=76WOa6IU_s8
+/// 
+/// Modifications to this script was adding a fps toggle, and a sorting list method. Plans are 
+/// to implement a loading screen.
+/// 
+/// </summary>
+
 public class SettingsManager : MonoBehaviour
 {
     [SerializeField] private Toggle fullscreenToggle, vsyncToggle;
@@ -26,8 +37,10 @@ public class SettingsManager : MonoBehaviour
 
     private void Start()
     {
+        // Assigns the Screen.fullScreen 
         fullscreenToggle.isOn = Screen.fullScreen;
-
+        
+        // The current state of the fps counter is assigned
         fpsToggle.isOn = FPSCounter.instance.isDisplayed;
 
         if(QualitySettings.vSyncCount == 0)
@@ -39,6 +52,7 @@ public class SettingsManager : MonoBehaviour
             vsyncToggle.isOn = true;
         }
 
+        // 
         bool foundRes = false;
         for (int i = 0; i < resolutions.Count; i++)
         {
@@ -82,6 +96,7 @@ public class SettingsManager : MonoBehaviour
 
         //numdisplays.text = displayInfos.Count.ToString();
 
+        // Retrieves the value from the mixer groups and passes out to float volume
         float volume = 0;
         mixer.GetFloat("MasterVol", out volume);
         masterSlider.value = volume;
@@ -90,16 +105,20 @@ public class SettingsManager : MonoBehaviour
         mixer.GetFloat("SFXVol", out volume);
         sfxSlider.value = volume;
 
+        // Update UI
+        // 80 is added to each value, due to how Unity audio works 
         masterText.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
         musicText.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
         sfxText.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
     }
 
+    // Sorts the repolution list by the horizontal value
     static int SortByRes(ResItem item1, ResItem item2)
     {
         return item1.horizontal.CompareTo(item2.horizontal);
     }
 
+    // Cycles the resolutions list
     public void ResLeft()
     {
         selectedResolution--;
@@ -110,6 +129,7 @@ public class SettingsManager : MonoBehaviour
         UpdateResolutionText();
     }
 
+    // Cycles the resolutions list
     public void ResRight()
     {
         selectedResolution++;
@@ -120,11 +140,13 @@ public class SettingsManager : MonoBehaviour
         UpdateResolutionText();
     }
 
+    // Updates the UI text
     public void UpdateResolutionText()
     {
         resolutionText.text = resolutions[selectedResolution].horizontal.ToString() + "x" + resolutions[selectedResolution].vertical.ToString();
     }
 
+    // Apply graphical changes
     public void ApplyGraphics() 
     {
         if (vsyncToggle.isOn)
@@ -138,6 +160,7 @@ public class SettingsManager : MonoBehaviour
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenToggle.isOn);
     } 
 
+    // The slider value is used to set and store in the audio mixer and PlayerPrefs, respectfully
     public void SetMasterVolume()
     {
         masterText.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
@@ -146,6 +169,7 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("MasterVol", masterSlider.value);
     }
 
+    // The slider value is used to set and store in the audio mixer and PlayerPrefs, respectfully
     public void SetMusicVolume()
     {
         musicText.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
@@ -154,6 +178,7 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("MusicVol", musicSlider.value);
     }
 
+    // The slider value is used to set and store in the audio mixer and PlayerPrefs, respectfully
     public void SetSFXVolume()
     {
         sfxText.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
@@ -163,6 +188,7 @@ public class SettingsManager : MonoBehaviour
     }
 }
 
+// Custom Resolution class
 [System.Serializable]
 public class ResItem
 {

@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// Handles the targetting the player gameobject.
+/// Scripts 'EnemyMovement' use this script to set the target.
+/// 
+/// </summary>
+
 public class TargetManager : MonoBehaviour
 {
     private EnemyMovement movement;
@@ -33,8 +40,6 @@ public class TargetManager : MonoBehaviour
     private void Start()
     {
         StopAllCoroutines();
-
-        //this.transform.parent = null;
     }
 
     private void Update()
@@ -46,6 +51,7 @@ public class TargetManager : MonoBehaviour
             StartCoroutine(LocatePlayerFromSpawning(spawner.targetObject));
     }
 
+    // Coroutine method, after a delay removes the target transform
     IEnumerator StartCountdown()
     {
         currentCountdown = Mathf.MoveTowards(currentCountdown, 0, countdownSpeed * Time.deltaTime);
@@ -55,6 +61,7 @@ public class TargetManager : MonoBehaviour
             RemovePlayerTarget();
     }
 
+    // Coroutine method, after enemy has been spawn, and another delay, the target transform is set
     public IEnumerator LocatePlayerFromSpawning(GameObject target)
     {
         GameObject player = target;
@@ -65,6 +72,7 @@ public class TargetManager : MonoBehaviour
         enemySpawnedFromSpawner = false;
     }
 
+    // Sets the target transform
     public void SetPlayerTarget(Transform transform)
     {
         canStartCountdown = false;
@@ -72,12 +80,14 @@ public class TargetManager : MonoBehaviour
         playerTransform = transform;
     }
 
+    // Removes target transform
     private void RemovePlayerTarget()
     {
         canStartCountdown = false;
         playerTransform = null;
     }
 
+    // Returns a bool if target is assigned
     public bool IsTargetIdenified()
     {
         if (playerTransform != null)
@@ -86,11 +96,13 @@ public class TargetManager : MonoBehaviour
         return false; // returns false if player transform is null
     }
 
+    // returns the player transform
     public Transform GetTargetPlayer()
     {
         return playerTransform;
     }
 
+    // After trigging, sets the target transform
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
@@ -102,6 +114,7 @@ public class TargetManager : MonoBehaviour
         SetPlayerTarget(other.transform);
     }
 
+    // After exiting the trigger, a countdown begins
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player"))

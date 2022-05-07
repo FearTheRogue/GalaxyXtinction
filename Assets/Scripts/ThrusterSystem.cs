@@ -1,6 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// Handles the thrusting mechanic, used by the player.
+/// 
+/// </summary>
+
 public class ThrusterSystem : MonoBehaviour
 {
     private ShipController shipController;
@@ -42,6 +48,7 @@ public class ThrusterSystem : MonoBehaviour
 
     private void Update()
     {
+        // Multiple checks if thrusting
         if (Input.GetKey(KeyCode.LeftShift) && thrusterStock > 0f && shipController.GetCurrentSpeed() >= 95 && canThrust)
         {
             ThrusterBoost();
@@ -49,20 +56,24 @@ public class ThrusterSystem : MonoBehaviour
         }
         else
         {
+            // If not thrusting, adjust camera with the normal FOV
             shipCamera.AdjustCamera(shipCamera.normalSpeedFOV);
             isThrusting = false;
             canThrust = true;
         }
 
+        // If the thrusterStocks value is less than 0.5, canThrust is false
         if(thrusterStock <= 0.5)
         {
             canThrust = false;
         }
         else if (thrusterStock < maxThrusterStock && !isThrusting && canThrust)
         {
+            // If not thrusting, RechargeThrusters
             RechargeThrusters();
         }
 
+        // Adds a delay to thrust, before being able to RechargeThrusters
         if (!canThrust)
         {
             currentTime += Time.deltaTime;
@@ -86,18 +97,23 @@ public class ThrusterSystem : MonoBehaviour
 
         thrusterFX.Stop();
 
+        // thrusterStock value is increased by the thruster amount
         thrusterStock = Mathf.MoveTowards(thrusterStock, maxThrusterStock, (IncreaseThrusterAmount * Time.deltaTime));
 
+        // Updates the UI
         thrusters.SetThruster(thrusterStock);
 
+        // If thruster amount is full, canThrust is true
         if (thrusterStock == maxThrusterStock)
             canThrust = true;
     }
 
     private void ThrusterBoost()
     {
+        // adjusts the camera to boost FOV
         shipCamera.AdjustCamera(shipCamera.boostSpeedFOV);
 
+        // Plays the effect
         thrusterFX.Play();
 
         if (!hasInitialSFXPlayed)

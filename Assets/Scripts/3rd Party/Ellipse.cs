@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// A video tutorial was used as an initial starting point for this script
+/// 
+/// Tutoral Video: https://www.youtube.com/watch?v=mQKGRoV_jBc&t=695s
+/// 
+/// This script was not used in the project.
+/// 
+/// </summary>
+
 [System.Serializable]
 public class Ellipse
 {

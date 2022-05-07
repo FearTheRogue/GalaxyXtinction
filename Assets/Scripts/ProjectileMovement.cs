@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// Handles the projectile movement.
+/// 
+/// Within the Start() method was utilised from the 'ProjectileMoveScript' script from the
+/// Gabriel Anguiar Productions asset pack.
+/// 
+/// </summary>
+
 public class ProjectileMovement : MonoBehaviour
 {
     [Header("Projectile")]
@@ -26,6 +35,9 @@ public class ProjectileMovement : MonoBehaviour
             return;
     }
 
+    // Was from the 'ProjectileMoveScript' script from the
+    // Gabriel Anguiar Productions asset pack
+    // Adds missile stray to projectiles, if projectile isnt 100& accurate
     private void Start()
     {
         if(accuracy != 100)
@@ -74,13 +86,16 @@ public class ProjectileMovement : MonoBehaviour
         {
             Debug.Log("Projectile has hit: " + collision.collider.gameObject.name);
 
+            // Get the health from the collision data
             HealthSystem healthSystem = collision.gameObject.GetComponent<HealthSystem>();
 
+            // If the healthSystem is null
             if (healthSystem == null)
             {
                 healthSystem = collision.gameObject.GetComponentInParent<HealthSystem>();
             }
 
+            // If the healthSystem isn't null, apply damage
             if (healthSystem != null)
             {
                 healthSystem.TakeDamage((int)damage);
@@ -90,6 +105,7 @@ public class ProjectileMovement : MonoBehaviour
             {
                 return;
             }
+
             DestroyProjectile();
         }
     }

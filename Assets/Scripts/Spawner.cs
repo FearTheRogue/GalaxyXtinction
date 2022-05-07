@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// Handles the Spawning of the enemies from the Hive Ship.
+/// 
+/// </summary>
+
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemiesToSpawn;
@@ -36,6 +42,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    // Spawns each enemy in the array
     IEnumerator SpawnEnemy()
     {
         for (int i = 0; i < destroyerAmountToSpawn; i++)
@@ -43,12 +50,15 @@ public class Spawner : MonoBehaviour
             GameObject enemy;
             enemy = Instantiate(enemiesToSpawn[0], transform.position, Quaternion.identity, this.transform);
 
+            // Set the hasBeenSpawned to true
             enemyMovement = enemy.GetComponent<EnemyMovement>();
             enemyMovement.hasBeenSpawned = true;
 
+            // Set the enemySpawnFromSpawn to true
             targetManager = enemy.GetComponent<TargetManager>();
             targetManager.enemySpawnedFromSpawner = true;
 
+            // Wait
             yield return new WaitForSeconds(1f);
         }
 
@@ -70,6 +80,7 @@ public class Spawner : MonoBehaviour
         yield return null;
     }
 
+    // After the player enters the trigger, starts to spawn enemies
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Player"))

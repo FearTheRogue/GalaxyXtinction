@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// Handles the weapons.
+/// 
+/// </summary>
+
+// enum values of the different fire modes
 public enum FireMode { Burst, Auto };
 
 public class Weapon : WeaponManager
@@ -35,6 +42,7 @@ public class Weapon : WeaponManager
 
     private void Update()
     {
+        // Changes the fireMode depending of the assignment
         switch (fireMode)
         {
             case FireMode.Burst:
@@ -62,6 +70,7 @@ public class Weapon : WeaponManager
 
     public void ShootMissile()
     {
+        // Adds delay to the rate of fire
         if (Time.time > fireTimer && !canBurstFire)
         {
             if (fireMode == FireMode.Auto)
@@ -85,6 +94,7 @@ public class Weapon : WeaponManager
         }
     }
 
+    // Instantiates the projectiles from the spawnpoints 
     private void Shoot()
     {
         foreach (Transform origin in missileSpawnPoint)
@@ -111,6 +121,7 @@ public class Weapon : WeaponManager
         }
     }
 
+    // Instantiates the projectiles from the spawnpoints 
     private IEnumerator FiringHomingMissiles()
     {
         foreach (Transform origin in homingMissileSpawnPoint)
@@ -121,6 +132,7 @@ public class Weapon : WeaponManager
         }
     }
 
+    // Returns an int of the number of weapons, used in the EnemyMovement script
     public int GetNumOfWeapons()
     {
         if(primaryWeapon != null && secondaryWeapon != null)
@@ -136,6 +148,7 @@ public class Weapon : WeaponManager
         return 0;
     }
 
+    // Coroutine for the burst fire
     private IEnumerator BurstFire()
     {
         yield return new WaitForSeconds(fireRate);

@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// A video tutorial was used as an initial starting point for this script
+/// 
+/// Tutoral Video: https://www.youtube.com/watch?v=7fdSYc8WElo
+///
+/// The project does not use this script.
+/// 
+/// </summary>
+
 public class Orbit : MonoBehaviour
 {
     public Transform orbitingObject;
@@ -29,7 +39,6 @@ public class Orbit : MonoBehaviour
     {
         Vector2 orbitPos = orbitPath.Evaluate(orbitProgress);
         orbitingObject.localPosition = new Vector3(orbitPos.x, 0, orbitPos.y);
-
     }
 
     IEnumerator AnimateOrbit()

@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 
+/// Handles the Cursor image during gameplay
+/// 
+/// </summary>
+
 public class CursorManager : MonoBehaviour
 {
     public static CursorManager instance;
@@ -27,6 +33,7 @@ public class CursorManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    // Sets the Cursor image to the normal cursor
     public void ActivateNormalCursor()
     {
         if(currentCursor != null)
@@ -34,9 +41,12 @@ public class CursorManager : MonoBehaviour
             previousCursor = currentCursor;
         }
 
+        // This cursors position in the array
         currentCursor = cursors[0];
 
         Cursor.lockState = CursorLockMode.None;
+        
+        // Cursor Properties
         Cursor.SetCursor(cursors[0], new Vector2(6, 4), CursorMode.Auto);
     }
 
@@ -50,6 +60,7 @@ public class CursorManager : MonoBehaviour
         currentCursor = cursors[1];
 
         Cursor.lockState = CursorLockMode.Confined;
+
         Cursor.SetCursor(cursors[1], new Vector2(64, 65), CursorMode.Auto);
     }
 
@@ -64,17 +75,5 @@ public class CursorManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked; 
         Cursor.SetCursor(cursors[2], new Vector2(14, 14), CursorMode.Auto);
-    }
-
-    public void ActivatePreviousCursor()
-    {
-        if (currentCursor != null)
-        {
-            Texture2D temp = previousCursor;
-
-            previousCursor = currentCursor;
-
-            currentCursor = temp;
-        }
     }
 }

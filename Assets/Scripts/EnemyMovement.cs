@@ -1,9 +1,18 @@
 using UnityEngine;
 
+/// <summary>
+/// 
+/// Handles the enemy movement using a switch case and enums to represent the different
+/// behaviour states.
+/// 
+/// </summary>
+
+// Different behaviours
 public enum Behaviour { Idle, Wandering, Pursue, Attack };
 
 public class EnemyMovement : MonoBehaviour
 {
+    // Sets the initial behaviour to Idle 
     [Header("Current Behaviour")]
     [SerializeField] private Behaviour currentBehaviour = Behaviour.Idle;
 
@@ -45,7 +54,6 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector3 wanderLocation;
     private Vector3 target;
-    //[SerializeField] private Transform playerTransform;
 
     [SerializeField] private Weapon weapon;
     private HealthSystem health;
@@ -75,6 +83,7 @@ public class EnemyMovement : MonoBehaviour
         startingLocation = transform.position;
     }
 
+    // Sets a location above the enemies position after being spawned
     public void SetSpawnedEnemyLocation()
     {
         startingLocation = transform.position + new Vector3(Random.Range(50, 200), Random.Range(100,250), 0);
@@ -82,9 +91,11 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
+        // For testing purposes
         if (!canMove)
             return;
 
+        // Handles the behaviour
         switch (currentBehaviour)
         {
             case Behaviour.Idle:
@@ -152,17 +163,21 @@ public class EnemyMovement : MonoBehaviour
                 break;
         }
 
+        // Speed of the enemy
         if (interpolatingValue <= 1f)
         {
             interpolatingValue += 0.01f;
         }
 
+        // Testing Purposes
+        /*
         if (Input.GetKeyDown(KeyCode.F))
         {
             health.TakeDamage(100);
         }
+        */
     }
-
+    
     private void MoveToLocation()
     {
         currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, interpolatingValue * forwardSpeed, forwardAcceleration * Time.deltaTime);
@@ -171,13 +186,16 @@ public class EnemyMovement : MonoBehaviour
 
     private void StartIdleBehaviour()
     {
+        // Sets current behaviour
         currentBehaviour = Behaviour.Idle;
 
+        // Random Idle time
         targetIdleTime = Random.Range(minIdleTime, maxIdleTime);
     }
 
+    // Handles levelling out the enemy when in Idle
     private void UpdateIdleBehaviour()
-    {  
+    { 
         Quaternion levellingOut = new Quaternion(0, transform.rotation.y, transform.rotation.z,1.0f);
         transform.rotation = Quaternion.Slerp(transform.rotation, levellingOut, (rotationSpeed / 2.0f));
 
@@ -188,6 +206,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!isAtDestination && !hasWanderPos)
         {
+            // Sets wander location
             wanderLocation = startingLocation + Random.insideUnitSphere * wanderRange;
             wanderLocation.y = Random.Range(startingLocation.y - 50f, startingLocation.y + 50f);
 
@@ -212,6 +231,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    // Rotates the enemy, specified by a speed value
     private void UpdateRotation(Vector3 posToRotate)
     {
         Quaternion rotation;
@@ -257,63 +277,23 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    // Checks if player is in range
     private bool IsPlayerInRange()
     {
-        //RaycastHit hit;
-
-        //if (Physics.Raycast(gameObject.transform.position, transform.forward, out hit, layerMask))
-        //{
-        //    Debug.DrawLine(transform.position, hit.point, Color.blue);
-
-        //    Physics.IgnoreCollision(gameObject.transform.Find("Ship Model").GetComponent<MeshCollider>(), hit.collider);
-
-        //    if (Physics.Raycast(transform.position, hit.point, missileAttackRange))
-        //    {
-        //        Debug.DrawLine(transform.position, hit.point, Color.green);
-
-        //        weapon.ShootMissile();
-        //        Debug.Log("Shooting Missile");
-        //    }
-        //    else if (Physics.Raycast(transform.position, hit.point, homingMissileAttackRange))
-        //    {
-        //        Debug.DrawLine(transform.position, hit.point, Color.red);
-
-        //        weapon.ShootHomingMissile();
-        //        Debug.Log("Shooting Homing Missile");
-        //    }
-        //    Debug.Log("Result True - Tag Collided with: " + hit.transform.GetComponent<MeshCollider>());
-        //    return true;
-        //}
-
-        //if (Physics.Raycast(transform.position, transform.forward, out hit, layerMask))
-        //{
-        //    Debug.DrawRay(gameObject.transform.position, hit.point, Color.red);
-
-        //    if (!hit.collider.CompareTag("Player"))
-        //    {
-        //        Debug.Log("Tag Collided with: " + hit.collider.tag);
-        //        return false;
-        //    }
-
-        //    return true;
-
-        //}
-        //Debug.Log("Result False - Tag Collided with: " + hit.transform.GetComponent<MeshCollider>());
-        //return false;
-
         if(Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, mask))
         {
-            //Debug.Log("GameObject hit: " + hit.transform.name + " with a distance of: " + hit.distance);
-
             return true;
         }
 
         return false;
     }
 
+    // Handles Shooting when in range
     private void AttackPlayer()
     {
         //currentBehaviour = Behaviour.Attack;
+
+        // Checks number of weapons
         if (weapon.GetNumOfWeapons() > 1)
         {
             if (hit.distance <= homingMissileAttackRange && hit.distance >= missileAttackRange)
@@ -326,8 +306,6 @@ public class EnemyMovement : MonoBehaviour
         {
             weapon.ShootMissile();
         }
-
-        //Debug.Log("Distance: " + dist);
     }
 
     private float DistanceFromPlayer()
@@ -338,6 +316,7 @@ public class EnemyMovement : MonoBehaviour
         return dist;
     }
 
+    // Distance from the enemy to target transforms
     private float DistanceFromTarget()
     {
         Vector3 targetPos = target;
@@ -345,24 +324,4 @@ public class EnemyMovement : MonoBehaviour
 
         return dist;
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if(!other.CompareTag("Player"))
-    //    {
-    //        return;
-    //    }
-
-    //    playerTransform = other.transform;
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if(!other.CompareTag("Player"))
-    //    {
-    //        return;
-    //    }
-
-    //    playerTransform = null;
-    //}
 }

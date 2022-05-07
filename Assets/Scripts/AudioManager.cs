@@ -2,6 +2,19 @@ using UnityEngine.Audio;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// 
+/// A video tutorial was used as an initial starting point for this script, along with the 'Sound' class
+/// 
+/// Tutoral Video: https://www.youtube.com/watch?v=6OT43pvUyfY
+/// 
+/// This script has been modified with the PlayOnce(), Stop(), and IsClipPlaying() methods.
+/// 
+/// Script handles the audio in the project, using an array of 'sounds'.
+/// Each 'sound' property is updated with the value in the Inspector.
+/// 
+/// </summary>
+
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
@@ -23,6 +36,7 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+        // Assigning values from Inspector to the Audio Source component
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -38,6 +52,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        // Retrieves a value to the audio mixer from PlayerPrefs if exists
         if (PlayerPrefs.HasKey("MasterVol"))
             mixer.SetFloat("MasterVol", PlayerPrefs.GetFloat("MasterVol"));
         if (PlayerPrefs.HasKey("MusicVol"))
@@ -48,6 +63,7 @@ public class AudioManager : MonoBehaviour
         Play("Main Music");
     }
 
+    // Plays the audio clip specified by the name
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -61,6 +77,7 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    // Plays the audio clip once specified by the name
     public void PlayOnce(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -74,6 +91,7 @@ public class AudioManager : MonoBehaviour
         s.source.PlayOneShot(s.clip);
     }
 
+    // Stops the audio clip specified by the name
     public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -81,6 +99,8 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
+    // Checks is the current audio clip is playing, and return either true or false
+    // Specified by the clip name
     public bool IsClipPlaying(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

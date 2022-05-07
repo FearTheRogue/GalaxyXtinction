@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// Handles the gameobject looking at the player
+/// 
+/// </summary>
+
 public class LookAt : MonoBehaviour
 {
     [SerializeField] public GameObject player;

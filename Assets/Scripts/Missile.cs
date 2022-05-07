@@ -2,6 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// A video tutorial was used as an initial starting point for this script
+/// 
+/// Tutoral Video: https://www.youtube.com/watch?v=Z6qBeuN-H1M
+/// Tutoral helped add the properties of the homing missiles. Such as the predictabilities.
+/// 
+/// Some modifications of the script has been made such as, applying the damage.
+/// 
+/// </summary>
+
 public class Missile : MonoBehaviour
 {
     [SerializeField] private float speed;
@@ -54,6 +65,7 @@ public class Missile : MonoBehaviour
         if (!AudioManager.instance.IsClipPlaying("Homing Missile Engine"))
             AudioManager.instance.Play("Homing Missile Engine");
 
+        // Forward movement
         rb.velocity = transform.forward * speed;
 
         if (player == null)
@@ -68,6 +80,7 @@ public class Missile : MonoBehaviour
         RotateRocket();
     }
 
+    // Rotates the missile to the target
     private void RotateRocket() 
     {
         var heading = deviatedPrediction - transform.position;
@@ -75,6 +88,7 @@ public class Missile : MonoBehaviour
         rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, rotation, rotateSpeed * Time.deltaTime));
     }
 
+    // Predict the future movement of the target
     private void PredictMovement(float leadTimePercentage)
     {
         var predictionTme = Mathf.Lerp(0, maxTimePrediction, leadTimePercentage);
@@ -82,6 +96,7 @@ public class Missile : MonoBehaviour
         standardPrediction = player.Rb.position + player.Rb.velocity * predictionTme;
     }
 
+    // Add deviation to the fligt path
     private void AddDeviation(float leadTimePercentage)
     {
         var deviation = new Vector3(Mathf.Cos(Time.time * deviationSpeed), 0, 0);
@@ -90,10 +105,12 @@ public class Missile : MonoBehaviour
         deviatedPrediction = standardPrediction + predictionOffset;
     }
 
+    // If the missile collides with something
     private void OnCollisionEnter(Collision other)
     {
         speed = 0;
 
+        // If the gameobject has a health component, take damage
         HealthSystem healthSystem = other.gameObject.GetComponent<HealthSystem>();
 
         if (healthSystem != null)
@@ -101,14 +118,17 @@ public class Missile : MonoBehaviour
             healthSystem.TakeDamage((int)damage);
         }
 
+        // Destroy missile
         MissileDie();
     }
 
     private void MissileDie()
     {
+        // Stop audio clip, if playing
         if (AudioManager.instance.IsClipPlaying("Homing Missile Engine"))
             AudioManager.instance.Stop("Homing Missile Engine");
 
+        // Instantiate explosion, and destroy gameobject
         if (explosionPrefab) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

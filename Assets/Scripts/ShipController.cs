@@ -2,6 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// A video tutorial was used as an initial starting point for this script
+/// 
+/// Tutoral Video: https://www.youtube.com/watch?v=J6QR4KzNeJU
+/// 
+/// Handles the player ship controls.
+/// 
+/// Modifications to this script include Thrusting mechanic and shooting.
+/// 
+/// </summary>
+
 public class ShipController : MonoBehaviour
 {
     private CameraMovement shipCamera;
@@ -42,14 +54,13 @@ public class ShipController : MonoBehaviour
         // Finding the screen center
         screenCenter.x = Screen.width * .5f;
         screenCenter.y = Screen.height * .5f;
-
-        //Cursor.lockState = CursorLockMode.Confined;
     }
 
     void Update()
     {
         if (!canRotate)
         {
+            // Calculates the centre of the screen
             mouseLookInput.x = Input.mousePosition.x;
             mouseLookInput.y = Input.mousePosition.y;
 
@@ -63,33 +74,42 @@ public class ShipController : MonoBehaviour
 
         if (CheckShoot())
         {
+            // Shooting projectiles
             weapon.ShootMissile();
         }
 
         if (thrusterSystem.isThrusting)
         {
+            // currentForwardSpeed is set to the thruster speed
             currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, Input.GetAxisRaw("Vertical") * thrusterSystem.GetThrusterSpeed(), forwardAcceleration * Time.deltaTime);
         }
         else
         {
+            // currentForwardSpeed is set to the normal speed
             currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, Input.GetAxisRaw("Vertical") * forwardSpeed, forwardAcceleration * Time.deltaTime);
 
+            // If the currentForwardSpeed exceeds a certain value
             if (currentForwardSpeed <= 50)
             {
+                // Adjust the camera to the start FOV
                 shipCamera.AdjustCamera(shipCamera.startFOV);
 
+                // Stops audio, if playing
                 if (AudioManager.instance.IsClipPlaying("Engine Start"))
                     AudioManager.instance.Stop("Engine Start");
 
                 hasEngineStartPlayed = false;
 
+                // Stops audio, if playing
                 if (AudioManager.instance.IsClipPlaying("Regular Boost"))
                     AudioManager.instance.Stop("Regular Boost");
             }
             else
             { 
+                // Adjust the camera to the normal FOV
                 shipCamera.AdjustCamera(shipCamera.normalSpeedFOV);
 
+                // If the audio isnt playing
                 if (!hasEngineStartPlayed)
                 {
                     if (!AudioManager.instance.IsClipPlaying("Engine Start"))

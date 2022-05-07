@@ -1,6 +1,18 @@
 using UnityEngine.Audio;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// A video tutorial was used as an initial starting point for this script, along with the 'AudioManager' class
+/// 
+/// Tutoral Video: https://www.youtube.com/watch?v=6OT43pvUyfY
+/// 
+/// This script has been modified with the AudioMixerGroup, spacialBlend properties.
+/// 
+/// This custom class is used in the Inspector, where the properties are assigned.
+/// 
+/// </summary>
+
 [System.Serializable]
 public class Sound
 {

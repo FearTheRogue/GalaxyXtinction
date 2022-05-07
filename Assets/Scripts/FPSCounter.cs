@@ -3,6 +3,18 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
+/// <summary>
+/// 
+/// A video tutorial was used as an initial starting point for this script
+/// 
+/// Tutoral Video: https://www.youtube.com/watch?v=RTfMWE-NDTE
+/// 
+/// Only small modifations to this script has been made. Such as the 'ResetMinAndMax()' method.
+/// Other additions were implemented, like saves if the display is enabled or disabled from
+/// the 'SettingsManager' script.
+/// 
+/// </summary>
+
 public class FPSCounter : MonoBehaviour
 {
     public static FPSCounter instance;
@@ -31,9 +43,11 @@ public class FPSCounter : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // Check if the save value exists 
         if (!PlayerPrefs.HasKey("IsFPSDisplayed"))
             isDisplayed = true;
         else
+            // if it doesn't exist
             isDisplayed = PlayerPrefs.GetInt("IsFPSDisplayed") != 0;
     }
 
@@ -47,6 +61,7 @@ public class FPSCounter : MonoBehaviour
         StartCoroutine(ResetMinFramerate());
     }
 
+    // Resets Min and Max frame rate values and text components
     private IEnumerator ResetMinFramerate()
     {
         yield return new WaitForSeconds(1.0f);
@@ -92,78 +107,9 @@ public class FPSCounter : MonoBehaviour
         }
     }
 
-
+    // Saves the current state of the fps display
     public void SaveDisplay()
     {
         PlayerPrefs.SetInt("IsFPSDisplayed", (isDisplayed ? 1 : 0));
     }
-
-    //public static FPSCounter instance;
-
-    //[SerializeField] private TMP_Text fpsDisplay;
-    //[SerializeField] private TMP_Text avgFPSDisplay;
-    //int framesPassed = 0;
-    //float avgFps = 0;
-    //float fpsTotal = 0f;
-
-    //private float[] frameDeltaTimeArray;
-
-    //public float displayValue;
-
-    //public bool isDisplayed;
-
-    //private void Awake()
-    //{
-    //    if (instance == null)
-    //    {
-    //        DontDestroyOnLoad(gameObject);
-    //        instance = this;
-    //    }
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //    }
-
-    //    isDisplayed = PlayerPrefs.GetInt("IsFPSDisplayed") != 0;
-
-    //    frameDeltaTimeArray = new float[50];
-    //}
-
-    //private void Update()
-    //{
-    //    if (isDisplayed)
-    //    {
-    //        frameDeltaTimeArray[framesPassed] = Time.unscaledDeltaTime;
-    //        framesPassed = (framesPassed + 1) % frameDeltaTimeArray.Length;
-
-    //        fpsDisplay.text = "FPS: " + Mathf.RoundToInt(CalculateFPS()).ToString();
-
-    //        avgFps += ((Time.deltaTime / Time.timeScale) - avgFps) * 0.03f;
-    //        avgFPSDisplay.text = "AVG: " + Mathf.RoundToInt((1f / avgFps)).ToString();
-    //    }
-    //    else
-    //    {
-    //        fpsDisplay.text = "";
-    //        avgFPSDisplay.text = "";
-    //    }
-    //    //fpsTotal += fps;
-    //    //framesPassed++;
-    //    //avgFPSDisplay.text = "AVG FPS: " + (fpsTotal / framesPassed);
-    //}
-
-    //private float CalculateFPS()
-    //{
-    //    float total = 0f;
-    //    foreach (float deltaTime in frameDeltaTimeArray) 
-    //    {
-    //        total += deltaTime;
-    //    }
-
-    //    return frameDeltaTimeArray.Length / total;
-    //}
-
-    //public void SaveDisplay()
-    //{
-    //    PlayerPrefs.SetInt("IsFPSDisplayed", (isDisplayed ? 1 : 0));
-    //}
 }

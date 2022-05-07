@@ -4,12 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 
+/// This script had the most iterations to it, and a number of tutorials was used to help
+/// implement player teleportation. 
+/// 
+/// Tutorial Video: https://www.youtube.com/watch?v=lQ3OT9xp_5A&t=904s
+/// This video was the most helpful. However appears noticably different
+/// 
+/// 
+/// Handles the overall player warping to and from planets.
+/// 
+/// </summary>
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
     [SerializeField] private int currentSceneIndex;
 
+    // Implement at a later date
     //[SerializeField] private GameObject loadingScreen;
     //[SerializeField] private Slider loadingBar;
     //[SerializeField] private Text loadingText;
@@ -37,17 +51,20 @@ public class GameManager : MonoBehaviour
 
         warpPortals = GameObject.FindGameObjectsWithTag("Warp");
 
-        //if (loadingScreen == null)
-        //    loadingScreen = InGameMenu.instance.GetLoadingPanel();
+        // Loading screen
+        /*
+        if (loadingScreen == null)
+            loadingScreen = InGameMenu.instance.GetLoadingPanel();
 
-        //loadingScreen.SetActive(true);
+        loadingScreen.SetActive(true);
 
-        //if (loadingBar == null)
-        //    loadingBar = loadingScreen.GetComponentInChildren<Slider>();
-        //if (loadingText == null)
-        //    loadingText = loadingScreen.GetComponentInChildren<Text>();
+        if (loadingBar == null)
+            loadingBar = loadingScreen.GetComponentInChildren<Slider>();
+        if (loadingText == null)
+            loadingText = loadingScreen.GetComponentInChildren<Text>();
 
-        //loadingScreen.SetActive(false);
+        loadingScreen.SetActive(false);
+        */
 
         if (portal == null)
         {
@@ -55,6 +72,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Final method that is called during scene loading
     private void OnLevelFinishedLoading(int comingFromSceneIndex)
     {
         Debug.Log("Scene has loaded");
@@ -65,6 +83,7 @@ public class GameManager : MonoBehaviour
 
         warpPortals = GameObject.FindGameObjectsWithTag("Warp");
 
+        // Compares each warpPortals with the one from the previous scene
         for (int i = 0; i < warpPortals.Length; i++)
         {
             if (warpPortals[i].GetComponent<WarpHandler>().sceneToLoadIndex == comingFromSceneIndex)
@@ -73,6 +92,7 @@ public class GameManager : MonoBehaviour
 
                 player = GameObject.FindGameObjectWithTag("Player");
 
+                // If the player is now in space
                 if(player.transform.parent != null)
                 {
                     player = player.transform.root.gameObject;
@@ -85,6 +105,7 @@ public class GameManager : MonoBehaviour
                     Debug.Log("Loading into space");
                 }
 
+                // If the player is on planet, deactivate the CharacterController component
                 if (player.GetComponent<CharacterController>() != null)
                 {
                     player.GetComponent<CharacterController>().enabled = false;
@@ -92,9 +113,11 @@ public class GameManager : MonoBehaviour
                     CursorManager.instance.ActivateCenter();
                 }
 
+                // Sets the player position to the spawn point of the correct warp point
                 player.transform.position = portal.GetSpawnPoint().position;
                 player.transform.rotation = portal.GetSpawnPoint().rotation;
 
+                // If the player is on planet, reactivate the CharacterController component
                 if (player.GetComponent<CharacterController>() != null)
                 {
                     player.GetComponent<CharacterController>().enabled = true;
@@ -107,6 +130,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Entry point to transitioning between space and planets, and vise versa
     public void StartToLoadLevel(int levelToLoad)
     {
         //loadingScreen.SetActive(true);
@@ -125,6 +149,7 @@ public class GameManager : MonoBehaviour
         loadingSceneInProgress = StartCoroutine(LoadSceneAsync(levelToLoad));
     }
 
+    // LoadSceneAsync to the desired scene
     private IEnumerator LoadSceneAsync(int levelToLoad)
     {
         int comingFromSceneIndex;
@@ -137,6 +162,7 @@ public class GameManager : MonoBehaviour
         loadingSceneInProgress = null;  
     }
 
+    // Handles transitioning from main menu to space scene
     public void SceneToLoad(string sceneToBeLoaded)
     {
        // loadingScreen.SetActive(true);
@@ -150,35 +176,7 @@ public class GameManager : MonoBehaviour
         //StartCoroutine(LoadLoad(sceneToBeLoaded));
     }
 
-    //private IEnumerator LoadLoad(string sceneToBeLoaded)
-    //{
-    //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToBeLoaded);
-
-    //    asyncLoad.allowSceneActivation = false;
-
-    //    while (!asyncLoad.isDone)
-    //    {
-    //        loadingBar.value = asyncLoad.progress;
-    //        loadingText.text = (asyncLoad.progress * 100).ToString() + "%";
-
-    //        if (asyncLoad.progress >= 0.9f && !asyncLoad.allowSceneActivation)
-    //        {
-    //            if (AudioManager.instance.IsClipPlaying("Thruster Boost"))
-    //            {
-    //                AudioManager.instance.Stop("Thruster Boost");
-    //            }
-
-
-    //            if (Input.GetMouseButtonDown(0))
-    //            {
-    //                asyncLoad.allowSceneActivation = true;
-    //            }
-    //        }
-
-    //        yield return null;
-    //    }
-    //}
-
+    // Sets the right cursor
     public void CheckCursor()
     {
         if(SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4)
@@ -187,30 +185,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ActivateLoadingScene()
-    {
-        //loadingScreen.SetActive(true);
-    }
-
     public void QuitGame()
     {
         Application.Quit();
     }
-
-    //public int SceneToLoad(int sceneNumberToLoad)
-    //{
-    //    currentWarpNumber = sceneNumberToLoad;
-        
-    //    if (SceneManager.GetActiveScene().buildIndex == 0)
-    //    {
-    //        //SceneManager.LoadScene(sceneNumberToLoad);
-    //        return sceneNumberToLoad;
-    //    }
-    //    else if (SceneManager.GetActiveScene().buildIndex == sceneNumberToLoad)
-    //    {
-    //        //SceneManager.LoadScene(0);
-    //        return 0;
-    //    }
-    //    return sceneNumberToLoad;
-    //}
 }
