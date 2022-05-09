@@ -28,7 +28,7 @@ The project can be downloaded from this repository, in the "Galaxy Xtinction - B
 
 ---
 
-## Licencing
+## Credits
 
 [Polygon Sci-Fi Space - Low Poly 3D Art by Synty](https://assetstore.unity.com/packages/3d/environments/sci-fi/polygon-sci-fi-space-low-poly-3d-art-by-synty-138857)
 \
