@@ -22,13 +22,13 @@ The game's main aim will be to stop an alien race from destroying life in this s
 
 ---
 
-## Downloading the Project
+### Downloading the Project
 
 The project can be downloaded from this repository, in the "Galaxy Xtinction - Build" folder. Or Click [here](https://rogue-studios.itch.io/galaxy-xtinction) to download from Itch.io.
 
 ---
 
-## Credits
+#### Credits
 
 [Polygon Sci-Fi Space - Low Poly 3D Art by Synty](https://assetstore.unity.com/packages/3d/environments/sci-fi/polygon-sci-fi-space-low-poly-3d-art-by-synty-138857)
 \
@@ -49,5 +49,11 @@ Licence Type: Single Entity
 [Off Screen Target Indicator](https://assetstore.unity.com/packages/tools/gui/off-screen-target-indicator-71799)
 \
 Licence Type: Extension Asset
+
+---
+
+#### Licencing 
+
+This work is licenced under the [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
 
 ---
