@@ -202,5 +202,3 @@ All gameplay systems and programming were independently implemented by me.
 ## 📄 Licence
 
 This work is licensed under the [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
-
-<p align="center"><em>Force-based gravity using Rigidbody physics</em></p>
